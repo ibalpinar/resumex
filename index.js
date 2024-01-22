@@ -7,11 +7,42 @@
 */
 
 const fastify = require('fastify');
-const app = fastify();
+const mongoose = require("mongoose")
+const User = require("./models/Users");
 
-app.get('/', function (request, reply) {
-    reply.send("Our first route...");
+const app = fastify();
+const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/users"
+/** connect to MongoDB datastore */
+try {
+    mongoose.connect(mongoUrl);
+} catch (error) {
+    console.error(error);
+}
+
+app.get('/', function (req, res) {
+    res.send("Welcome to ResumeX!");
 })
+
+app.post("/api/users", (req, res) => {
+   let user = req.body;
+
+   User
+      .create(user)
+      .then(() => {
+         res.send({
+            status: 1,
+            msg: "success"
+         });
+   })
+   .catch((err) => {
+      res.send({
+         status: 0,
+         msg: "error"
+      });
+      console.error(err);
+   });
+
+});
 
 app.listen({port: 3000}, (err, address) =>  {
     if (err) {
