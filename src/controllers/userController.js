@@ -50,5 +50,14 @@ module.exports = {
       }
    },
 
-   delete: async (request, reply) => {},
+   delete: async (request, reply) => {
+      try{
+         const userId = request.params.id;
+         const userToDelete = await User.findById(userId);
+         await User.findByIdAndDelete(userId);
+         reply.code(200).send({ data: userToDelete });
+      }catch(e){
+         reply.code(500).send(e);
+      }
+   },
 };
