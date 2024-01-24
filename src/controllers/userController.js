@@ -20,7 +20,15 @@ module.exports = {
       }
    },
 
-   get: async (request, reply) => {},
+   get: async (request, reply) => {
+      try{
+         const userId = request.params.id;
+         const user = await User.findById(userId);
+         reply.code(200).send(user);
+      }catch(e){
+         reply.code(500).send(e);
+      }
+   },
 
    update: async (request, reply) => {},
 
