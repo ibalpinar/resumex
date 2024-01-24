@@ -1,13 +1,5 @@
 const User = require('../models/User');
 
-/**
- * TODO: If there is no user return http 404
- * when calling the fetch all user and get
- * one user endpoint
- * Also return 404 on update and delete when
- * the user is not found.
-*/
-
 module.exports = {
    create: async (request, reply) => {
       try{
