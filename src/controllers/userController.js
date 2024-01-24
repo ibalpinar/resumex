@@ -38,7 +38,17 @@ module.exports = {
       }
    },
 
-   update: async (request, reply) => {},
+   update: async (request, reply) => {
+      try{
+         const userId = request.params.id;
+         const userUpdates = request.body;
+         await User.findByIdAndUpdate(userId, userUpdates);
+         const userToUpdate = await User.findById(userId);
+         reply.code(200).send({ data: userToUpdate });
+      }catch(e){
+         reply.code(500).send(e);
+      }
+   },
 
    delete: async (request, reply) => {},
 };
