@@ -1,11 +1,21 @@
 const User = require('../models/User');
+const { hashPassword } = require('../../utils/passwordManager');
 
 module.exports = {
    createUser: async (request, reply) => {
       try{
          const user = request.body;
-         const newUser = await User.create(user);
-         reply.code(201).send({ data: newUser });
+         var bcryptedPassword = hashPassword(user.password, process.env.SALT_ROUNDS);
+         await bcryptedPassword.then(function(bcrypted){
+            user.password = bcrypted.hash;
+            user.salt = bcrypted.salt;
+            return user;
+         }).then(async (user) => {
+            const newUser = await User.create(user);
+            reply.code(201).send({ data: newUser });
+         }).catch(e => {
+            console.error(e.message);
+         });
       }catch(e){
          reply.code(500).send(e);
       }
