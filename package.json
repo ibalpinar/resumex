@@ -1,0 +1,18 @@
+{
+   "name": "resumex",
+   "version": "0.0.1",
+   "description": "ResumeX is the new generation open source resume platform. ResumeX forces you to prepare only 2 pages resume.",
+   "main": "index.js",
+   "scripts": {
+      "start": "node --env-file config/dev.env src/index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "bcrypt": "^5.1.1",
+      "fastify": "^4.25.2",
+      "mongoose": "^8.1.0"
+   }
+}
