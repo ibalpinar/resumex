@@ -1,7 +1,7 @@
 const User = require('../models/User');
 
 module.exports = {
-   create: async (request, reply) => {
+   createUser: async (request, reply) => {
       try{
          const user = request.body;
          const newUser = await User.create(user);
@@ -11,7 +11,7 @@ module.exports = {
       }
    },
 
-   fetch: async (request, reply) => {
+   getAllUser: async (request, reply) => {
       try{
          const users = await User.find({});
          reply.code(200).send({ data: users });
@@ -20,7 +20,7 @@ module.exports = {
       }
    },
 
-   get: async (request, reply) => {
+   getUserById: async (request, reply) => {
       try{
          const userId = request.params.id;
          const user = await User.findById(userId);
@@ -30,7 +30,7 @@ module.exports = {
       }
    },
 
-   update: async (request, reply) => {
+   updateUser: async (request, reply) => {
       try{
          const userId = request.params.id;
          const userUpdates = request.body;
@@ -42,7 +42,7 @@ module.exports = {
       }
    },
 
-   delete: async (request, reply) => {
+   deleteUser: async (request, reply) => {
       try{
          const userId = request.params.id;
          const userToDelete = await User.findById(userId);
