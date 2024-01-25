@@ -4,7 +4,7 @@
    "description": "ResumeX is the new generation open source resume platform. ResumeX forces you to prepare only 2 pages resume.",
    "main": "index.js",
    "scripts": {
-      "start": "node src/index.js",
+      "start": "node --env-file config/dev.env src/index.js",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "keywords": [],
