@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const { hashPassword } = require('../../utils/passwordManager');
+const { hashPassword, comparePassword } = require('../../utils/passwordManager');
 
 module.exports = {
    createUser: async (request, reply) => {

@@ -13,4 +13,15 @@ const hashPassword = async function(password, saltRounds) {
    }
 }
 
-module.exports.hashPassword = hashPassword;
+const comparePassword = async function(password, hash) {
+   let isVerified = false;
+   try {
+      isVerified = bcrypt.compare(password, hash);
+   } catch (err) {
+      console.error(err.message);
+   } finally {
+      return isVerified;
+   }
+}
+
+module.exports = {hashPassword, comparePassword};
