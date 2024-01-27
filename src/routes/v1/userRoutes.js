@@ -5,6 +5,7 @@ const userRoutes = async (app, opts) => {
    app.route({
       method: "POST",
       url: "/create",
+      schema: userServiceSchema.create,
       handler: userController.createUser,
    });
 
