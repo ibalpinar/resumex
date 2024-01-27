@@ -66,4 +66,17 @@ module.exports = {
          reply.code(500).send(err);
       }
    },
+
+   loginUser: async (request, reply) => {
+      try{
+         const { email, password } = request.body;
+
+         const userToDelete = await User.findById(userId);
+         await User.findByIdAndDelete(userId);
+         reply.code(200).send({ data: userToDelete });
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
+      }
+   },
 };
