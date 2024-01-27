@@ -12,11 +12,12 @@ module.exports = {
          }).then(async (user) => {
             const newUser = await User.create(user);
             reply.code(201).send({ data: newUser });
-         }).catch(e => {
-            console.error(e.message);
+         }).catch(err => {
+            console.error(err.message);
          });
-      }catch(e){
-         reply.code(500).send(e);
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
       }
    },
 
@@ -24,8 +25,9 @@ module.exports = {
       try{
          const users = await User.find({});
          reply.code(200).send({ data: users });
-      }catch(e){
-         reply.code(500).send(e);
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
       }
    },
 
@@ -34,8 +36,9 @@ module.exports = {
          const userId = request.params.id;
          const user = await User.findById(userId);
          reply.code(200).send({ data: user });
-      }catch(e){
-         reply.code(500).send(e);
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
       }
    },
 
@@ -46,8 +49,9 @@ module.exports = {
          await User.findByIdAndUpdate(userId, userUpdates);
          const userToUpdate = await User.findById(userId);
          reply.code(200).send({ data: userToUpdate });
-      }catch(e){
-         reply.code(500).send(e);
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
       }
    },
 
@@ -57,8 +61,9 @@ module.exports = {
          const userToDelete = await User.findById(userId);
          await User.findByIdAndDelete(userId);
          reply.code(200).send({ data: userToDelete });
-      }catch(e){
-         reply.code(500).send(e);
+      }catch(err){
+         console.error(err.message);
+         reply.code(500).send(err);
       }
    },
 };

@@ -9,8 +9,8 @@ const port = process.env.PORT || 3000;
 
 try {
     mongoose.connect(mongoUrl);
-} catch (error) {
-    console.error(error);
+} catch (err) {
+    console.error(err);
 }
 
 userRoutes(app);

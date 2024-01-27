@@ -7,13 +7,13 @@ const hashPassword = async function(password, saltRounds) {
          const salt = await bcrypt.genSalt(parseInt(saltRounds));
          const hash = await bcrypt.hash(password, salt);
          rhash = hash;
-      } catch (e) {
-         console.error(e.message);
+      } catch (err) {
+         console.error(err.message);
       } finally {
          return rhash;
       }
-   } catch (e) {
-      console.error(e.message);
+   } catch (err) {
+      console.error(err.message);
    }
  }
 
