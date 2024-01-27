@@ -5,10 +5,9 @@ module.exports = {
    createUser: async (request, reply) => {
       try{
          const user = request.body;
-         var bcryptedPassword = hashPassword(user.password, process.env.SALT_ROUNDS);
-         await bcryptedPassword.then(function(bcrypted){
-            user.password = bcrypted.hash;
-            user.salt = bcrypted.salt;
+         var hash = hashPassword(user.password, process.env.SALT_ROUNDS);
+         await hash.then(function(rHash){
+            user.password = rHash;
             return user;
          }).then(async (user) => {
             const newUser = await User.create(user);

@@ -1,18 +1,19 @@
 const bcrypt = require("bcrypt");
 
 const hashPassword = async function(password, saltRounds) {
-   let bcrypted = {hash: '', salt: ''};
+   let rhash;
    try {
       try {
          const salt = await bcrypt.genSalt(parseInt(saltRounds));
-         bcrypted.salt = salt;
          const hash = await bcrypt.hash(password, salt);
-         bcrypted.hash = hash;
+         rhash = hash;
+      } catch (e) {
+         console.error(e.message);
       } finally {
-         return bcrypted;
+         return rhash;
       }
-   } catch (err) {
-      console.error(err.message);
+   } catch (e) {
+      console.error(e.message);
    }
  }
 
