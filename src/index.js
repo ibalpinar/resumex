@@ -13,9 +13,7 @@ try {
     console.error(err);
 }
 
-// app.register(userRoutes(app), { prefix: "api/v1/auth" });
 app.register(userRoutes, { prefix: "api/v1/user" });
-// userRoutes(app);
 
 app.listen({port: port}, (err, address) =>  {
     if (err) {
