@@ -2,6 +2,7 @@ const getCommonProperties = (statusCode, successValue) => ({
 	statusCode: { type: "integer", example: statusCode },
 	message: { type: "string" },
 	success: { type: "boolean", example: successValue },
+   data: { type: "object"},
 });
 
 const getErrorProperties = (statusCode, successValue) => ({

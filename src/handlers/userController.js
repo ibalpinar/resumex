@@ -22,6 +22,7 @@ module.exports = {
                {
                   statusCode: 201,
                   message: "User created successfully",
+                  data: newUser
                }
             );
             // reply.code(201).send({ data: newUser });
