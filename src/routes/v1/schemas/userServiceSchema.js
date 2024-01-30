@@ -22,13 +22,7 @@ const userServiceSchema = {
 				password: { type: "string"},
 			},
 			required: ["name", "lastName", "email", "password"],
-		},
-		response: {
-			201: getSuccessObject(201, true, "User created successfully", {}),
-			400: errors[404],
-			500: errors[500],
-			429: errors[429],
-		},
+		}
 	},
    fetch: {},
    get: {},
