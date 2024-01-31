@@ -1,34 +1,27 @@
 const bcrypt = require("bcrypt");
 
 const hashPassword = async function(password, saltRounds) {
-   let bcrypted = {hash: '', salt: ''};
+   let rhash;
    try {
-      try {
-         const salt = await bcrypt.genSalt(parseInt(saltRounds));
-         bcrypted.salt = salt;
-         const hash = await bcrypt.hash(password, salt);
-         bcrypted.hash = hash;
-      } finally {
-         return bcrypted;
-      }
+      const salt = await bcrypt.genSalt(parseInt(saltRounds));
+      const hash = await bcrypt.hash(password, salt);
+      rhash = hash;
    } catch (err) {
       console.error(err.message);
+   } finally {
+      return rhash;
    }
- }
-
- module.exports.hashPassword = hashPassword;
-
-/*
-module.exports.validatePassword = function(hash) {
-   bcrypt
-      .compare(password, hash)
-      .then(res => {
-         console.log('Validated -> ', res);
-         return true;
-      })
-      .catch(err => {
-         console.error(err.message);
-         return false;
-      });
 }
-*/
+
+const comparePassword = async function(password, hash) {
+   let isVerified = false;
+   try {
+      isVerified = bcrypt.compare(password, hash);
+   } catch (err) {
+      console.error(err.message);
+   } finally {
+      return isVerified;
+   }
+}
+
+module.exports = {hashPassword, comparePassword};

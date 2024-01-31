@@ -1,19 +1,19 @@
 const fastify = require('fastify');
 const mongoose = require("mongoose")
 const User = require("./models/User");
-const userRoutes = require('./routes/userRoutes');
+const { userRoutes } = require('./routes/v1/userRoutes');
 
-const app = fastify();
+const app = fastify({ logger: true });
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/resumex"
 const port = process.env.PORT || 3000;
 
 try {
     mongoose.connect(mongoUrl);
-} catch (error) {
-    console.error(error);
+} catch (err) {
+    console.error(err);
 }
 
-userRoutes(app);
+app.register(userRoutes, { prefix: "api/v1/user" });
 
 app.listen({port: port}, (err, address) =>  {
     if (err) {
