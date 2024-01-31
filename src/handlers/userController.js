@@ -16,16 +16,15 @@ module.exports = {
             return user;
          }).then(async (user) => {
             const newUser = await User.create(user);
-
+            const { password, ...filteredNewUser } = newUser;
             sendSuccessResponse(
                reply,
                {
                   statusCode: 201,
                   message: "User created successfully",
-                  data: newUser
+                  data: filteredNewUser
                }
             );
-            // reply.code(201).send({ data: newUser });
          }).catch(err => {
             console.error(err.message);
          });

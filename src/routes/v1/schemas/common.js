@@ -1,8 +1,8 @@
 const getCommonProperties = (statusCode, successValue) => ({
-	statusCode: { type: "integer", example: statusCode },
+	statusCode: { type: "integer" },
 	message: { type: "string" },
-	success: { type: "boolean", example: successValue },
-   data: { type: "object"},
+	success: { type: "boolean" },
+   data: { type: "object" },
 });
 
 const getErrorProperties = (statusCode, successValue) => ({

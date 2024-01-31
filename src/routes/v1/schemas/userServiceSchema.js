@@ -6,7 +6,7 @@ const {
 const errors = responseErrors;
 
 const userServiceSchema = {
-	create: {
+	createUser: {
 		description:
 			"User creation endpoint. Returns all user information as object.",
 		tags: ["Create User"],
@@ -17,11 +17,11 @@ const userServiceSchema = {
             lastName: { type: "string"},
 				email: {
 					type: "string",
-					format: "email",
+					format: "email"
 				},
-				password: { type: "string"},
+				password: { type: "string"}
 			},
-			required: ["name", "lastName", "email", "password"],
+			required: ["name", "lastName", "email", "password"]
 		}
 	},
    fetch: {},
