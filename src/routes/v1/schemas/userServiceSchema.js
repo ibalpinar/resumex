@@ -7,8 +7,7 @@ const errors = responseErrors;
 
 const userServiceSchema = {
 	createUser: {
-		description:
-			"User creation endpoint. Returns all user information as object.",
+		description: "User creation endpoint. Returns all user information as object.",
 		tags: ["Create User"],
 		body: {
 			type: "object",
