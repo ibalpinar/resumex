@@ -15,22 +15,15 @@ module.exports = {
             user.password = rHash;
             return user;
          }).then(async (user) => {
-            const newUser = await User.create(user);
-
-            let filteredNewUser = Object.keys(newUser).filter(objKey =>
-               objKey !== 'password').reduce((newObj, key) =>
-               {
-                  newObj[key] = newUser[key];
-                  return newObj;
-               }
-            );
+            let newUser = await User.create(user);
+            newUser.password = null;
 
             sendSuccessResponse(
                reply,
                {
                   statusCode: 201,
                   message: "User created successfully",
-                  data: filteredNewUser
+                  data: newUser
                }
             );
          }).catch(err => {
