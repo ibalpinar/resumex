@@ -16,27 +16,14 @@ module.exports = {
             return user;
          }).then(async (user) => {
             const newUser = await User.create(user);
-            console.log('-----------------------------------');
-            console.log('newUser --> ', newUser);
-            console.log('-----------------------------------');
-
-
-
-            console.log('>>> ', Object.keys(newUser)[0]);
-            console.log('>>> ', Object.keys(newUser)[1]);
-            console.log('>>> ', Object.keys(newUser)[2]);
-            console.log('>>> ', Object.keys(newUser)[3]);
 
             let filteredNewUser = Object.keys(newUser).filter(objKey =>
                objKey !== 'password').reduce((newObj, key) =>
                {
                   newObj[key] = newUser[key];
-                  console.log('key --> ', key);
                   return newObj;
                }
             );
-
-            console.log("filteredNewUser -> ", filteredNewUser);
 
             sendSuccessResponse(
                reply,
