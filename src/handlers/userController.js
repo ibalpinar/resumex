@@ -15,14 +15,15 @@ module.exports = {
             user.password = rHash;
             return user;
          }).then(async (user) => {
-            const newUser = await User.create(user);
-            const { password, ...filteredNewUser } = newUser;
+            let newUser = await User.create(user);
+            newUser.password = null;
+
             sendSuccessResponse(
                reply,
                {
                   statusCode: 201,
                   message: "User created successfully",
-                  data: filteredNewUser
+                  data: newUser
                }
             );
          }).catch(err => {
