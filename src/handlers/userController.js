@@ -38,7 +38,14 @@ module.exports = {
    getAllUser: async (request, reply) => {
       try{
          const users = await User.find({});
-         reply.code(200).send({ data: users });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "All users listed successfully",
+               data: users
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
