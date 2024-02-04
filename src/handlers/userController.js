@@ -76,6 +76,7 @@ module.exports = {
          const userUpdates = request.body;
          await User.findByIdAndUpdate(userId, userUpdates);
          const userToUpdate = await User.findById(userId);
+         userToUpdate.password = null;
          sendSuccessResponse(
             reply,
             {
