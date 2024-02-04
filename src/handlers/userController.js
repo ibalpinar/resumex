@@ -76,7 +76,14 @@ module.exports = {
          const userUpdates = request.body;
          await User.findByIdAndUpdate(userId, userUpdates);
          const userToUpdate = await User.findById(userId);
-         reply.code(200).send({ data: userToUpdate });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User listed successfully",
+               data: userToUpdate
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
