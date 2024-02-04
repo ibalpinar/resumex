@@ -56,7 +56,14 @@ module.exports = {
       try{
          const userId = request.params.id;
          const user = await User.findById(userId);
-         reply.code(200).send({ data: user });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User listed successfully",
+               data: user
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
@@ -69,7 +76,15 @@ module.exports = {
          const userUpdates = request.body;
          await User.findByIdAndUpdate(userId, userUpdates);
          const userToUpdate = await User.findById(userId);
-         reply.code(200).send({ data: userToUpdate });
+         userToUpdate.password = null;
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User listed successfully",
+               data: userToUpdate
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
@@ -81,7 +96,14 @@ module.exports = {
          const userId = request.params.id;
          const userToDelete = await User.findById(userId);
          await User.findByIdAndDelete(userId);
-         reply.code(200).send({ data: userToDelete });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User deleted successfully",
+               data: userToDelete
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
