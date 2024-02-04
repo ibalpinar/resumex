@@ -56,7 +56,14 @@ module.exports = {
       try{
          const userId = request.params.id;
          const user = await User.findById(userId);
-         reply.code(200).send({ data: user });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User listed successfully",
+               data: user
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
