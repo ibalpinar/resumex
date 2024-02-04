@@ -96,7 +96,14 @@ module.exports = {
          const userId = request.params.id;
          const userToDelete = await User.findById(userId);
          await User.findByIdAndDelete(userId);
-         reply.code(200).send({ data: userToDelete });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "User deleted successfully",
+               data: userToDelete
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
