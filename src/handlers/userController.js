@@ -113,7 +113,14 @@ module.exports = {
    deleteAllUser: async (request, reply) => {
       try{
          await User.deleteMany();
-         reply.code(200).send({ data: 'All user deleted' });
+         sendSuccessResponse(
+            reply,
+            {
+               statusCode: 200,
+               message: "All users deleted successfully",
+               data: null
+            }
+         );
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
