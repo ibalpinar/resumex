@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 const { Schema } = mongoose;
 const { model } = mongoose;
 
@@ -29,6 +30,7 @@ const UserSchema = new Schema({
       required: [true, "E-mail is required field!"],
       maxlength: [150, "E-mail must not have more then 150 characters!"],
       minlength: [6, "E-mail must have at least 6 characters!"],
+      validate: [validator.isEmail, 'Please enter a valid email.'],
       trim: true,
       unique : true
    }
