@@ -16,6 +16,21 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 		default:
 			break;
 	}
+	if (!options.redirectURL) {
+		reply.status(statusCode).send({
+			statusCode,
+			error,
+			message,
+			success: false,
+		});
+	} else {
+		reply
+			.code(302)
+			.redirect(
+				`${options.redirectURL}?error=${error}&message=${message}&success=false`
+			);
+	}
+
 };
 
 const sendSuccessResponse = (reply, response, options = {}) => {

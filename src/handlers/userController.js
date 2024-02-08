@@ -4,7 +4,7 @@ const {
 	sendErrorResponse,
 	sendSuccessResponse,
 } = require("../../utils/responseHelpers");
-
+const { errors } = require('../../utils/errors');
 
 module.exports = {
    createUser: async (request, reply) => {
@@ -27,7 +27,12 @@ module.exports = {
                }
             );
          }).catch(err => {
-            console.error(err.message);
+            sendErrorResponse(reply, 400, "User already exist!");
+            // console.log("1 HATA BURADA ===============> ", err.code);
+            // console.log("2 HATA BURADA ===============> ", err.message);
+            // console.log("3 HATA BURADA ===============> ", err.name);
+            // console.log("4 HATA BURADA ===============> ", err);
+            // console.error(err.message);
          });
       }catch(err){
          console.error(err.message);
