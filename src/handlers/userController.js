@@ -55,7 +55,7 @@ module.exports = {
          }
       }catch(err){
          console.error(err.message);
-         reply.code(500).send(err);
+         sendErrorResponse(reply, 500, "Internal Server Error!");
       }
    },
 
