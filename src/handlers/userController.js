@@ -1,10 +1,7 @@
 const User = require('../models/User');
+const error = require('../../utils/errors');
 const { hashPassword, comparePassword } = require('../../utils/passwordManager');
-const {
-	sendErrorResponse,
-	sendSuccessResponse,
-} = require("../../utils/responseHelpers");
-const { errors } = require('../../utils/errors');
+const { sendErrorResponse, sendSuccessResponse } = require("../../utils/responseHelpers");
 
 module.exports = {
    createUser: async (request, reply) => {
@@ -27,12 +24,11 @@ module.exports = {
                }
             );
          }).catch(err => {
-            sendErrorResponse(reply, 400, "User already exist!");
-            // console.log("1 HATA BURADA ===============> ", err.code);
-            // console.log("2 HATA BURADA ===============> ", err.message);
-            // console.log("3 HATA BURADA ===============> ", err.name);
-            // console.log("4 HATA BURADA ===============> ", err);
-            // console.error(err.message);
+            if(err.code == error.DUPLICATE_KEY_ERROR){
+               sendErrorResponse(reply, 400, "User already exist!");
+            }else{
+               sendErrorResponse(reply, 500, "Internal Server Error!");
+            }
          });
       }catch(err){
          console.error(err.message);
