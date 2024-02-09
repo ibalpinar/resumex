@@ -1,7 +1,8 @@
 const User = require('../models/User');
 const error = require('../../utils/errors');
 const { hashPassword, comparePassword } = require('../../utils/passwordManager');
-const { sendErrorResponse, sendSuccessResponse } = require("../../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp } = require("../../utils/responseHelpers");
+
 
 module.exports = {
    createUser: async (request, reply) => {
@@ -62,18 +63,23 @@ module.exports = {
    getUserById: async (request, reply) => {
       try{
          const userId = request.params.id;
-         const user = await User.findById(userId);
-         if(user){
-            sendSuccessResponse(
-               reply,
-               {
-                  statusCode: 200,
-                  message: "User listed successfully",
-                  data: user
-               }
-            );
+
+         if(checkObjectIdRegExp.test(userId)){
+            const user = await User.findById(userId);
+            if(user){
+               sendSuccessResponse(
+                  reply,
+                  {
+                     statusCode: 200,
+                     message: "User listed successfully",
+                     data: user
+                  }
+               );
+            }else{
+               sendErrorResponse(reply, 404, "No User Found!");
+            }
          }else{
-            sendErrorResponse(reply, 404, "No User Found!");
+            sendErrorResponse(reply, 400, `Cast to ObjectId failed for value ${userId}`);
          }
       }catch(err){
          console.error(err.message);
