@@ -17,13 +17,9 @@ module.exports = {
             newUser.password = null;
 
             sendSuccessResponse(
-               reply,
-               {
-                  statusCode: 201,
-                  message: "User created successfully",
-                  data: newUser
-               }
+               reply, { statusCode: 201, message: "User created successfully", data: newUser }
             );
+
          }).catch(err => {
             console.error(err.message);
             if(err.code == error.DUPLICATE_KEY_ERROR){
@@ -43,12 +39,7 @@ module.exports = {
          const users = await User.find({});
          if(users.length != 0){
             sendSuccessResponse(
-               reply,
-               {
-                  statusCode: 200,
-                  message: "All users listed successfully",
-                  data: users
-               }
+               reply, { statusCode: 200, message: "All users listed successfully", data: users }
             );
          }
          else{
@@ -68,12 +59,7 @@ module.exports = {
             const user = await User.findById(userId);
             if(user){
                sendSuccessResponse(
-                  reply,
-                  {
-                     statusCode: 200,
-                     message: "User listed successfully",
-                     data: user
-                  }
+                  reply, { statusCode: 200, message: "User listed successfully", data: user }
                );
             }else{
                sendErrorResponse(reply, 404, "No User Found!");
@@ -95,12 +81,7 @@ module.exports = {
          const userToUpdate = await User.findById(userId);
          userToUpdate.password = null;
          sendSuccessResponse(
-            reply,
-            {
-               statusCode: 200,
-               message: "User listed successfully",
-               data: userToUpdate
-            }
+            reply, { statusCode: 200, message: "User listed successfully", data: userToUpdate }
          );
       }catch(err){
          console.error(err.message);
@@ -114,12 +95,7 @@ module.exports = {
          const userToDelete = await User.findById(userId);
          await User.findByIdAndDelete(userId);
          sendSuccessResponse(
-            reply,
-            {
-               statusCode: 200,
-               message: "User deleted successfully",
-               data: userToDelete
-            }
+            reply, { statusCode: 200, message: "User deleted successfully", data: userToDelete }
          );
       }catch(err){
          console.error(err.message);
@@ -131,12 +107,7 @@ module.exports = {
       try{
          await User.deleteMany();
          sendSuccessResponse(
-            reply,
-            {
-               statusCode: 200,
-               message: "All users deleted successfully",
-               data: null
-            }
+            reply, { statusCode: 200, message: "All users deleted successfully", data: null }
          );
       }catch(err){
          console.error(err.message);
