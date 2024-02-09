@@ -63,14 +63,18 @@ module.exports = {
       try{
          const userId = request.params.id;
          const user = await User.findById(userId);
-         sendSuccessResponse(
-            reply,
-            {
-               statusCode: 200,
-               message: "User listed successfully",
-               data: user
-            }
-         );
+         if(user){
+            sendSuccessResponse(
+               reply,
+               {
+                  statusCode: 200,
+                  message: "User listed successfully",
+                  data: user
+               }
+            );
+         }else{
+            sendErrorResponse(reply, 404, "No User Found!");
+         }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, "Internal Server Error!");
