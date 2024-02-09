@@ -40,14 +40,19 @@ module.exports = {
    getAllUser: async (request, reply) => {
       try{
          const users = await User.find({});
-         sendSuccessResponse(
-            reply,
-            {
-               statusCode: 200,
-               message: "All users listed successfully",
-               data: users
-            }
-         );
+         if(users.length != 0){
+            sendSuccessResponse(
+               reply,
+               {
+                  statusCode: 200,
+                  message: "All users listed successfully",
+                  data: users
+               }
+            );
+         }
+         else{
+            sendErrorResponse(reply, 404, "No Users Found!");
+         }
       }catch(err){
          console.error(err.message);
          reply.code(500).send(err);
