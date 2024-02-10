@@ -13,7 +13,7 @@ const responseMessage = {
    USER_LISTED_SUCCESSFULLY: "User listed successfully",
    USER_UPDATED_SUCCESSFULLY: "User updated successfully",
    USER_DELETED_SUCCESSFULLY: "User deleted successfully",
-   ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully",
+   ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully"
 }
 
 const sendErrorResponse = (reply, statusCode, message, options = {}) => {
