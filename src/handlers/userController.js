@@ -81,7 +81,7 @@ module.exports = {
          const userToUpdate = await User.findById(userId);
          userToUpdate.password = null;
          sendSuccessResponse(
-            reply, { statusCode: 200, message: "User listed successfully", data: userToUpdate }
+            reply, { statusCode: 200, message: "User updated successfully", data: userToUpdate }
          );
       }catch(err){
          console.error(err.message);
