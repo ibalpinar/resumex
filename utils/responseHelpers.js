@@ -1,4 +1,4 @@
-const reponseMessage = {
+const responseMessage = {
    INTERNAL_SERVER_ERROR: "Internal Server Error",
    BAD_REQUEST: "Bad Request",
    NOT_FOUND: "Not Found",
@@ -71,5 +71,5 @@ module.exports = {
 	sendErrorResponse,
 	sendSuccessResponse,
    checkObjectIdRegExp,
-   reponseMessage
+   responseMessage
 };
