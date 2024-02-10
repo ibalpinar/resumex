@@ -17,7 +17,7 @@ const responseMessage = {
 }
 
 const sendErrorResponse = (reply, statusCode, message, options = {}) => {
-	let error = "Internal Server Error";
+	let error = responseMessage.INTERNAL_SERVER_ERROR;
 	switch (statusCode) {
 		case 400:
 			error = responseMessage.BAD_REQUEST;
