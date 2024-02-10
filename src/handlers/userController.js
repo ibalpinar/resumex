@@ -77,12 +77,23 @@ module.exports = {
       try{
          const userId = request.params.id;
          const userUpdates = request.body;
-         await User.findByIdAndUpdate(userId, userUpdates);
-         const userToUpdate = await User.findById(userId);
-         userToUpdate.password = null;
-         sendSuccessResponse(
-            reply, { statusCode: 200, message: "User updated successfully", data: userToUpdate }
-         );
+
+         if(checkObjectIdRegExp.test(userId)){
+            const userToUpdate = await User.findById(userId);
+            if(userToUpdate){
+               await User.findByIdAndUpdate(userId, userUpdates);
+               const userToUpdate = await User.findById(userId);
+               userToUpdate.password = null;
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: "User updated successfully", data: userToUpdate }
+               );
+            }else{
+               sendErrorResponse(reply, 404, "No User Found!");
+            }
+         }else{
+            sendErrorResponse(reply, 400, `Cast to ObjectId failed for value ${userId}`);
+         }
+
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, "Internal Server Error!");
