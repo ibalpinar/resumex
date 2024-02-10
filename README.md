@@ -10,6 +10,6 @@ This will be a never-ending project and will constantly grow and develop with op
  - 150 Stars
 #### Project in production:
  - 5000 active users
- - Reach out 1000 active resumes until January 2025
+ - 1000 active resumes
 
 <b>New participants are welcome!</b>
