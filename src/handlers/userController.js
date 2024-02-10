@@ -105,10 +105,15 @@ module.exports = {
 
    deleteAllUser: async (request, reply) => {
       try{
-         await User.deleteMany();
-         sendSuccessResponse(
-            reply, { statusCode: 200, message: "All users deleted successfully", data: null }
-         );
+         let numberOfUsers = await User.countDocuments({});
+         if(numberOfUsers != 0){
+            await User.deleteMany();
+            sendSuccessResponse(
+               reply, { statusCode: 200, message: "All users deleted successfully", data: null }
+            );
+         }else{
+            sendErrorResponse(reply, 404, "No Users Found!");
+         }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, "Internal Server Error!");
