@@ -11,7 +11,7 @@ const hashPassword = async function(password, saltRounds) {
    } finally {
       return rhash;
    }
-}
+};
 
 const comparePassword = async function(password, hash) {
    let isVerified = false;
@@ -22,6 +22,21 @@ const comparePassword = async function(password, hash) {
    } finally {
       return isVerified;
    }
-}
+};
 
-module.exports = {hashPassword, comparePassword};
+const removePasswordKey = function(user){
+   let tempUser = {
+      _id: user._id,
+      name: user.name,
+      lastname: user.lastName,
+      email: user.email,
+      __v: user.__v
+   };
+   return tempUser;
+};
+
+module.exports = {
+   hashPassword,
+   comparePassword,
+   removePasswordKey
+};

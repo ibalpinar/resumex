@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const error = require('../../utils/errors');
-const { hashPassword, comparePassword } = require('../../utils/passwordManager');
+const { hashPassword, comparePassword, removePasswordKey } = require('../../utils/passwordManager');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../../utils/responseHelpers");
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
             return user;
          }).then(async (user) => {
             let newUser = await User.create(user);
-            newUser.password = null;
+            newUser = removePasswordKey(newUser);
 
             sendSuccessResponse(
                reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
