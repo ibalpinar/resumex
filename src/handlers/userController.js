@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const error = require('../../utils/errors');
+const constants = require('../../utils/constants');
 const { hashPassword, comparePassword, removePasswordKey } = require('../../utils/passwordManager');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../../utils/responseHelpers");
 
@@ -35,7 +36,7 @@ module.exports = {
 
    getAllUser: async (request, reply) => {
       try{
-         const users = await User.find({});
+         const users = await User.find({}).select(constants.selectUserFields);
          if(users.length != 0){
             sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY, data: users }
@@ -55,7 +56,8 @@ module.exports = {
          const userId = request.params.id;
 
          if(checkObjectIdRegExp.test(userId)){
-            const user = await User.findById(userId);
+            const user = await User.findById(userId).select(constants.selectUserFields);
+
             if(user){
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_LISTED_SUCCESSFULLY, data: user }
@@ -81,8 +83,7 @@ module.exports = {
             const userToUpdate = await User.findById(userId);
             if(userToUpdate){
                await User.findByIdAndUpdate(userId, userUpdates);
-               const userToUpdate = await User.findById(userId);
-               userToUpdate.password = null;
+               const userToUpdate = await User.findById(userId).select(constants.selectUserFields);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
@@ -104,7 +105,7 @@ module.exports = {
          const userId = request.params.id;
 
          if(checkObjectIdRegExp.test(userId)){
-            const userToDelete = await User.findById(userId);
+            const userToDelete = await User.findById(userId).select(constants.selectUserFields);
             if(userToDelete){
                await User.findByIdAndDelete(userId);
                sendSuccessResponse(
