@@ -20,16 +20,16 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 	let error = "Internal Server Error";
 	switch (statusCode) {
 		case 400:
-			error = reponseMessage.BAD_REQUEST;
+			error = responseMessage.BAD_REQUEST;
 			break;
 		case 404:
-			error = reponseMessage.NOT;
+			error = responseMessage.NOT;
 			break;
 		case 403:
-			error = reponseMessage.FORBIDDEN;
+			error = responseMessage.FORBIDDEN;
 			break;
 		case 429:
-			error = reponseMessage.TOO_MANY_REQUEST;
+			error = responseMessage.TOO_MANY_REQUEST;
 			break;
 		default:
 			break;
