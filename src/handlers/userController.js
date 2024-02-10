@@ -1,8 +1,7 @@
 const User = require('../models/User');
 const error = require('../../utils/errors');
 const { hashPassword, comparePassword } = require('../../utils/passwordManager');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp } = require("../../utils/responseHelpers");
-
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, reponseMessage } = require("../../utils/responseHelpers");
 
 module.exports = {
    createUser: async (request, reply) => {
