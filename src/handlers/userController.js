@@ -92,11 +92,21 @@ module.exports = {
    deleteUser: async (request, reply) => {
       try{
          const userId = request.params.id;
-         const userToDelete = await User.findById(userId);
-         await User.findByIdAndDelete(userId);
-         sendSuccessResponse(
-            reply, { statusCode: 200, message: "User deleted successfully", data: userToDelete }
-         );
+
+         if(checkObjectIdRegExp.test(userId)){
+            const userToDelete = await User.findById(userId);
+            if(userToDelete){
+               await User.findByIdAndDelete(userId);
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: "User deleted successfully", data: userToDelete }
+               );
+            }else{
+               sendErrorResponse(reply, 404, "No User Found!");
+            }
+         }else{
+            sendErrorResponse(reply, 400, `Cast to ObjectId failed for value ${userId}`);
+         }
+
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, "Internal Server Error!");
