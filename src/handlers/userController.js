@@ -6,8 +6,8 @@ const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMes
 
 module.exports = {
    createUser: async (request, reply) => {
+      const user = request.body;
       try{
-         const user = request.body;
          user.password = await bcryptPassword(user.password);
          let newUser = await User.create(user);
          newUser = removePasswordKey(newUser);
@@ -42,9 +42,8 @@ module.exports = {
    },
 
    getUserById: async (request, reply) => {
+      const userId = request.params.id;
       try{
-         const userId = request.params.id;
-
          if(checkObjectIdRegExp.test(userId)){
             const user = await User.findById(userId).select(constants.selectUserFields);
 
@@ -65,10 +64,9 @@ module.exports = {
    },
 
    updateUser: async (request, reply) => {
+      const userId = request.params.id;
+      const userUpdates = request.body;
       try{
-         const userId = request.params.id;
-         const userUpdates = request.body;
-
          if(checkObjectIdRegExp.test(userId)){
             let userToUpdate = await User.findById(userId);
             if(userToUpdate){
@@ -101,9 +99,8 @@ module.exports = {
    },
 
    deleteUser: async (request, reply) => {
+      const userId = request.params.id;
       try{
-         const userId = request.params.id;
-
          if(checkObjectIdRegExp.test(userId)){
             const userToDelete = await User.findById(userId).select(constants.selectUserFields);
             if(userToDelete){
