@@ -92,7 +92,11 @@ module.exports = {
 
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         if(err.code == error.DUPLICATE_KEY_ERROR){
+            sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }else{
+            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         }
       }
    },
 
