@@ -7,20 +7,24 @@ const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMes
 module.exports = {
    createUser: async (request, reply) => {
       const user = request.body;
-      try{
-         user.password = await bcryptPassword(user.password);
-         let newUser = await User.create(user);
-         newUser = removePasswordKey(newUser);
-         sendSuccessResponse(
-            reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
-         );
-      }catch(err){
-         console.error(err.message);
-         if(err.code == error.DUPLICATE_KEY_ERROR){
-            sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
-         }else{
-            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      if(user.password == user.confirmPassword){
+         try{
+            user.password = await bcryptPassword(user.password);
+            let newUser = await User.create(user);
+            newUser = removePasswordKey(newUser);
+            sendSuccessResponse(
+               reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
+            );
+         }catch(err){
+            console.error(err.message);
+            if(err.code == error.DUPLICATE_KEY_ERROR){
+               sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+            }else{
+               sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+            }
          }
+      }else{
+         sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
       }
    },
 
