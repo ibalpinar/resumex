@@ -72,9 +72,14 @@ module.exports = {
          if(checkObjectIdRegExp.test(userId)){
             let userToUpdate = await User.findById(userId);
             if(userToUpdate){
-               userUpdates.password = (userUpdates.password)?userUpdates.password:userToUpdate.password;
+               if(userUpdates.password){
+                  userUpdates.password = await bcryptPassword(userUpdates.password);
+               }else{
+                  userUpdates.password = userToUpdate.password;
+               }
                await User.findByIdAndUpdate(userId, userUpdates);
-               userToUpdate = await User.findById(userId).select(constants.selectUserFields);
+               userToUpdate = removePasswordKey(userToUpdate);
+               // userToUpdate = await User.findById(userId).select(constants.selectUserFields);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
