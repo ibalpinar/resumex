@@ -1,36 +1,26 @@
 const User = require('../models/User');
 const error = require('../../utils/errors');
 const constants = require('../../utils/constants');
-const { hashPassword, comparePassword, removePasswordKey } = require('../../utils/passwordManager');
+const { removePasswordKey, bcryptPassword } = require('../../utils/passwordManager');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../../utils/responseHelpers");
 
 module.exports = {
    createUser: async (request, reply) => {
       try{
          const user = request.body;
-         var hash = hashPassword(user.password, process.env.SALT_ROUNDS);
-         await hash.then(function(rHash){
-            user.password = rHash;
-            return user;
-         }).then(async (user) => {
-            let newUser = await User.create(user);
-            newUser = removePasswordKey(newUser);
-
-            sendSuccessResponse(
-               reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
-            );
-
-         }).catch(err => {
-            console.error(err.message);
-            if(err.code == error.DUPLICATE_KEY_ERROR){
-               sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
-            }else{
-               sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
-            }
-         });
+         user.password = await bcryptPassword(user.password);
+         let newUser = await User.create(user);
+         newUser = removePasswordKey(newUser);
+         sendSuccessResponse(
+            reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
+         );
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         if(err.code == error.DUPLICATE_KEY_ERROR){
+            sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }else{
+            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         }
       }
    },
 

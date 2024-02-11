@@ -13,6 +13,14 @@ const hashPassword = async function(password, saltRounds) {
    }
 };
 
+const bcryptPassword = async function(password) {
+   const bcrypted = await hashPassword(password, process.env.SALT_ROUNDS)
+      .then((rHash)=>{
+         return rHash;
+   });
+   return bcrypted;
+};
+
 const comparePassword = async function(password, hash) {
    let isVerified = false;
    try {
@@ -36,7 +44,7 @@ const removePasswordKey = function(user){
 };
 
 module.exports = {
-   hashPassword,
    comparePassword,
-   removePasswordKey
+   removePasswordKey,
+   bcryptPassword
 };
