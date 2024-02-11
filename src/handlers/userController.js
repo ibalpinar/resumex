@@ -75,6 +75,9 @@ module.exports = {
             let userToUpdate = await User.findById(userId);
             if(userToUpdate){
                if(userUpdates.password){
+                  if(userUpdates.password != userUpdates.confirmPassword){
+                     sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+                  }
                   userUpdates.password = await bcryptPassword(userUpdates.password);
                }else{
                   userUpdates.password = userToUpdate.password;
