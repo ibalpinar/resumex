@@ -8,6 +8,7 @@ const responseMessage = {
    NO_USER_FOUND: "No User Found",
    NO_USERS_FOUND: "No Users Found",
    USER_ALREADY_EXIST: "User already exist",
+   PASS_CONFIRM_PASS_DONT_MATCH: "Password and Confirm Password do not match",
    USER_CREATED_SUCCESSFULLY: "User created successfully",
    ALL_USERS_LISTED_SUCCESSFULLY: "All users listed successfully",
    USER_LISTED_SUCCESSFULLY: "User listed successfully",
@@ -23,7 +24,7 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 			error = responseMessage.BAD_REQUEST;
 			break;
 		case 404:
-			error = responseMessage.NOT;
+			error = responseMessage.NOT_FOUND;
 			break;
 		case 403:
 			error = responseMessage.FORBIDDEN;
