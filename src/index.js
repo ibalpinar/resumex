@@ -4,7 +4,7 @@ const fastifySwagger = require("@fastify/swagger");
 const fastifySwaggerUi = require("@fastify/swagger-ui");
 const User = require("./models/User");
 const { userRoutes } = require('./routes/v1/userRoutes');
-const { swaggerUiOptions, swaggerOptions } = require('../utils/constants');
+const { swaggerUiOptions, swaggerOptions } = require('./utils/constants');
 
 const app = fastify({ logger: true });
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/resumex"
