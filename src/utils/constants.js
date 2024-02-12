@@ -7,16 +7,19 @@ const swaggerUiOptions = {
 
 const swaggerOptions = {
    swagger: {
-       info: {
-           title: process.env.SWAGGER_TITLE,
-           description: process.env.SWAGGER_DESCRIPTION,
-           version: process.env.VERSION,
-       },
-       host: process.env.HOST,
-       schemes: ["http", "https"],
-       consumes: ["application/json"],
-       produces: ["application/json"],
-       tags: [{ name: "Default", description: "Default" }],
+      info: {
+         title: process.env.SWAGGER_TITLE,
+         description: process.env.SWAGGER_DESCRIPTION,
+         version: process.env.VERSION,
+         license: {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+         }
+      },
+      host: process.env.HOST,
+      schemes: ["http", "https"],
+      consumes: ["application/json"],
+      produces: ["application/json"]
    },
 };
 
