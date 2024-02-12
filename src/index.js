@@ -1,5 +1,7 @@
 const fastify = require('fastify');
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const fastifySwagger = require("@fastify/swagger");
+const fastifySwaggerUi = require("@fastify/swagger-ui");
 const User = require("./models/User");
 const { userRoutes } = require('./routes/v1/userRoutes');
 
@@ -12,6 +14,29 @@ try {
 } catch (err) {
     console.error(err);
 }
+
+const swaggerOptions = {
+   swagger: {
+       info: {
+           title: process.env.SWAGGER_TITLE,
+           description: process.env.SWAGGER_DESCRIPTION,
+           version: process.env.VERSION,
+       },
+       host: process.env.HOST,
+       schemes: ["http", "https"],
+       consumes: ["application/json"],
+       produces: ["application/json"],
+       tags: [{ name: "Default", description: "Default" }],
+   },
+};
+
+const swaggerUiOptions = {
+   routePrefix: "/docs",
+   exposeRoute: true,
+};
+
+app.register(fastifySwagger, swaggerOptions);
+app.register(fastifySwaggerUi, swaggerUiOptions);
 
 app.register(userRoutes, { prefix: "api/v1/user" });
 
