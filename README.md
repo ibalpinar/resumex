@@ -1,5 +1,5 @@
 # ResumeX v0.1
-ResumeX is the new generation open source resume platform. ResumeX forces you to prepare only 2 pages resume.
+ResumeX is the new generation open-source resume platform that forces you to prepare a resume of only 2 pages to present yourself best.
 
 This will be a never-ending project and will constantly grow and develop with open-source contributors.
 
