@@ -23,10 +23,18 @@ const userServiceSchema = {
             description: responseMessage.USER_CREATED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'string', format: 'uuid' },
-               name: { type: "string"},
-               lastName: { type: "string"},
-               email: { type: "string", format: "email" }
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: {
+                  type: 'object',
+                  properties: {
+                     _id: { type: 'string', format: 'uuid' },
+                     name: { type: "string"},
+                     lastName: { type: "string"},
+                     email: { type: "string", format: "email" }
+                  }
+               },
+               success: { type: "boolean"}
             }
          },
          400: {
@@ -83,7 +91,7 @@ const userServiceSchema = {
       description: "This endpoint fetches a user given its Id. It returns a single user object",
       summary: "Get a user",
 		tags: [path.USER],
-      params: {
+      querystring: {
          type: 'object',
          properties: {
            id: {
@@ -94,14 +102,22 @@ const userServiceSchema = {
          }
        },
        response: {
-         201: {
+         200: {
             description: responseMessage.USER_LISTED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'string', format: 'uuid' },
-               name: { type: "string"},
-               lastName: { type: "string"},
-               email: { type: "string", format: "email" }
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: {
+                  type: 'object',
+                  properties: {
+                     _id: { type: 'string', format: 'uuid' },
+                     name: { type: "string"},
+                     lastName: { type: "string"},
+                     email: { type: "string", format: "email" }
+                  }
+               },
+               success: { type: "boolean"}
             }
          },
          400: {
@@ -125,7 +141,7 @@ const userServiceSchema = {
       description: "This endpoint updates user information given its Id. The password does not have to be sent. It is only updated if it is sent. Returns the updated user information as a user object",
       summary: "Update a user",
 		tags: [path.USER],
-      params: {
+      querystring: {
          type: 'object',
          properties: {
            id: {
@@ -151,10 +167,18 @@ const userServiceSchema = {
             description: responseMessage.USER_UPDATED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'string', format: 'uuid' },
-               name: { type: "string"},
-               lastName: { type: "string"},
-               email: { type: "string", format: "email" }
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: {
+                  type: 'object',
+                  properties: {
+                     _id: { type: 'string', format: 'uuid' },
+                     name: { type: "string"},
+                     lastName: { type: "string"},
+                     email: { type: "string", format: "email" }
+                  }
+               },
+               success: { type: "boolean"}
             }
          },
          400: {
@@ -178,7 +202,7 @@ const userServiceSchema = {
       description: "This endpoint deletes a user given its Id. Returns the deleted user's information",
       summary: "Delete a user",
 		tags: [path.USER],
-      params: {
+      querystring: {
          type: 'object',
          properties: {
             id: {
