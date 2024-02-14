@@ -26,7 +26,7 @@ const userServiceSchema = {
             description: responseMessage.USER_CREATED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'number', format: 'uuid' },
+               _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
                email: {
@@ -54,18 +54,26 @@ const userServiceSchema = {
       response: {
          200: {
             description: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
-            type: 'array',
-            items: {
-               type: 'object',
-               properties: {
-                  _id: { type: 'number', format: 'uuid' },
-                  name: { type: "string"},
-                  lastName: { type: "string"},
-                  email: {
-                     type: "string",
-                     format: "email"
+            type: 'object',
+            properties: {
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: {
+                  type: 'array',
+                  items: {
+                     type: 'object',
+                     properties: {
+                        _id: { type: 'string', format: 'uuid' },
+                        name: { type: "string"},
+                        lastName: { type: "string"},
+                        email: {
+                           type: "string",
+                           format: "email"
+                        }
+                     }
                   }
-               }
+               },
+               success: { type: "boolean"}
             }
          },
          404: {
@@ -99,7 +107,7 @@ const userServiceSchema = {
             description: responseMessage.USER_LISTED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'number', format: 'uuid' },
+               _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
                email: {
@@ -158,7 +166,7 @@ const userServiceSchema = {
             description: responseMessage.USER_UPDATED_SUCCESSFULLY,
             type: 'object',
             properties: {
-               _id: { type: 'number', format: 'uuid' },
+               _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
                email: {
@@ -203,7 +211,7 @@ const userServiceSchema = {
            description: responseMessage.USER_DELETED_SUCCESSFULLY,
            type: 'object',
            properties: {
-              _id: { type: 'number', format: 'uuid' },
+              _id: { type: 'string', format: 'uuid' },
               name: { type: "string"},
               lastName: { type: "string"},
               email: {

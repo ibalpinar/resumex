@@ -12,6 +12,7 @@ const userRoutes = async (app, opts) => {
    app.route({
       method: "GET",
       url: "/fetch",
+      schema: userServiceSchema.fetch,
       handler: userController.getAllUser,
    });
 
