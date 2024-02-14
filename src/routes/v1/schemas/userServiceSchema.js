@@ -51,6 +51,34 @@ const userServiceSchema = {
 		description: "This endpoint lists all users. It returns an array of user objects",
       summary: "Fetch all users",
 		tags: [path.USER],
+      response: {
+         201: {
+            description: responseMessage.USER_LISTED_SUCCESSFULLY,
+            type: 'array',
+            items: {
+               type: 'object',
+               properties: {
+                  _id: { type: 'number', format: 'uuid' },
+                  name: { type: "string"},
+                  lastName: { type: "string"},
+                  email: {
+                     type: "string",
+                     format: "email"
+                  }
+               }
+            }
+         },
+         404: {
+            description: responseMessage.NO_USERS_FOUND,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         500: {
+            description: responseMessage.INTERNAL_SERVER_ERROR,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         }
+      }
    },
    get: {
       description: "This endpoint fetches a user given its Id. It returns a single user object",
