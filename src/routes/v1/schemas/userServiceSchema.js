@@ -213,54 +213,67 @@ const userServiceSchema = {
          }
       },
       response: {
-        200: {
-           description: responseMessage.USER_DELETED_SUCCESSFULLY,
-           type: 'object',
-           properties: {
-              _id: { type: 'string', format: 'uuid' },
-              name: { type: "string"},
-              lastName: { type: "string"},
-              email: { type: "string", format: "email" }
-           }
-        },
-        400: {
-           description: responseMessage.BAD_REQUEST,
-           type: 'object',
-           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
-        },
-        404: {
-           description: responseMessage.NO_USER_FOUND,
-           type: 'object',
-           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
-        },
-        500: {
-           description: responseMessage.INTERNAL_SERVER_ERROR,
-           type: 'object',
-           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
-        }
-     }
+         200: {
+            description: responseMessage.USER_DELETED_SUCCESSFULLY,
+            type: 'object',
+            properties: {
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: {
+                  type: 'object',
+                  properties: {
+                     _id: { type: 'string', format: 'uuid' },
+                     name: { type: "string"},
+                     lastName: { type: "string"},
+                     email: { type: "string", format: "email" }
+                  }
+               },
+               success: { type: "boolean"}
+            }
+         },
+         400: {
+            description: responseMessage.BAD_REQUEST,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         404: {
+            description: responseMessage.NO_USER_FOUND,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         500: {
+            description: responseMessage.INTERNAL_SERVER_ERROR,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         }
+      }
    },
    deleteAllUsers: {
       description: "This endpoint deletes all users. It only returns a status message",
       summary: "Delete all users",
 		tags: [path.USER],
       response: {
-        200: {
-           description: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
-           type: 'object',
-           properties: {}
-        },
-        404: {
-           description: responseMessage.NO_USER_FOUND,
-           type: 'object',
-           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
-        },
-        500: {
-           description: responseMessage.INTERNAL_SERVER_ERROR,
-           type: 'object',
-           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
-        }
-     }
+         200: {
+            description: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
+            type: 'object',
+            properties: {
+               statusCode: { type: "string"},
+               message: { type: "string"},
+               data: { type: "null"},
+               success: { type: "boolean"}
+            }
+         },
+         404: {
+            description: responseMessage.NO_USER_FOUND,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         500: {
+            description: responseMessage.INTERNAL_SERVER_ERROR,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         }
+      }
    }
 }
 
