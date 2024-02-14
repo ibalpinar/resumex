@@ -1,8 +1,8 @@
 const User = require('../models/User');
-const error = require('../../utils/errors');
-const constants = require('../../utils/constants');
-const { removePasswordKey, bcryptPassword } = require('../../utils/passwordManager');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../../utils/responseHelpers");
+const error = require('../utils/errors');
+const constants = require('../utils/constants');
+const { removePasswordKey, bcryptPassword } = require('../utils/passwordManager');
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
 
 module.exports = {
    createUser: async (request, reply) => {

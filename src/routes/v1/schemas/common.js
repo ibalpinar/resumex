@@ -5,6 +5,10 @@ const getCommonProperties = (statusCode, successValue) => ({
    data: { type: "object" },
 });
 
+const path = {
+	USER: "User"
+};
+
 const getErrorProperties = (statusCode, successValue) => ({
 	...getCommonProperties(statusCode, successValue),
 	error: { type: "string" },
@@ -63,4 +67,5 @@ module.exports = {
 	getCommonProperties,
 	getErrorProperties,
 	getEmailStatusResponse,
+   path
 };

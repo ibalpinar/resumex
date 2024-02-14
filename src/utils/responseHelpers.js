@@ -14,8 +14,14 @@ const responseMessage = {
    USER_LISTED_SUCCESSFULLY: "User listed successfully",
    USER_UPDATED_SUCCESSFULLY: "User updated successfully",
    USER_DELETED_SUCCESSFULLY: "User deleted successfully",
-   ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully"
-}
+   ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully",
+   DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
+      statusCode: { type: 'number'},
+      error: { type: "string"},
+      message: { type: "string"},
+      success: { type: "boolean"}
+   }
+};
 
 const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 	let error = responseMessage.INTERNAL_SERVER_ERROR;
