@@ -99,7 +99,17 @@ const userServiceSchema = {
    delete: {
       description: "This endpoint deletes a user given its Id. Returns the deleted user's information",
       summary: "Delete a user",
-		tags: [path.USER]
+		tags: [path.USER],
+      params: {
+         type: 'object',
+         properties: {
+           id: {
+             type: 'string',
+             format: 'uuid',
+             description: 'User Id'
+           }
+         }
+       }
    },
    deleteAllUsers: {
       description: "This endpoint deletes all users. It only returns a status message",
