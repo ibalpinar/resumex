@@ -71,6 +71,16 @@ const userServiceSchema = {
       description: "This endpoint updates user information given its Id. The password does not have to be sent. It is only updated if it is sent. Returns the updated user information as a user object",
       summary: "Update a user",
 		tags: [path.USER],
+      params: {
+         type: 'object',
+         properties: {
+           id: {
+             type: 'string',
+             format: 'uuid',
+             description: 'User Id'
+           }
+         }
+      },
 		body: {
 			type: "object",
 			properties: {
