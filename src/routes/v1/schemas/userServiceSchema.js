@@ -55,7 +55,17 @@ const userServiceSchema = {
    get: {
       description: "This endpoint fetches a user given its Id. It returns a single user object",
       summary: "Get a user",
-		tags: [path.USER]
+		tags: [path.USER],
+      params: {
+         type: 'object',
+         properties: {
+           id: {
+             type: 'string',
+             format: 'uuid',
+             description: 'User Id'
+           }
+         }
+       }
    },
    update: {
       description: "This endpoint updates user information given its Id. The password does not have to be sent. It is only updated if it is sent. Returns the updated user information as a user object",
