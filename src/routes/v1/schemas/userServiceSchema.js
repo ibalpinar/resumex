@@ -12,10 +12,7 @@ const userServiceSchema = {
 			properties: {
 				name: { type: "string"},
             lastName: { type: "string"},
-				email: {
-					type: "string",
-					format: "email"
-				},
+            email: { type: "string", format: "email" },
 				password: { type: "string"},
             confirmPassword: { type: "string"}
 			},
@@ -29,10 +26,7 @@ const userServiceSchema = {
                _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
-               email: {
-                  type: "string",
-                  format: "email"
-               }
+               email: { type: "string", format: "email" }
             }
          },
          400: {
@@ -66,10 +60,7 @@ const userServiceSchema = {
                         _id: { type: 'string', format: 'uuid' },
                         name: { type: "string"},
                         lastName: { type: "string"},
-                        email: {
-                           type: "string",
-                           format: "email"
-                        }
+                        email: { type: "string", format: "email" }
                      }
                   }
                },
@@ -110,10 +101,7 @@ const userServiceSchema = {
                _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
-               email: {
-                  type: "string",
-                  format: "email"
-               }
+               email: { type: "string", format: "email" }
             }
          },
          400: {
@@ -152,10 +140,7 @@ const userServiceSchema = {
 			properties: {
 				name: { type: "string"},
             lastName: { type: "string"},
-				email: {
-					type: "string",
-					format: "email"
-				},
+            email: { type: "string", format: "email" },
 				password: { type: "string"},
             confirmPassword: { type: "string"}
 			},
@@ -169,10 +154,7 @@ const userServiceSchema = {
                _id: { type: 'string', format: 'uuid' },
                name: { type: "string"},
                lastName: { type: "string"},
-               email: {
-                  type: "string",
-                  format: "email"
-               }
+               email: { type: "string", format: "email" }
             }
          },
          400: {
@@ -214,10 +196,7 @@ const userServiceSchema = {
               _id: { type: 'string', format: 'uuid' },
               name: { type: "string"},
               lastName: { type: "string"},
-              email: {
-                 type: "string",
-                 format: "email"
-              }
+              email: { type: "string", format: "email" }
            }
         },
         400: {
