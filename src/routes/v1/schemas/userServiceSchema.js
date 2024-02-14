@@ -144,7 +144,7 @@ const userServiceSchema = {
 				password: { type: "string"},
             confirmPassword: { type: "string"}
 			},
-			required: ["name", "lastName", "email", "password"]
+			required: ["name", "lastName", "email"]
 		},
       response: {
          200: {
