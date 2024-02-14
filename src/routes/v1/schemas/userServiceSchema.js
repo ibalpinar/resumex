@@ -93,7 +93,37 @@ const userServiceSchema = {
              description: 'User Id'
            }
          }
-       }
+       },
+       response: {
+         201: {
+            description: responseMessage.USER_LISTED_SUCCESSFULLY,
+            type: 'object',
+            properties: {
+               _id: { type: 'number', format: 'uuid' },
+               name: { type: "string"},
+               lastName: { type: "string"},
+               email: {
+                  type: "string",
+                  format: "email"
+               }
+            }
+         },
+         400: {
+            description: responseMessage.BAD_REQUEST,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         404: {
+            description: responseMessage.NO_USER_FOUND,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         },
+         500: {
+            description: responseMessage.INTERNAL_SERVER_ERROR,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+         }
+      }
    },
    update: {
       description: "This endpoint updates user information given its Id. The password does not have to be sent. It is only updated if it is sent. Returns the updated user information as a user object",
@@ -122,7 +152,37 @@ const userServiceSchema = {
             confirmPassword: { type: "string"}
 			},
 			required: ["name", "lastName", "email", "password"]
-		}
+		},
+      response: {
+        200: {
+           description: responseMessage.USER_UPDATED_SUCCESSFULLY,
+           type: 'object',
+           properties: {
+              _id: { type: 'number', format: 'uuid' },
+              name: { type: "string"},
+              lastName: { type: "string"},
+              email: {
+                 type: "string",
+                 format: "email"
+              }
+           }
+        },
+        400: {
+           description: responseMessage.BAD_REQUEST,
+           type: 'object',
+           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+        },
+        404: {
+           description: responseMessage.NO_USER_FOUND,
+           type: 'object',
+           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+        },
+        500: {
+           description: responseMessage.INTERNAL_SERVER_ERROR,
+           type: 'object',
+           properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA
+        }
+     }
    },
    delete: {
       description: "This endpoint deletes a user given its Id. Returns the deleted user's information",
