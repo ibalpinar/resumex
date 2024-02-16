@@ -38,7 +38,9 @@ const removePasswordKey = function(user){
       name: user.name,
       lastName: user.lastName,
       email: user.email,
-      __v: user.__v
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      deletedAt: user.deletedAt
    };
    return tempUser;
 };

@@ -33,6 +33,21 @@ const UserSchema = new Schema({
       validate: [validator.isEmail, 'Please enter a valid email.'],
       trim: true,
       unique : true
+   },
+   createdAt: {
+      type : Date,
+      default: Date.now,
+      trim: true
+   },
+   updatedAt: {
+      type : Date,
+      default: null,
+      trim: true
+   },
+   deletedAt: {
+      type : Date,
+      default: null,
+      trim: true
    }
 });
 
