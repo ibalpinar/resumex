@@ -1,4 +1,4 @@
-const selectUserFields = { _id: 1, name: 1, lastName: 1, email: 1, __v: 1 };
+const selectUserFields = { _id: 1, name: 1, lastName: 1, email: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
 
 const swaggerUiOptions = {
    routePrefix: "/apidocs",

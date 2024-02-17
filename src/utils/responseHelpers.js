@@ -20,6 +20,15 @@ const responseMessage = {
       error: { type: "string"},
       message: { type: "string"},
       success: { type: "boolean"}
+   },
+   DEFAULT_RESPONSE_USER_SCHEMA: {
+      _id: { type: 'string', format: 'uuid' },
+      name: { type: "string"},
+      lastName: { type: "string"},
+      email: { type: "string", format: "email" },
+      createdAt: { type: "string"},
+      updatedAt: { type: "string"},
+      deletedAt: { type: "string"}
    }
 };
 

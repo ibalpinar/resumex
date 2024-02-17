@@ -27,12 +27,7 @@ const userServiceSchema = {
                message: { type: "string"},
                data: {
                   type: 'object',
-                  properties: {
-                     _id: { type: 'string', format: 'uuid' },
-                     name: { type: "string"},
-                     lastName: { type: "string"},
-                     email: { type: "string", format: "email" }
-                  }
+                  properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA
                },
                success: { type: "boolean"}
             }
@@ -64,12 +59,7 @@ const userServiceSchema = {
                   type: 'array',
                   items: {
                      type: 'object',
-                     properties: {
-                        _id: { type: 'string', format: 'uuid' },
-                        name: { type: "string"},
-                        lastName: { type: "string"},
-                        email: { type: "string", format: "email" }
-                     }
+                     properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA
                   }
                },
                success: { type: "boolean"}
@@ -110,12 +100,7 @@ const userServiceSchema = {
                message: { type: "string"},
                data: {
                   type: 'object',
-                  properties: {
-                     _id: { type: 'string', format: 'uuid' },
-                     name: { type: "string"},
-                     lastName: { type: "string"},
-                     email: { type: "string", format: "email" }
-                  }
+                  properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA
                },
                success: { type: "boolean"}
             }
@@ -171,12 +156,7 @@ const userServiceSchema = {
                message: { type: "string"},
                data: {
                   type: 'object',
-                  properties: {
-                     _id: { type: 'string', format: 'uuid' },
-                     name: { type: "string"},
-                     lastName: { type: "string"},
-                     email: { type: "string", format: "email" }
-                  }
+                  properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA
                },
                success: { type: "boolean"}
             }
@@ -221,12 +201,7 @@ const userServiceSchema = {
                message: { type: "string"},
                data: {
                   type: 'object',
-                  properties: {
-                     _id: { type: 'string', format: 'uuid' },
-                     name: { type: "string"},
-                     lastName: { type: "string"},
-                     email: { type: "string", format: "email" }
-                  }
+                  properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA
                },
                success: { type: "boolean"}
             }
