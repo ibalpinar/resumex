@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const { Schema } = mongoose;
-const { model } = mongoose;
+const { Schema, model } = mongoose;
 
 const InterestSchema = new Schema({
-    interestName: {
+    name: {
       type: String,
       required: [true, "Name is required field!"],
       trim: true
@@ -26,6 +25,6 @@ const InterestSchema = new Schema({
    }
 });
 
-const Interest = model('User', InterestSchema);
+const Interest = model('Interest', InterestSchema);
 
 module.exports = Interest;

@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const { Schema } = mongoose;
-const { model } = mongoose;
+const { Schema, model } = mongoose;
 
 const LanguageSchema = new Schema({
-    languageName: {
+   name: {
       type: String,
       required: [true, "Name is required field!"],
       trim: true
@@ -26,6 +25,6 @@ const LanguageSchema = new Schema({
    }
 });
 
-const Language = model('User', LanguageSchema);
+const Language = model('Language', LanguageSchema);
 
 module.exports = Language;

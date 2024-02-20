@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const { Schema } = mongoose;
-const { model } = mongoose;
+const { Schema, model } = mongoose;
 
 const SkillSchema = new Schema({
-    skillName: {
+   name: {
       type: String,
       required: [true, "Name is required field!"],
       trim: true
@@ -26,6 +25,6 @@ const SkillSchema = new Schema({
    }
 });
 
-const Skill = model('User', SkillSchema);
+const Skill = model('Skill', SkillSchema);
 
 module.exports = Skill;

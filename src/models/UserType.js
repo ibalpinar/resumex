@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const { Schema } = mongoose;
-const { model } = mongoose;
+const { Schema, model } = mongoose;
 
 const UserTypeSchema = new Schema({
-    typeName: {
+   name: {
       type: String,
       required: [true, "Name is required field!"],
       trim: true
@@ -26,6 +25,6 @@ const UserTypeSchema = new Schema({
    }
 });
 
-const UserType = model('User', UserTypeSchema);
+const UserType = model('UserType', UserTypeSchema);
 
 module.exports = UserType;
