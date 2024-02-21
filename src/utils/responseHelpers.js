@@ -15,6 +15,7 @@ const responseMessage = {
    USER_UPDATED_SUCCESSFULLY: "User updated successfully",
    USER_DELETED_SUCCESSFULLY: "User deleted successfully",
    ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully",
+   RESUME_CREATED_SUCCESSFULLY: "Resume created successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},

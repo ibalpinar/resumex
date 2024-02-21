@@ -1,4 +1,4 @@
-const { responseErrors, getSuccessObject, path } = require("./common");
+const { responseErrors, getSuccessObject, path } = require("../../common");
 const { responseMessage } = require("../../../utils/responseHelpers");
 const errors = responseErrors;
 
