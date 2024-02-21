@@ -6,7 +6,8 @@ const getCommonProperties = (statusCode, successValue) => ({
 });
 
 const path = {
-	USER: "User"
+	USER: "User",
+   RESUME: "Resume"
 };
 
 const getErrorProperties = (statusCode, successValue) => ({

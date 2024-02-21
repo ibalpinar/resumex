@@ -89,7 +89,6 @@ const ResumeSchema = new Schema({
 
 });
 
-
 const Resume = model('Resume', ResumeSchema);
 
 module.exports = Resume;
