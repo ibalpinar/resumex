@@ -8,6 +8,13 @@ const resumeRoutes = async (app, opts) => {
       schema: resumeServiceSchema.createResume,
       handler: resumeController.createResume
    });
+
+   app.route({
+      method: "GET",
+      url: "/fetch",
+      schema: resumeServiceSchema.fetch,
+      handler: resumeController.getAllResumes
+   });
 };
 
  module.exports = {

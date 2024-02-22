@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
+const User = require('../models/User');
 
 const ResumeSchema = new Schema({
+   userId: {
+      type: Schema.Types.ObjectId,
+      ref: User
+   },
    header: {
       type: Object,
       properties: {
