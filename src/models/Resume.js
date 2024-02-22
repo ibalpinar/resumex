@@ -17,7 +17,7 @@ const ResumeSchema = new Schema({
          github: String
       }
    },
-   WorkExperience: {
+   workExperience: {
       type: Array,
       items: {
          type: Object,
@@ -85,6 +85,21 @@ const ResumeSchema = new Schema({
             iconName: String
          }
       }
+   },
+   createdAt: {
+      type : Date,
+      default: Date.now,
+      trim: true
+   },
+   updatedAt: {
+      type : Date,
+      default: null,
+      trim: true
+   },
+   deletedAt: {
+      type : Date,
+      default: null,
+      trim: true
    }
 
 });
