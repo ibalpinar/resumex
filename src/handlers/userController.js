@@ -28,7 +28,7 @@ module.exports = {
       }
    },
 
-   getAllUser: async (request, reply) => {
+   getAllUsers: async (request, reply) => {
       try{
          const users = await User.find({}).select(constants.selectUserFields);
          if(users.length != 0){
@@ -128,7 +128,7 @@ module.exports = {
       }
    },
 
-   deleteAllUser: async (request, reply) => {
+   deleteAllUsers: async (request, reply) => {
       try{
          let numberOfUsers = await User.countDocuments({});
          if(numberOfUsers != 0){
