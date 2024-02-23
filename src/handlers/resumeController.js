@@ -13,13 +13,14 @@ module.exports = {
                reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
             );
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
          }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
+
    getAllResumes: async (request, reply) => {
       try{
          const resumes = await Resume.find({}).select(constants.selectResumeFields);
