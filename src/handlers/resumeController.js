@@ -7,10 +7,14 @@ module.exports = {
    createResume: async (request, reply) => {
       const resume = request.body;
       try{
-         let newResume = await Resume.create(resume);
-         sendSuccessResponse(
-            reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
-         );
+         if(checkObjectIdRegExp.test(resume.userId)){
+            let newResume = await Resume.create(resume);
+            sendSuccessResponse(
+               reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
+            );
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+         }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
