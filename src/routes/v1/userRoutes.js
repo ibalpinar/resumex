@@ -12,28 +12,28 @@ const userRoutes = async (app, opts) => {
    app.route({
       method: "GET",
       url: "/fetch",
-      schema: userServiceSchema.fetch,
+      schema: userServiceSchema.fetchAllUsers,
       handler: userController.getAllUsers
    });
 
    app.route({
       method: "GET",
       url: "/get/:id",
-      schema: userServiceSchema.get,
+      schema: userServiceSchema.getUser,
       handler: userController.getUserById
    });
 
    app.route({
       method: "PUT",
       url: "/update/:id",
-      schema: userServiceSchema.update,
+      schema: userServiceSchema.updateUser,
       handler: userController.updateUser
    });
 
    app.route({
       method: "DELETE",
       url: "/delete/:id",
-      schema: userServiceSchema.delete,
+      schema: userServiceSchema.deleteUser,
       handler: userController.deleteUser
    });
 

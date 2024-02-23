@@ -44,7 +44,7 @@ const userServiceSchema = {
          }
       }
 	},
-   fetch: {
+   fetchAllUsers: {
 		description: "This endpoint lists all users. It returns an array of user objects",
       summary: "Fetch all users",
 		tags: [path.USER],
@@ -77,7 +77,7 @@ const userServiceSchema = {
          }
       }
    },
-   get: {
+   getUser: {
       description: "This endpoint fetches a user given its Id. It returns a single user object",
       summary: "Get a user",
 		tags: [path.USER],
@@ -122,7 +122,7 @@ const userServiceSchema = {
          }
       }
    },
-   update: {
+   updateUser: {
       description: "This endpoint updates user information given its Id. The password does not have to be sent. It is only updated if it is sent. Returns the updated user information as a user object",
       summary: "Update a user",
 		tags: [path.USER],
@@ -178,7 +178,7 @@ const userServiceSchema = {
          }
       }
    },
-   delete: {
+   deleteUser: {
       description: "This endpoint deletes a user given its Id. Returns the deleted user's information",
       summary: "Delete a user",
 		tags: [path.USER],
