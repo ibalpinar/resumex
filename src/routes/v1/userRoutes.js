@@ -13,7 +13,7 @@ const userRoutes = async (app, opts) => {
       method: "GET",
       url: "/fetch",
       schema: userServiceSchema.fetch,
-      handler: userController.getAllUser
+      handler: userController.getAllUsers
    });
 
    app.route({
@@ -41,7 +41,7 @@ const userRoutes = async (app, opts) => {
       method: "DELETE",
       url: "/delete/all",
       schema: userServiceSchema.deleteAllUsers,
-      handler: userController.deleteAllUser
+      handler: userController.deleteAllUsers
    });
  };
 

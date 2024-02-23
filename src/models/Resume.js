@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
+const User = require('../models/User');
 
 const ResumeSchema = new Schema({
+   userId: {
+      type: Schema.Types.ObjectId,
+      ref: User
+   },
    header: {
       type: Object,
       properties: {
@@ -17,7 +22,7 @@ const ResumeSchema = new Schema({
          github: String
       }
    },
-   WorkExperience: {
+   workExperience: {
       type: Array,
       items: {
          type: Object,
@@ -85,6 +90,21 @@ const ResumeSchema = new Schema({
             iconName: String
          }
       }
+   },
+   createdAt: {
+      type : Date,
+      default: Date.now,
+      trim: true
+   },
+   updatedAt: {
+      type : Date,
+      default: null,
+      trim: true
+   },
+   deletedAt: {
+      type : Date,
+      default: null,
+      trim: true
    }
 
 });
