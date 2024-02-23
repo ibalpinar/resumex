@@ -77,7 +77,7 @@ const userServiceSchema = {
          }
       }
    },
-   getUser: {
+   getUserById: {
       description: "This endpoint fetches a user given its Id. It returns a single user object",
       summary: "Get a user",
 		tags: [path.USER],
@@ -178,7 +178,7 @@ const userServiceSchema = {
          }
       }
    },
-   deleteUser: {
+   deleteUserById: {
       description: "This endpoint deletes a user given its Id. Returns the deleted user's information",
       summary: "Delete a user",
 		tags: [path.USER],
