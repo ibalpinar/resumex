@@ -12,8 +12,15 @@ const resumeRoutes = async (app, opts) => {
    app.route({
       method: "GET",
       url: "/fetch",
-      schema: resumeServiceSchema.fetch,
+      schema: resumeServiceSchema.fetchAllResumes,
       handler: resumeController.getAllResumes
+   });
+
+   app.route({
+      method: "DELETE",
+      url: "/delete/all",
+      schema: resumeServiceSchema.deleteAllResumes,
+      handler: resumeController.deleteAllResumes
    });
 };
 

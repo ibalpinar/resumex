@@ -68,17 +68,15 @@ module.exports = {
 
    deleteAllResumes: async (request, reply) => {
       try{
-         /*
-         let numberOfUsers = await User.countDocuments({});
-         if(numberOfUsers != 0){
-            await User.deleteMany();
+         let numberOfResumes = await Resume.countDocuments({});
+         if(numberOfResumes != 0){
+            await Resume.deleteMany();
             sendSuccessResponse(
-               reply, { statusCode: 200, message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY, data: null }
+               reply, { statusCode: 200, message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY, data: null }
             );
          }else{
-            sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+            sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
-         */
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
