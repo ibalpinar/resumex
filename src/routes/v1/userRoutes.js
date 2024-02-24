@@ -26,8 +26,8 @@ const userRoutes = async (app, opts) => {
    app.route({
       method: "PUT",
       url: "/update/:id",
-      schema: userServiceSchema.updateUser,
-      handler: userController.updateUser
+      schema: userServiceSchema.updateUserById,
+      handler: userController.updateUserById
    });
 
    app.route({

@@ -47,7 +47,7 @@ module.exports = {
       }
    },
 
-   updateResume: async (request, reply) => {
+   updateResumeById: async (request, reply) => {
       // const userId = request.params.id;
       // const userUpdates = request.body;
       try{
@@ -58,7 +58,7 @@ module.exports = {
       }
    },
 
-   deleteResume: async (request, reply) => {
+   deleteResumeById: async (request, reply) => {
       // const userId = request.params.id;
       try{
       }catch(err){

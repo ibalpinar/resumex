@@ -67,7 +67,7 @@ module.exports = {
       }
    },
 
-   updateUser: async (request, reply) => {
+   updateUserById: async (request, reply) => {
       const userId = request.params.id;
       const userUpdates = request.body;
       try{
