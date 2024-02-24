@@ -51,6 +51,10 @@ const UserSchema = new Schema({
       type : Date,
       default: null,
       trim: true
+   },
+   isSuspended: {
+      type : Boolean,
+      default: false
    }
 });
 

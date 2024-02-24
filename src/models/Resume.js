@@ -105,6 +105,10 @@ const ResumeSchema = new Schema({
       type : Date,
       default: null,
       trim: true
+   },
+   isPublished: {
+      type : Boolean,
+      default: false
    }
 
 });
