@@ -31,6 +31,9 @@ const responseMessage = {
       name: { type: "string"},
       lastName: { type: "string"},
       email: { type: "string", format: "email" },
+      userType: { type: "string" },
+      isSuspended: { type: "boolean" },
+      isEmailConfirmed: { type: "boolean" },
       createdAt: { type: "string"},
       updatedAt: { type: "string"},
       deletedAt: { type: "string"}

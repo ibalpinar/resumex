@@ -2,6 +2,21 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
 
+/**
+ * TODO: This section must be simplified!
+ * IMPORTANT: Don't add a new field without reading below!
+ *
+ * ##########################################################################
+ * ##########################################################################
+ * ### Don't forget to add the new fields to the following files as well  ###
+ * ###    - Response section of model schema                              ###
+ * ###    - DEFAULT_RESPONSE_USER_SCHEMA in response helper               ###
+ * ###    - selectUserFields in utils/constants at db queries             ###
+ * ###    - And removePasswordKey in utils/passwordManager                ###
+ * ##########################################################################
+ * ##########################################################################
+ */
+
 const UserSchema = new Schema({
     name: {
       type: String,
@@ -53,6 +68,10 @@ const UserSchema = new Schema({
       trim: true
    },
    isSuspended: {
+      type : Boolean,
+      default: false
+   },
+   isEmailConfirmed: {
       type : Boolean,
       default: false
    }
