@@ -35,7 +35,7 @@ const ResumeSchema = new Schema({
             accomplishments: {
                type: Array,
                items: {
-                  type: String
+                  type: Schema.Types.ObjectId
                }
             }
          }
@@ -44,7 +44,7 @@ const ResumeSchema = new Schema({
    skills: {
       type: Array,
       items: {
-         type: String
+         type: Schema.Types.ObjectId
       }
    },
    education: {
@@ -66,7 +66,7 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            name: String,
+            languageId: Schema.Types.ObjectId,
             level: String
          }
       }
@@ -86,7 +86,7 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            name: String,
+            interestId: Schema.Types.ObjectId,
             iconName: String
          }
       }
