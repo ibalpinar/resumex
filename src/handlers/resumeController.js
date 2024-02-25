@@ -39,8 +39,21 @@ module.exports = {
    },
 
    getResumeById: async (request, reply) => {
-      // const userId = request.params.id;
+      const resumeId = request.params.id;
+
       try{
+         if(checkObjectIdRegExp.test(resumeId)){
+            const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
+            if(resume){
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: resume }
+               );
+            }else{
+               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+            }
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+         }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);

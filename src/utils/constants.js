@@ -1,5 +1,5 @@
 const selectUserFields = { _id: 1, name: 1, lastName: 1, email: 1, userType: 1, isSuspended: 1, isEmailConfirmed: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
-const selectResumeFields = { _id: 1, header: 1, workExperience: 1, skills: 1, languages: 1, courses: 1, interests: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
+const selectResumeFields = { _id: 1, userId:1,  header: 1, workExperience: 1, skills: 1, languages: 1, courses: 1, interests: 1, isPublished: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
 
 const swaggerUiOptions = {
    routePrefix: "/apidocs",

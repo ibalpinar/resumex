@@ -18,6 +18,7 @@ const responseMessage = {
    RESUME_CREATED_SUCCESSFULLY: "Resume created successfully",
    ALL_RESUMES_LISTED_SUCCESSFULLY: "All resumes listed successfully",
    ALL_RESUMES_DELETED_SUCCESSFULLY: "All resumes deleted successfully",
+   RESUME_LISTED_SUCCESSFULLY: "Resume listed successfully",
    NO_RESUME_FOUND: "No resume found",
    NO_RESUMES_FOUND: "No resumes found",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
