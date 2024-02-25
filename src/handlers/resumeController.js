@@ -72,8 +72,22 @@ module.exports = {
    },
 
    deleteResumeById: async (request, reply) => {
-      // const userId = request.params.id;
+      const resumeId = request.params.id;
       try{
+         if(checkObjectIdRegExp.test(resumeId)){
+            const resumeToDelete = await Resume.findById(resumeId).select(constants.selectResumeFields);
+            if(resumeToDelete){
+               await Resume.findByIdAndDelete(resumeId);
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.RESUME_DELETED_SUCCESSFULLY, data: resumeToDelete }
+               );
+            }else{
+               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+            }
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+         }
+
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
