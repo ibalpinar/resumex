@@ -84,7 +84,6 @@ module.exports = {
                }
                await User.findByIdAndUpdate(userId, userUpdates);
                userToUpdate = removePasswordKey(userToUpdate);
-               // userToUpdate = await User.findById(userId).select(constants.selectUserFields);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
