@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
 const User = require('../models/User');
+const Skill = require('../models/Skill');
+const Interest = require('../models/Interest');
+const Language = require('../models/Language');
 
 const ResumeSchema = new Schema({
    userId: {
@@ -35,7 +38,7 @@ const ResumeSchema = new Schema({
             accomplishments: {
                type: Array,
                items: {
-                  type: Schema.Types.ObjectId
+                  type: String
                }
             }
          }
@@ -44,7 +47,8 @@ const ResumeSchema = new Schema({
    skills: {
       type: Array,
       items: {
-         type: Schema.Types.ObjectId
+         type: Schema.Types.ObjectId,
+         ref: Skill
       }
    },
    education: {
@@ -66,7 +70,10 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            languageId: Schema.Types.ObjectId,
+            languageId: {
+               type: Schema.Types.ObjectId,
+               ref: Language
+            },
             level: String
          }
       }
@@ -86,7 +93,10 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            interestId: Schema.Types.ObjectId,
+            interestId: {
+               type: Schema.Types.ObjectId,
+               ref: Interest
+            },
             iconName: String
          }
       }

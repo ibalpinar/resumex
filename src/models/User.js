@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
-
+const UserType = require('./UserType');
 /**
  * TODO: This section must be simplified!
  * IMPORTANT: Don't add a new field without reading below!
@@ -48,9 +48,9 @@ const UserSchema = new Schema({
       trim: true,
       unique : true
    },
-   userType: {
-      type: String,
-      trim: true
+   userTypeId: {
+      type: Schema.Types.ObjectId,
+      ref: UserType
    },
    createdAt: {
       type : Date,
