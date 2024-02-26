@@ -96,8 +96,7 @@ const ResumeSchema = new Schema({
             interestId: {
                type: Schema.Types.ObjectId,
                ref: Interest
-            },
-            iconName: String
+            }
          }
       }
    },
