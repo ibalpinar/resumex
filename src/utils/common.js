@@ -1,14 +1,14 @@
-const User = require("./../models/User");
-const UserType = require("./../models/UserType");
-const Language = require("./../models/Language");
-const Skill = require("./../models/Skill");
-const Interest = require("./../models/Interest");
+const User = require("../models/User");
+const UserType = require("../models/UserType");
+const Language = require("../models/Language");
+const Skill = require("../models/Skill");
+const Interest = require("../models/Interest");
 
 const insertInitialData = async()=>{
    const predefinedUserTypes = [
-      { name : "admin"},
-      { name : "candidate"},
-      { name : "editor"}
+      { _id: "65dd07373d7e0c75327ccf24", name : "admin"},
+      { _id: "65dd07373d7e0c75327ccf25", name : "candidate"},
+      { _id: "65dd07373d7e0c75327ccf26", name : "editor"}
    ];
    const userTypes = await UserType.find({});
    if (userTypes === undefined || userTypes.length === 0) {
@@ -16,16 +16,16 @@ const insertInitialData = async()=>{
    }
 
    const predefinedLanguages = [
-      { name : "English"},
-      { name : "Turkish"},
-      { name : "Chinese"},
-      { name : "Arabic"},
-      { name : "Hindi"},
-      { name : "Portuguese"},
-      { name : "Russian"},
-      { name : "Japanese"},
-      { name : "French"},
-      { name : "Spanish"}
+      { _id: "65dd07373d7e0c75327ccf32", name : "English"},
+      { _id: "65dd07373d7e0c75327ccf33", name : "Turkish"},
+      { _id: "65dd07373d7e0c75327ccf34", name : "Chinese"},
+      { _id: "65dd07373d7e0c75327ccf30", name : "Arabic"},
+      { _id: "65dd07373d7e0c75327ccf2e", name : "Hindi"},
+      { _id: "65dd07373d7e0c75327ccf2c", name : "Portuguese"},
+      { _id: "65dd07373d7e0c75327ccf2d", name : "Russian"},
+      { _id: "65dd07373d7e0c75327ccf31", name : "Japanese"},
+      { _id: "65dd07373d7e0c75327ccf2b", name : "French"},
+      { _id: "65dd07373d7e0c75327ccf2f", name : "Spanish"}
    ];
    const languages = await Language.find({});
    if (languages === undefined || languages.length === 0) {
@@ -33,34 +33,34 @@ const insertInitialData = async()=>{
    }
 
    const predefinedSkills = [
-      { name : "Effective Hiring"},
-      { name : "Time Management"},
-      { name : "People Management"},
-      { name : "Execution"},
-      { name : "Performance Management"},
-      { name : "Listening"},
-      { name : "Resource Planning"},
-      { name : "Good Communication"},
-      { name : "Budget Management"},
-      { name : "Open Source"},
-      { name : "Project Management"},
-      { name : "Java"},
-      { name : "Node.js"},
-      { name : "C#"},
-      { name : "Linux"},
-      { name : "Software Development"},
-      { name : "RESTful Services"},
-      { name : "System Administration"},
-      { name : "Object Oriented Paradigm"},
-      { name : "DevOps"},
-      { name : "Database Systems"},
-      { name : "Agile Methodologies"},
-      { name : "Scalability"},
-      { name : "Availability"},
-      { name : "Caching"},
-      { name : "Indexing Engines"},
-      { name : "GIT"},
-      { name : "Cloud Platforms (GCP, AWS, Azure)"}
+      { _id: "65dd07373d7e0c75327ccf43", name : "Effective Hiring"},
+      { _id: "65dd07373d7e0c75327ccf54", name : "Time Management"},
+      { _id: "65dd07373d7e0c75327ccf42", name : "People Management"},
+      { _id: "65dd07373d7e0c75327ccf41", name : "Execution"},
+      { _id: "65dd07373d7e0c75327ccf44", name : "Performance Management"},
+      { _id: "65dd07373d7e0c75327ccf45", name : "Listening"},
+      { _id: "65dd07373d7e0c75327ccf47", name : "Resource Planning"},
+      { _id: "65dd07373d7e0c75327ccf46", name : "Good Communication"},
+      { _id: "65dd07373d7e0c75327ccf48", name : "Budget Management"},
+      { _id: "65dd07373d7e0c75327ccf4a", name : "Open Source"},
+      { _id: "65dd07373d7e0c75327ccf49", name : "Project Management"},
+      { _id: "65dd07373d7e0c75327ccf4b", name : "Java"},
+      { _id: "65dd07373d7e0c75327ccf4c", name : "Node.js"},
+      { _id: "65dd07373d7e0c75327ccf4d", name : "C#"},
+      { _id: "65dd07373d7e0c75327ccf4e", name : "Linux"},
+      { _id: "65dd07373d7e0c75327ccf51", name : "Software Development"},
+      { _id: "65dd07373d7e0c75327ccf4f", name : "RESTful Services"},
+      { _id: "65dd07373d7e0c75327ccf50", name : "System Administration"},
+      { _id: "65dd07373d7e0c75327ccf52", name : "Object Oriented Paradigm"},
+      { _id: "65dd07373d7e0c75327ccf55", name : "DevOps"},
+      { _id: "65dd07373d7e0c75327ccf56", name : "Database Systems"},
+      { _id: "65dd07373d7e0c75327ccf57", name : "Agile Methodologies"},
+      { _id: "65dd07373d7e0c75327ccf58", name : "Scalability"},
+      { _id: "65dd07373d7e0c75327ccf59", name : "Availability"},
+      { _id: "65dd07373d7e0c75327ccf5b", name : "Caching"},
+      { _id: "65dd07373d7e0c75327ccf5a", name : "Indexing Engines"},
+      { _id: "65dd07373d7e0c75327ccf53", name : "GIT"},
+      { _id: "65dd07373d7e0c75327ccf40", name : "Cloud Platforms (GCP, AWS, Azure)"}
    ];
    const skills = await Skill.find({});
    if (skills === undefined || skills.length === 0) {
@@ -68,13 +68,13 @@ const insertInitialData = async()=>{
    }
 
    const predefinedInterests = [
-      { name : "Photography"},
-      { name : "Constant Reading"},
-      { name : "Chess"},
-      { name : "Basketball"},
-      { name : "Swimming"},
-      { name : "Travelling"},
-      { name : "Science & Technology"}
+      { _id: "65dd07373d7e0c75327ccf7a", name : "Photography"},
+      { _id: "65dd07373d7e0c75327ccf7b", name : "Constant Reading"},
+      { _id: "65dd07373d7e0c75327ccf7c", name : "Chess"},
+      { _id: "65dd07373d7e0c75327ccf7d", name : "Basketball"},
+      { _id: "65dd07373d7e0c75327ccf7e", name : "Swimming"},
+      { _id: "65dd07373d7e0c75327ccf7f", name : "Travelling"},
+      { _id: "65dd07373d7e0c75327ccf80", name : "Science & Technology"}
    ];
    const interests = await Interest.find({});
    if (interests === undefined || interests.length === 0) {
@@ -83,39 +83,49 @@ const insertInitialData = async()=>{
 
    const predefinedUsers = [
       {
-         "name": "Ilker",
-         "lastName": "Balpinar",
-         "email": "ilker@balpinar.com",
-         "password": "buBirsifredir!!!",
-         "confirmPassword": "buBirsifredir!!!"
+         _id: "65dd07373d7e0c75327ccf89",
+         name: "Ilker",
+         lastName: "Balpinar",
+         email: "ilker@balpinar.com",
+         password: "buBirsifredir!!!",
+         confirmPassword: "buBirsifredir!!!",
+         userTypeId: "65dd07373d7e0c75327ccf24"
      },
      {
-         "name": "Linus",
-         "lastName": "Torvalds",
-         "email": "linus@torvalds.com",
-         "password": "buBirsifredir2!!!",
-         "confirmPassword": "buBirsifredir2!!!"
+         _id: "65dd07373d7e0c75327ccf8a",
+         name: "Linus",
+         lastName: "Torvalds",
+         email: "linus@torvalds.com",
+         password: "buBirsifredir2!!!",
+         confirmPassword: "buBirsifredir2!!!",
+         userTypeId: "65dd07373d7e0c75327ccf24"
      },
      {
-         "name": "Bill",
-         "lastName": "Gates",
-         "email": "bill@gates.com",
-         "password": "buBirsifredir3!!!",
-         "confirmPassword": "buBirsifredir3!!!"
+         _id: "65dd07373d7e0c75327ccf8b",
+         name: "Bill",
+         lastName: "Gates",
+         email: "bill@gates.com",
+         password: "buBirsifredir3!!!",
+         confirmPassword: "buBirsifredir3!!!",
+         userTypeId: "65dd07373d7e0c75327ccf26"
      },
      {
-         "name": "Dennis",
-         "lastName": "Ritchie",
-         "email": "dennis@ritchie.com",
-         "password": "buBirsifredir4!!!",
-         "confirmPassword": "buBirsifredir4!!!"
+         _id: "65dd07373d7e0c75327ccf8c",
+         name: "Dennis",
+         lastName: "Ritchie",
+         email: "dennis@ritchie.com",
+         password: "buBirsifredir4!!!",
+         confirmPassword: "buBirsifredir4!!!",
+         userTypeId: "65dd07373d7e0c75327ccf25"
      },
      {
-         "name": "Richard",
-         "lastName": "Stallman",
-         "email": "richard@stallman.com",
-         "password": "buBirsifredir5!!!",
-         "confirmPassword": "buBirsifredir5!!!"
+         _id: "65dd07373d7e0c75327ccf8d",
+         name: "Richard",
+         lastName: "Stallman",
+         email: "richard@stallman.com",
+         password: "buBirsifredir5!!!",
+         confirmPassword: "buBirsifredir5!!!",
+         userTypeId: "65dd07373d7e0c75327ccf25"
      }
    ];
    const users = await User.find({});
