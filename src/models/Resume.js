@@ -7,7 +7,7 @@ const Interest = require('../models/Interest');
 const Language = require('../models/Language');
 
 const ResumeSchema = new Schema({
-   userId: {
+   user: {
       type: Schema.Types.ObjectId,
       ref: User
    },
