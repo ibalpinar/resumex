@@ -35,6 +35,7 @@ const responseMessage = {
       lastName: { type: "string"},
       email: { type: "string", format: "email" },
       userType: { type: "string" },
+      resumeIds: { type: "array" },
       isSuspended: { type: "boolean" },
       isEmailConfirmed: { type: "boolean" },
       createdAt: { type: "string"},

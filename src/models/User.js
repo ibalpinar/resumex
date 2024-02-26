@@ -52,13 +52,13 @@ const UserSchema = new Schema({
    },
    userType: {
       type: Schema.Types.ObjectId,
-      ref: UserType
+      ref: 'UserType'
    },
-   resume: {
+   resumeIds: {
       type: Array,
       items: {
          type: Schema.Types.ObjectId,
-         ref: Resume
+         ref: 'Resume'
       }
    },
    createdAt: {

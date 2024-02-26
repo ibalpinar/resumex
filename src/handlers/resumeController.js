@@ -1,5 +1,5 @@
 const Resume = require('../models/Resume');
-const error = require('../utils/errors');
+const User = require('../models/User');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
 
@@ -7,14 +7,22 @@ module.exports = {
    createResume: async (request, reply) => {
       const resume = request.body;
       try{
-         if(checkObjectIdRegExp.test(resume.userId)){
-            let newResume = await Resume.create(resume);
-            sendSuccessResponse(
-               reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
-            );
-         }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
-         }
+            if(checkObjectIdRegExp.test(resume.userId)){
+               let user = await User.findById(resume.userId).select(constants.selectUserFieldsOnlyResume);
+               if(user){
+                  let newResume = await Resume.create(resume);
+                  user.resumeIds.push(newResume._id);
+                  await User.findByIdAndUpdate(resume.userId, user);
+                  sendSuccessResponse(
+                     reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
+                  );
+               }
+               else{
+                  sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               }
+            }else{
+               sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
+            }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);

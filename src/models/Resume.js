@@ -7,9 +7,9 @@ const Interest = require('../models/Interest');
 const Language = require('../models/Language');
 
 const ResumeSchema = new Schema({
-   user: {
+   userId: {
       type: Schema.Types.ObjectId,
-      ref: User
+      ref: 'User'
    },
    header: {
       type: Object,
@@ -48,7 +48,7 @@ const ResumeSchema = new Schema({
       type: Array,
       items: {
          type: Schema.Types.ObjectId,
-         ref: Skill
+         ref: 'Skill'
       }
    },
    education: {
@@ -72,7 +72,7 @@ const ResumeSchema = new Schema({
          properties: {
             languageId: {
                type: Schema.Types.ObjectId,
-               ref: Language
+               ref: 'Language'
             },
             level: String
          }
@@ -95,7 +95,7 @@ const ResumeSchema = new Schema({
          properties: {
             interestId: {
                type: Schema.Types.ObjectId,
-               ref: Interest
+               ref: 'Interest'
             }
          }
       }
