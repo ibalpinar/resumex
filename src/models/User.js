@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
 const UserType = require('./UserType');
+const Resume = require('./Resume');
+
 /**
  * TODO: This section must be simplified!
  * IMPORTANT: Don't add a new field without reading below!
@@ -48,9 +50,16 @@ const UserSchema = new Schema({
       trim: true,
       unique : true
    },
-   userTypeId: {
+   userType: {
       type: Schema.Types.ObjectId,
       ref: UserType
+   },
+   resume: {
+      type: Array,
+      items: {
+         type: Schema.Types.ObjectId,
+         ref: Resume
+      }
    },
    createdAt: {
       type : Date,
