@@ -40,7 +40,6 @@ module.exports = {
 
    getResumeById: async (request, reply) => {
       const resumeId = request.params.id;
-
       try{
          if(checkObjectIdRegExp.test(resumeId)){
             const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
@@ -61,9 +60,23 @@ module.exports = {
    },
 
    updateResumeById: async (request, reply) => {
-      // const userId = request.params.id;
-      // const userUpdates = request.body;
+      const resumeId = request.params.id;
+      const resumeUpdates = request.body;
       try{
+         if(checkObjectIdRegExp.test(resumeId)){
+            let resumeToUpdate = await Resume.findById(resumeId);
+            if(resumeToUpdate){
+               await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
+               resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.RESUME_UPDATED_SUCCESSFULLY, data: resumeToUpdate }
+               );
+            }else{
+               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+            }
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+         }
 
       }catch(err){
          console.error(err.message);
@@ -85,7 +98,7 @@ module.exports = {
                sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
          }
 
       }catch(err){

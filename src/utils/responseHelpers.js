@@ -22,6 +22,7 @@ const responseMessage = {
    RESUME_DELETED_SUCCESSFULLY: "Resume deleted successfully",
    NO_RESUME_FOUND: "No resume found",
    NO_RESUMES_FOUND: "No resumes found",
+   RESUME_UPDATED_SUCCESSFULLY: "Resume updated successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
