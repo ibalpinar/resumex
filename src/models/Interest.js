@@ -3,9 +3,12 @@ const validator = require('validator');
 const { Schema, model } = mongoose;
 
 const InterestSchema = new Schema({
-    name: {
+   name: {
       type: String,
-      required: [true, "Name is required field!"],
+      trim: true
+   },
+   iconName: {
+      type: String,
       trim: true
    },
    createdAt: {

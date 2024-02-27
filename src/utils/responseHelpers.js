@@ -17,8 +17,12 @@ const responseMessage = {
    ALL_USERS_DELETED_SUCCESSFULLY: "All users deleted successfully",
    RESUME_CREATED_SUCCESSFULLY: "Resume created successfully",
    ALL_RESUMES_LISTED_SUCCESSFULLY: "All resumes listed successfully",
+   ALL_RESUMES_DELETED_SUCCESSFULLY: "All resumes deleted successfully",
+   RESUME_LISTED_SUCCESSFULLY: "Resume listed successfully",
+   RESUME_DELETED_SUCCESSFULLY: "Resume deleted successfully",
    NO_RESUME_FOUND: "No resume found",
    NO_RESUMES_FOUND: "No resumes found",
+   RESUME_UPDATED_SUCCESSFULLY: "Resume updated successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
@@ -30,6 +34,10 @@ const responseMessage = {
       name: { type: "string"},
       lastName: { type: "string"},
       email: { type: "string", format: "email" },
+      userType: { type: "string" },
+      resumeIds: { type: "array" },
+      isSuspended: { type: "boolean" },
+      isEmailConfirmed: { type: "boolean" },
       createdAt: { type: "string"},
       updatedAt: { type: "string"},
       deletedAt: { type: "string"}

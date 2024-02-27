@@ -1,6 +1,23 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
+const UserType = require('./UserType');
+const Resume = require('./Resume');
+
+/**
+ * TODO: This section must be simplified!
+ * IMPORTANT: Don't add a new field without reading below!
+ *
+ * ##########################################################################
+ * ##########################################################################
+ * ### Don't forget to add the new fields to the following files as well  ###
+ * ###    - Response section of model schema                              ###
+ * ###    - DEFAULT_RESPONSE_USER_SCHEMA in response helper               ###
+ * ###    - selectUserFields in utils/constants at db queries             ###
+ * ###    - And removePasswordKey in utils/passwordManager                ###
+ * ##########################################################################
+ * ##########################################################################
+ */
 
 const UserSchema = new Schema({
     name: {
@@ -34,8 +51,15 @@ const UserSchema = new Schema({
       unique : true
    },
    userType: {
-      type: String,
-      trim: true
+      type: Schema.Types.ObjectId,
+      ref: 'UserType'
+   },
+   resumeIds: {
+      type: Array,
+      items: {
+         type: Schema.Types.ObjectId,
+         ref: 'Resume'
+      }
    },
    createdAt: {
       type : Date,
@@ -51,6 +75,14 @@ const UserSchema = new Schema({
       type : Date,
       default: null,
       trim: true
+   },
+   isSuspended: {
+      type : Boolean,
+      default: false
+   },
+   isEmailConfirmed: {
+      type : Boolean,
+      default: false
    }
 });
 

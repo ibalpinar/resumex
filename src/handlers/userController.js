@@ -28,7 +28,7 @@ module.exports = {
       }
    },
 
-   getAllUsers: async (request, reply) => {
+   fetchAllUsers: async (request, reply) => {
       try{
          const users = await User.find({}).select(constants.selectUserFields);
          if(users.length != 0){
@@ -67,7 +67,7 @@ module.exports = {
       }
    },
 
-   updateUser: async (request, reply) => {
+   updateUserById: async (request, reply) => {
       const userId = request.params.id;
       const userUpdates = request.body;
       try{
@@ -84,7 +84,6 @@ module.exports = {
                }
                await User.findByIdAndUpdate(userId, userUpdates);
                userToUpdate = removePasswordKey(userToUpdate);
-               // userToUpdate = await User.findById(userId).select(constants.selectUserFields);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
@@ -105,7 +104,7 @@ module.exports = {
       }
    },
 
-   deleteUser: async (request, reply) => {
+   deleteUserById: async (request, reply) => {
       const userId = request.params.id;
       try{
          if(checkObjectIdRegExp.test(userId)){
@@ -143,5 +142,5 @@ module.exports = {
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
-   },
+   }
 };

@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
 const User = require('../models/User');
+const Skill = require('../models/Skill');
+const Interest = require('../models/Interest');
+const Language = require('../models/Language');
 
 const ResumeSchema = new Schema({
    userId: {
       type: Schema.Types.ObjectId,
-      ref: User
+      ref: 'User'
    },
    header: {
       type: Object,
@@ -44,7 +47,8 @@ const ResumeSchema = new Schema({
    skills: {
       type: Array,
       items: {
-         type: String
+         type: Schema.Types.ObjectId,
+         ref: 'Skill'
       }
    },
    education: {
@@ -66,7 +70,10 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            name: String,
+            languageId: {
+               type: Schema.Types.ObjectId,
+               ref: 'Language'
+            },
             level: String
          }
       }
@@ -86,8 +93,10 @@ const ResumeSchema = new Schema({
       items: {
          type: Object,
          properties: {
-            name: String,
-            iconName: String
+            interestId: {
+               type: Schema.Types.ObjectId,
+               ref: 'Interest'
+            }
          }
       }
    },
@@ -105,6 +114,10 @@ const ResumeSchema = new Schema({
       type : Date,
       default: null,
       trim: true
+   },
+   isPublished: {
+      type : Boolean,
+      default: false
    }
 
 });
