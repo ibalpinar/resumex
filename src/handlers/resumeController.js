@@ -67,6 +67,45 @@ module.exports = {
       }
    },
 
+   getResumeByUserId: async (request, reply) => {
+      const _userId = request.params.id;
+      try{
+         if(checkObjectIdRegExp.test(_userId)){
+            const resume = await Resume.findOne({userId:_userId}).select(constants.selectResumeFields);
+            if(resume){
+               let resumes = await Resume.aggregate([{
+                  $lookup:{
+                     from: 'users',
+                     localField: 'userId',
+                     foreignField: '_id',
+                     as: 'userInformation'
+                  }
+               }]);
+
+               let skills = await Resume.aggregate([{
+                  $lookup:{
+                     from: 'skills',
+                     localField: 'skills',
+                     foreignField: '_id',
+                     as: 'skillInformation'
+                  }
+               }]);
+
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: skills }
+               );
+            }else{
+               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+            }
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
+         }
+      }catch(err){
+         console.error(err.message);
+         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
    updateResumeById: async (request, reply) => {
       const resumeId = request.params.id;
       const resumeUpdates = request.body;

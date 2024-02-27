@@ -20,7 +20,6 @@ try {
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
-
 app.register(resumeRoutes, { prefix: "api/v1/resume" });
 
 insertInitialData();
