@@ -98,17 +98,29 @@ module.exports = {
          if(checkObjectIdRegExp.test(resumeId)){
             const resumeToDelete = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resumeToDelete){
-               await Resume.findByIdAndDelete(resumeId);
-               sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.RESUME_DELETED_SUCCESSFULLY, data: resumeToDelete }
-               );
+               let user = await User.findById(resumeToDelete.userId).select(constants.selectUserFieldsOnlyResume);
+               if(user){
+                  const indexOfResumeId = user.resumeIds.indexOf(resumeId);
+                  if(indexOfResumeId > -1){
+                     user.resumeIds.splice(indexOfResumeId, 1);
+                  }else{
+                     console.log("There's no Resume Id in User!");
+                  }
+                  await User.findByIdAndUpdate(resumeToDelete.userId, user);
+                  await Resume.findByIdAndDelete(resumeId);
+                  sendSuccessResponse(
+                     reply, { statusCode: 200, message: responseMessage.RESUME_DELETED_SUCCESSFULLY, data: resumeToDelete }
+                  );
+               }
+               else{
+                  sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               }
             }else{
                sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
          }
-
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
