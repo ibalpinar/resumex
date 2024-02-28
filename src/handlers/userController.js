@@ -3,6 +3,8 @@ const error = require('../utils/errors');
 const constants = require('../utils/constants');
 const { removePasswordKey, bcryptPassword } = require('../utils/passwordManager');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 module.exports = {
    createUser: async (request, reply) => {
@@ -12,6 +14,7 @@ module.exports = {
             user.password = await bcryptPassword(user.password);
             let newUser = await User.create(user);
             newUser = removePasswordKey(newUser);
+            user.userTypeId = new ObjectId(user.userTypeId);
             sendSuccessResponse(
                reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
             );
