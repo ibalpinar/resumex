@@ -18,6 +18,11 @@ const resumeServiceSchema = {
       summary: "Get a resume",
 		tags: [path.RESUME]
    },
+   getResumeByUserId: {
+		description: "This endpoint fetches a resume given User Id. It returns a single resume object of a user",
+      summary: "Get a resume of the user",
+		tags: [path.RESUME]
+   },
    updateResumeById: {
       description: "This endpoint updates resume information given its Id. Returns the updated resume information as a resume object",
       summary: "Update a resume",

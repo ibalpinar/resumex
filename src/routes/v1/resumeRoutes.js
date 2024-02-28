@@ -24,6 +24,13 @@ const resumeRoutes = async (app, opts) => {
    });
 
    app.route({
+      method: "GET",
+      url: "/get/u/:id",
+      schema: resumeServiceSchema.getResumeByUserId,
+      handler: resumeController.getResumeByUserId
+   });
+
+   app.route({
       method: "PUT",
       url: "/update/:id",
       schema: resumeServiceSchema.updateResumeById,

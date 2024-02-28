@@ -91,13 +91,8 @@ const ResumeSchema = new Schema({
    interests: {
       type: Array,
       items: {
-         type: Object,
-         properties: {
-            interestId: {
-               type: Schema.Types.ObjectId,
-               ref: 'Interest'
-            }
-         }
+         type: Schema.Types.ObjectId,
+         ref: 'Interest'
       }
    },
    createdAt: {

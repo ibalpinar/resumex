@@ -2,10 +2,20 @@ const Resume = require('../models/Resume');
 const User = require('../models/User');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 module.exports = {
    createResume: async (request, reply) => {
       const resume = request.body;
+
+      resume.userId = new ObjectId(resume.userId);
+      resume.skills = resume.skills.map(skill => new ObjectId(skill));
+      resume.interests = resume.interests.map(interest => new ObjectId(interest));
+      resume.languages = resume.languages.map(function (language) {
+         return { languageId: new ObjectId(language.languageId), level: language.level };
+      });
+
       try{
             if(checkObjectIdRegExp.test(resume.userId)){
                let user = await User.findById(resume.userId).select(constants.selectUserFieldsOnlyResume);
@@ -60,6 +70,37 @@ module.exports = {
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+         }
+      }catch(err){
+         console.error(err.message);
+         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
+   getResumeByUserId: async (request, reply) => {
+      const _userId = request.params.id;
+      try{
+         if(checkObjectIdRegExp.test(_userId)){
+            const resume = await Resume.findOne({userId:_userId}).select(constants.selectResumeFields);
+            if(resume){
+
+               let skills = await Resume.aggregate([{
+                  $lookup:{
+                     from: 'skills',
+                     localField: 'skills',
+                     foreignField: '_id',
+                     as: 'skillInformation'
+                  }
+               }]);
+
+               sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: skills }
+               );
+            }else{
+               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+            }
+         }else{
+            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
          }
       }catch(err){
          console.error(err.message);

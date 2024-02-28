@@ -50,7 +50,7 @@ const UserSchema = new Schema({
       trim: true,
       unique : true
    },
-   userType: {
+   userTypeId: {
       type: Schema.Types.ObjectId,
       ref: 'UserType'
    },
