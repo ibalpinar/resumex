@@ -3,6 +3,7 @@ const UserType = require("../models/UserType");
 const Language = require("../models/Language");
 const Skill = require("../models/Skill");
 const Interest = require("../models/Interest");
+const { bcryptPassword } = require('../utils/passwordManager');
 
 const insertInitialData = async()=>{
    const predefinedUserTypes = [
@@ -81,14 +82,13 @@ const insertInitialData = async()=>{
       Interest.create(predefinedInterests);
    }
 
-   const predefinedUsers = [
+   let predefinedUsers = [
       {
          _id: "65dd07373d7e0c75327ccf89",
          name: "Ilker",
          lastName: "Balpinar",
          email: "ilker@balpinar.com",
-         password: "buBirsifredir!!!",
-         confirmPassword: "buBirsifredir!!!",
+         password: "$2b$08$yBuRjo66uRpdiilER0FFHua0XoPsvBBgNHSAvwZ0ys6TbM7SSw0.W",
          userTypeId: "65dd07373d7e0c75327ccf24"
      },
      {
@@ -96,8 +96,7 @@ const insertInitialData = async()=>{
          name: "Linus",
          lastName: "Torvalds",
          email: "linus@torvalds.com",
-         password: "buBirsifredir2!!!",
-         confirmPassword: "buBirsifredir2!!!",
+         password: "$2b$08$yBuRjo66uRpdiilER0FFHua0XoPsvBBgNHSAvwZ0ys6TbM7SSw0.W",
          userTypeId: "65dd07373d7e0c75327ccf24"
      },
      {
@@ -105,8 +104,7 @@ const insertInitialData = async()=>{
          name: "Bill",
          lastName: "Gates",
          email: "bill@gates.com",
-         password: "buBirsifredir3!!!",
-         confirmPassword: "buBirsifredir3!!!",
+         password: "$2b$08$yBuRjo66uRpdiilER0FFHua0XoPsvBBgNHSAvwZ0ys6TbM7SSw0.W",
          userTypeId: "65dd07373d7e0c75327ccf26"
      },
      {
@@ -114,8 +112,7 @@ const insertInitialData = async()=>{
          name: "Dennis",
          lastName: "Ritchie",
          email: "dennis@ritchie.com",
-         password: "buBirsifredir4!!!",
-         confirmPassword: "buBirsifredir4!!!",
+         password: "$2b$08$yBuRjo66uRpdiilER0FFHua0XoPsvBBgNHSAvwZ0ys6TbM7SSw0.W",
          userTypeId: "65dd07373d7e0c75327ccf25"
      },
      {
@@ -123,8 +120,7 @@ const insertInitialData = async()=>{
          name: "Richard",
          lastName: "Stallman",
          email: "richard@stallman.com",
-         password: "buBirsifredir5!!!",
-         confirmPassword: "buBirsifredir5!!!",
+         password: "$2b$08$yBuRjo66uRpdiilER0FFHua0XoPsvBBgNHSAvwZ0ys6TbM7SSw0.W",
          userTypeId: "65dd07373d7e0c75327ccf25"
      }
    ];
