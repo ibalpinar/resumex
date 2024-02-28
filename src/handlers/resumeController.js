@@ -77,24 +77,41 @@ module.exports = {
       }
    },
 
-   getResumeByUserId: async (request, reply) => {
-      const _userId = request.params.id;
+   getCompleteResumeById: async (request, reply) => {
+      const resumeId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(_userId)){
-            const resume = await Resume.findOne({userId:_userId}).select(constants.selectResumeFields);
+         if(checkObjectIdRegExp.test(resumeId)){
+            const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resume){
-
-               let skills = await Resume.aggregate([{
-                  $lookup:{
-                     from: 'skills',
-                     localField: 'skills',
-                     foreignField: '_id',
-                     as: 'skillInformation'
+               let completeResume = await Resume.aggregate([
+                  {
+                     $lookup:{
+                        from: 'interests',
+                        localField: 'interests',
+                        foreignField: '_id',
+                        as: 'interestInformation'
+                     }
+                  },
+                  {
+                     $lookup:{
+                        from: 'skills',
+                        localField: 'skills',
+                        foreignField: '_id',
+                        as: 'skillInformation'
+                     }
+                  },
+                  {
+                     $lookup:{
+                        from: 'languages',
+                        localField: 'languages.languageId',
+                        foreignField: '_id',
+                        as: 'languageInformation'
+                     }
                   }
-               }]);
+               ]);
 
                sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: skills }
+                  reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: completeResume }
                );
             }else{
                sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
