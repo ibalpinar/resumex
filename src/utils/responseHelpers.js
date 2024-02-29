@@ -31,6 +31,7 @@ const responseMessage = {
    NO_SKILLS_FOUND: "No skills found",
    ALL_LANGUAGES_LISTED_SUCCESSFULLY: "All languages listed successfully",
    NO_LANGUAGES_FOUND: "No languages found",
+   USER_TOKEN_GENERATED_SUCCESSFULLY: "User token generated successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
