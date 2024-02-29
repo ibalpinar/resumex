@@ -54,6 +54,10 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'UserType'
    },
+   countryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Country'
+   },
    resumeIds: {
       type: Array,
       items: {
