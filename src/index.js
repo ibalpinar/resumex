@@ -23,6 +23,7 @@ app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
 app.register(resumeRoutes, { prefix: "api/v1/resume" });
 app.register(lookupRoutes, { prefix: "api/v1/lookup" });
+app.get('/health', (req, res) => {res.send({ "statusCode":200, "status":"ok", message: 'Success' })});
 
 insertInitialData();
 
