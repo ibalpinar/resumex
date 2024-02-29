@@ -4,6 +4,7 @@ const fastifySwagger = require("@fastify/swagger");
 const fastifySwaggerUi = require("@fastify/swagger-ui");
 const { userRoutes } = require('./routes/v1/userRoutes');
 const { resumeRoutes } = require('./routes/v1/resumeRoutes');
+const { lookupRoutes } = require('./routes/v1/lookupRoutes');
 const { swaggerUiOptions, swaggerOptions } = require('./utils/constants');
 const { insertInitialData } = require('./utils/insertInitialData');
 
@@ -21,6 +22,7 @@ app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
 app.register(resumeRoutes, { prefix: "api/v1/resume" });
+app.register(lookupRoutes, { prefix: "api/v1/lookup" });
 
 insertInitialData();
 

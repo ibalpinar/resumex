@@ -23,6 +23,8 @@ const responseMessage = {
    NO_RESUME_FOUND: "No resume found",
    NO_RESUMES_FOUND: "No resumes found",
    RESUME_UPDATED_SUCCESSFULLY: "Resume updated successfully",
+   ALL_COUNTRIES_LISTED_SUCCESSFULLY: "All countries listed successfully",
+   NO_COUNTRIES_FOUND: "No countries found",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
