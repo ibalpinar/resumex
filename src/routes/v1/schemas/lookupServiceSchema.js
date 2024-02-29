@@ -8,6 +8,11 @@ const lookupServiceSchema = {
       summary: "Fetch all countries",
 		tags: [path.LOOKUP]
    },
+   fetchAllInterests: {
+		description: "This endpoint lists all countries. It returns an array of country objects",
+      summary: "Fetch all countries",
+		tags: [path.LOOKUP]
+   },
 };
 
 module.exports = {

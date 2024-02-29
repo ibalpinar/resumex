@@ -25,6 +25,8 @@ const responseMessage = {
    RESUME_UPDATED_SUCCESSFULLY: "Resume updated successfully",
    ALL_COUNTRIES_LISTED_SUCCESSFULLY: "All countries listed successfully",
    NO_COUNTRIES_FOUND: "No countries found",
+   ALL_INTERESTS_LISTED_SUCCESSFULLY: "All interests listed successfully",
+   NO_INTERESTS_FOUND: "No interests found",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},

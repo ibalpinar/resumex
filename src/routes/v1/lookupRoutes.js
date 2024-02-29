@@ -9,6 +9,13 @@ const lookupRoutes = async (app, opts) => {
       handler: lookupController.getAllCountries
    });
 
+   app.route({
+      method: "GET",
+      url: "/fetch/interest",
+      schema: lookupServiceSchema.fetchAllInterests,
+      handler: lookupController.getAllInterests
+   });
+
 };
 
  module.exports = {
