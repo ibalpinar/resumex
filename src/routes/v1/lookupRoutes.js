@@ -4,16 +4,23 @@ const { lookupServiceSchema } = require('../../routes/v1/schemas/lookupServiceSc
 const lookupRoutes = async (app, opts) => {
    app.route({
       method: "GET",
-      url: "/fetch/country",
+      url: "/fetch/all/countries",
       schema: lookupServiceSchema.fetchAllCountries,
       handler: lookupController.getAllCountries
    });
 
    app.route({
       method: "GET",
-      url: "/fetch/interest",
+      url: "/fetch/all/interests",
       schema: lookupServiceSchema.fetchAllInterests,
       handler: lookupController.getAllInterests
+   });
+
+   app.route({
+      method: "GET",
+      url: "/fetch/all/skills",
+      schema: lookupServiceSchema.fetchAllSkills,
+      handler: lookupController.getAllSkills
    });
 
 };

@@ -1,5 +1,6 @@
 const Country = require('../models/Country');
 const Interest = require('../models/Interest');
+const Skill = require('../models/Skill');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
@@ -33,6 +34,23 @@ module.exports = {
          }
          else{
             sendErrorResponse(reply, 404, responseMessage.NO_INTERESTS_FOUND);
+         }
+      }catch(err){
+         console.error(err.message);
+         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
+   getAllSkills: async (request, reply) => {
+      try{
+         const skills = await Skill.find({}).select(constants.selectSkillFields);
+         if(skills.length != 0){
+            sendSuccessResponse(
+               reply, { statusCode: 200, message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY, data: skills }
+            );
+         }
+         else{
+            sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
          }
       }catch(err){
          console.error(err.message);

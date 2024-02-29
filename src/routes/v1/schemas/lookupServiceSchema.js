@@ -8,9 +8,16 @@ const lookupServiceSchema = {
       summary: "Fetch all countries",
 		tags: [path.LOOKUP]
    },
+
    fetchAllInterests: {
-		description: "This endpoint lists all countries. It returns an array of country objects",
-      summary: "Fetch all countries",
+		description: "This endpoint lists all interests. It returns an array of interest objects",
+      summary: "Fetch all interests",
+		tags: [path.LOOKUP]
+   },
+
+   fetchAllSkills: {
+		description: "This endpoint lists all skills. It returns an array of skill objects",
+      summary: "Fetch all skills",
 		tags: [path.LOOKUP]
    },
 };
