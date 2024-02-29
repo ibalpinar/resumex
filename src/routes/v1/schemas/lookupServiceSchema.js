@@ -20,6 +20,12 @@ const lookupServiceSchema = {
       summary: "Fetch all skills",
 		tags: [path.LOOKUP]
    },
+
+   fetchAllLanguages: {
+		description: "This endpoint lists all languages. It returns an array of language objects",
+      summary: "Fetch all languages",
+		tags: [path.LOOKUP]
+   },
 };
 
 module.exports = {

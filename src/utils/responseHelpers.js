@@ -29,6 +29,8 @@ const responseMessage = {
    NO_INTERESTS_FOUND: "No interests found",
    ALL_SKILLS_LISTED_SUCCESSFULLY: "All skills listed successfully",
    NO_SKILLS_FOUND: "No skills found",
+   ALL_LANGUAGES_LISTED_SUCCESSFULLY: "All languages listed successfully",
+   NO_LANGUAGES_FOUND: "No languages found",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},

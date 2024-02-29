@@ -4,6 +4,7 @@ const selectResumeFields = { _id: 1, userId:1,  header: 1, workExperience: 1, sk
 const selectCountryFields = { _id: 1, codeA2:1,  codeA3: 1, name: 1, flagFileName: 1, continentCode: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
 const selectInterestFields = { _id: 1, name: 1, iconName: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
 const selectSkillFields = { _id: 1, name: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
+const selectLanguageFields = { _id: 1, name: 1, createdAt: 1, updatedAt: 1, deletedAt: 1 };
 
 const swaggerUiOptions = {
    routePrefix: "/apidocs",
@@ -28,4 +29,4 @@ const swaggerOptions = {
    },
 };
 
-module.exports = { selectUserFields, selectUserFieldsOnlyResume, selectResumeFields, selectCountryFields, selectInterestFields, swaggerUiOptions, swaggerOptions };
+module.exports = { selectUserFields, selectUserFieldsOnlyResume, selectResumeFields, selectCountryFields, selectInterestFields, selectSkillFields, selectLanguageFields, swaggerUiOptions, swaggerOptions };

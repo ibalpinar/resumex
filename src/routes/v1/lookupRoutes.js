@@ -23,6 +23,13 @@ const lookupRoutes = async (app, opts) => {
       handler: lookupController.getAllSkills
    });
 
+   app.route({
+      method: "GET",
+      url: "/fetch/all/languages",
+      schema: lookupServiceSchema.fetchAllLanguages,
+      handler: lookupController.getAllLanguages
+   });
+
 };
 
  module.exports = {

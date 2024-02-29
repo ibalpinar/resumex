@@ -1,6 +1,7 @@
 const Country = require('../models/Country');
 const Interest = require('../models/Interest');
 const Skill = require('../models/Skill');
+const Language = require('../models/Language');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
@@ -51,6 +52,23 @@ module.exports = {
          }
          else{
             sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
+         }
+      }catch(err){
+         console.error(err.message);
+         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
+   getAllLanguages: async (request, reply) => {
+      try{
+         const languages = await Language.find({}).select(constants.selectLanguageFields);
+         if(languages.length != 0){
+            sendSuccessResponse(
+               reply, { statusCode: 200, message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY, data: languages }
+            );
+         }
+         else{
+            sendErrorResponse(reply, 404, responseMessage.NO_LANGUAGES_FOUND);
          }
       }catch(err){
          console.error(err.message);
