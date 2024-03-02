@@ -1,5 +1,6 @@
 const responseMessage = {
    INTERNAL_SERVER_ERROR: "Internal Server Error",
+   FST_JWT_AUTHORIZATION_TOKEN_INVALID: "Authorization token invalid",
    BAD_REQUEST: "Bad Request",
    NOT_FOUND: "Not Found",
    FORBIDDEN: "Forbidden",

@@ -20,7 +20,7 @@ try {
    console.error(err);
 }
 
-app.register(jwt, {secret: 'secret'});
+app.register(jwt, {secret: process.env.JWT_SECRET});
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
