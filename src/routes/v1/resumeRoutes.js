@@ -25,9 +25,9 @@ const resumeRoutes = async (app, opts) => {
 
    app.route({
       method: "GET",
-      url: "/get/u/:id",
+      url: "/get/complete/:id",
       schema: resumeServiceSchema.getResumeByUserId,
-      handler: resumeController.getResumeByUserId
+      handler: resumeController.getCompleteResumeById
    });
 
    app.route({
@@ -52,6 +52,6 @@ const resumeRoutes = async (app, opts) => {
    });
 };
 
- module.exports = {
+module.exports = {
 	resumeRoutes
 };

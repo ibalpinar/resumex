@@ -10,11 +10,13 @@ const userServiceSchema = {
 		body: {
 			type: "object",
 			properties: {
-				name: { type: "string"},
-            lastName: { type: "string"},
+				name: { type: "string" },
+            lastName: { type: "string" },
             email: { type: "string", format: "email" },
-				password: { type: "string"},
-            confirmPassword: { type: "string"}
+				password: { type: "string" },
+            confirmPassword: { type: "string" },
+            userTypeId: { type: "string" },
+            countryId: { type: "string" }
 			},
 			required: ["name", "lastName", "email", "password", "confirmPassword"]
 		},
