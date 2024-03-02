@@ -45,6 +45,6 @@ const userRoutes = async (app, opts) => {
    });
  };
 
- module.exports = {
+module.exports = {
 	userRoutes
 };

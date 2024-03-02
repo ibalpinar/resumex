@@ -52,6 +52,6 @@ const resumeRoutes = async (app, opts) => {
    });
 };
 
- module.exports = {
+module.exports = {
 	resumeRoutes
 };

@@ -32,6 +32,6 @@ const lookupRoutes = async (app, opts) => {
 
 };
 
- module.exports = {
+module.exports = {
 	lookupRoutes
 };

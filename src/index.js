@@ -8,7 +8,7 @@ const { lookupRoutes } = require('./routes/v1/lookupRoutes');
 const { authenticationRoutes } = require('./routes/v1/authenticationRoutes');
 const { swaggerUiOptions, swaggerOptions } = require('./utils/constants');
 const { insertInitialData } = require('./utils/insertInitialData');
-const ffjwt = require('@fastify/jwt');
+const jwt = require('@fastify/jwt');
 
 const app = fastify({ logger: true });
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/resumex"
@@ -20,7 +20,7 @@ try {
    console.error(err);
 }
 
-app.register(ffjwt, {secret: 'secret'});
+app.register(jwt, {secret: 'secret'});
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
