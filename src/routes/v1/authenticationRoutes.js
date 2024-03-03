@@ -51,7 +51,7 @@ const authenticationRoutes = async (app, opts) => {
          const userId = request.params.id;
          try{
             const data = {_id:userId};
-            const authToken = app.jwt.sign(data);
+            const authToken = app.jwt.sign(data, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
             sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.USER_TOKEN_GENERATED_SUCCESSFULLY, data: { authToken: authToken } }
             );
