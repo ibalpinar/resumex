@@ -6,6 +6,7 @@ const responseMessage = {
    FORBIDDEN: "Forbidden",
    TOO_MANY_REQUEST: "Too many requests",
    CAST_OBJECTID_ERROR: "Cast to ObjectId failed for value",
+   EMAIL_OR_PASSWORD_IS_INCORRECT: "Email address or password is incorrect",
    NO_USER_FOUND: "No user found",
    NO_USERS_FOUND: "No users found",
    USER_ALREADY_EXIST: "User already exist",

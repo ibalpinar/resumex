@@ -24,7 +24,10 @@ const bcryptPassword = async function(password) {
 const comparePassword = async function(password, hash) {
    let isVerified = false;
    try {
-      isVerified = bcrypt.compare(password, hash);
+      isVerified = bcrypt.compare(password, hash)
+         .then(result=>{
+            return result;
+      });
    } catch (err) {
       console.error(err.message);
    } finally {
