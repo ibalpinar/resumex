@@ -59,6 +59,20 @@ const authenticationRoutes = async (app, opts) => {
       preHandler: [app.verifyEmailPassword],
       handler: authenticationController.login
    });
+
+   app.route({
+      method: "POST",
+      url: "/forgotPassword",
+      handler: authenticationController.forgotPassword
+   });
+
+   app.route({
+      method: "POST",
+      url: "/setPassword",
+      preHandler: [app.verifyEmailPassword],
+      handler: authenticationController.setPassword
+   });
+
 };
 
 module.exports = {

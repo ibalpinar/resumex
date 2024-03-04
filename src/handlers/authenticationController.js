@@ -27,7 +27,8 @@ module.exports = {
             _id: user._id,
             name: user.name,
             lastName: user.lastName,
-            email: user.email
+            email: user.email,
+            userTypeId: user.userTypeId
          };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
          sendSuccessResponse(
@@ -37,5 +38,10 @@ module.exports = {
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
-   }
+   },
+
+   forgotPassword: async (request, reply) => {},
+
+   setPassword: async (request, reply) => {}
+
 };
