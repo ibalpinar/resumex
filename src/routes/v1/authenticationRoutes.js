@@ -18,8 +18,9 @@ const authenticationRoutes = async (app, opts) => {
             sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
          }
       }
-   })
-   .decorate("verifyEmailPassword", async(request, reply) => {
+   });
+
+   app.decorate("verifyEmailPassword", async(request, reply) => {
       const email = request.body.email;
       const password = request.body.password;
       try{
@@ -40,19 +41,7 @@ const authenticationRoutes = async (app, opts) => {
    app.route({
       method: "GET",
       url: "/generateToken/:id",
-      handler: (request, reply) => {
-         const userId = request.params.id;
-         try{
-            const authData = {_id:userId};
-            const authToken = app.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
-            sendSuccessResponse(
-               reply, { statusCode: 200, message: responseMessage.USER_TOKEN_GENERATED_SUCCESSFULLY, data: { authToken: authToken } }
-            );
-         }catch(err){
-            console.error(err.message);
-            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
-         }
-      }
+      handler: authenticationController.generateToken
    });
 
    app.route({
@@ -68,25 +57,7 @@ const authenticationRoutes = async (app, opts) => {
       method: "POST",
       url: "/login",
       preHandler: [app.verifyEmailPassword],
-      handler: (request, reply) => {
-         const email = request.body.email;
-         try{
-            const user = User.findOne({ email: email }).select(constants.selectUserFieldsForLogin);
-            const authData = {
-               _id: user._id,
-               name: user.name,
-               lastName: user.ame,
-               email: user.email
-            };
-            const authToken = app.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
-            sendSuccessResponse(
-               reply, { statusCode: 200, message: responseMessage.USER_LOGGED_IN_SUCCESSFULLY, data: { authToken: authToken } }
-            );
-         }catch(err){
-            console.error(err.message);
-            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
-         }
-      }
+      handler: authenticationController.login
    });
 };
 
