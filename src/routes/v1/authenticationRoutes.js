@@ -25,13 +25,8 @@ const authenticationRoutes = async (app, opts) => {
       try{
          const user = await User.findOne({ email: email }).select(constants.selectUserFieldsForLogin);
          if(user){
-            if(await comparePassword(password, user.password)){
-               sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.USER_LISTED_SUCCESSFULLY, data: user }
-               );
-            }else{
+            if(!await comparePassword(password, user.password))
                sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
-            }
          }else{
             sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
          }
@@ -40,9 +35,7 @@ const authenticationRoutes = async (app, opts) => {
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
 
-
-   })
-   ;
+   });
 
    app.route({
       method: "GET",
