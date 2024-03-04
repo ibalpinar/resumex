@@ -34,6 +34,7 @@ const responseMessage = {
    ALL_LANGUAGES_LISTED_SUCCESSFULLY: "All languages listed successfully",
    NO_LANGUAGES_FOUND: "No languages found",
    USER_TOKEN_GENERATED_SUCCESSFULLY: "User token generated successfully",
+   USER_LOGGED_IN_SUCCESSFULLY: "User logged in successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
