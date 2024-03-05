@@ -44,7 +44,7 @@ module.exports = {
       }
    },
 
-   forgotPassword: async (request, reply) => {
+   forgottenPassword: async (request, reply) => {
       const email = request.body.email;
       try{
          if(checkEmailRegex.test(email)){
@@ -61,7 +61,7 @@ module.exports = {
                }
                const forgotPasswordRequest = await ForgorPasswordRequest.create(forgotPasswordRequestData);
                sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.USER_LOGGED_IN_SUCCESSFULLY, data: { forgotPasswordRequest } }
+                  reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
                );
             }else{
                sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
@@ -75,6 +75,8 @@ module.exports = {
       }
    },
 
-   resetPassword: async (request, reply) => {}
+   resetPasswordWithToken: async (request, reply) => {},
+
+   resetPasswordWithCode: async (request, reply) => {}
 
 };

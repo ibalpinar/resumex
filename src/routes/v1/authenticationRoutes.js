@@ -62,15 +62,20 @@ const authenticationRoutes = async (app, opts) => {
 
    app.route({
       method: "POST",
-      url: "/forgotPassword",
-      handler: authenticationController.forgotPassword
+      url: "/forgottenPassword",
+      handler: authenticationController.forgottenPassword
    });
 
    app.route({
       method: "POST",
-      url: "/setPassword",
-      preHandler: [app.verifyEmailPassword],
-      handler: authenticationController.resetPassword
+      url: "/resetPasswordWithToken",
+      handler: authenticationController.resetPasswordWithToken
+   });
+
+   app.route({
+      method: "POST",
+      url: "/resetPasswordWithCode",
+      handler: authenticationController.resetPasswordWithCode
    });
 
 };
