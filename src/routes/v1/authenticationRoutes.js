@@ -1,16 +1,13 @@
-const User = require('../../models/User');
-const constants = require('../../utils/constants');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../../utils/responseHelpers");
 const authenticationController = require('../../handlers/authenticationController');
-const { authenticationServiceSchema } = require('../../routes/v1/schemas/authenticationServiceSchema');
+const authenticationDecorator = require('../../decorators/authenticationDecorators');
 
 const authenticationRoutes = async (app, opts) => {
    app.decorate("authenticate", async (request, reply) => {
-      await authenticationController.authenticateDecorator(request, reply);
+      await authenticationDecorator.authenticate(request, reply);
    });
 
    app.decorate("verifyEmailPassword", async(request, reply) => {
-      await authenticationController.verifyEmailPasswordDecorator(request, reply);
+      await authenticationDecorator.verifyEmailPassword(request, reply);
    });
 
    app.route({
