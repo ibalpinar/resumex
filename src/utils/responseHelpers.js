@@ -7,6 +7,7 @@ const responseMessage = {
    TOO_MANY_REQUEST: "Too many requests",
    CAST_OBJECTID_ERROR: "Cast to ObjectId failed for value",
    EMAIL_OR_PASSWORD_IS_INCORRECT: "Email address or password is incorrect",
+   INVALID_EMAIL_ADDRESS: "Invalid email address",
    NO_USER_FOUND: "No user found",
    NO_USERS_FOUND: "No users found",
    USER_ALREADY_EXIST: "User already exist",
@@ -107,10 +108,12 @@ const sendSuccessResponse = (reply, response, options = {}) => {
 };
 
 const checkObjectIdRegex = new RegExp("^[0-9a-fA-F]{24}$");
+const checkEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
 
 module.exports = {
 	sendErrorResponse,
 	sendSuccessResponse,
    checkObjectIdRegex,
+   checkEmailRegex,
    responseMessage
 };
