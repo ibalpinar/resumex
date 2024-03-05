@@ -55,6 +55,7 @@ module.exports = {
                const forgotPasswordRequestData = {
                   userId: new ObjectId(user.userId),
                   email: user.email,
+                  requestCode: Math.floor(100000 + Math.random() * 900000),
                   requestToken: crypto.randomBytes(32).toString("hex"),
                   expiredAt: expiredAt
                }
