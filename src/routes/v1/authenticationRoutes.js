@@ -70,7 +70,7 @@ const authenticationRoutes = async (app, opts) => {
       method: "POST",
       url: "/setPassword",
       preHandler: [app.verifyEmailPassword],
-      handler: authenticationController.setPassword
+      handler: authenticationController.resetPassword
    });
 
 };
