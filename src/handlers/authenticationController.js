@@ -1,12 +1,44 @@
 const User = require('../models/User');
 const ForgorPasswordRequest = require('../models/ForgorPasswordRequest');
 const constants = require('../utils/constants');
+const error = require('../utils/errors');
 const { sendErrorResponse, sendSuccessResponse, checkEmailRegex, responseMessage } = require("../utils/responseHelpers");
+const { comparePassword } = require('../utils/passwordManager');
 const crypto = require("crypto");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
 module.exports = {
+   authenticateDecorator: async (request, reply) => {
+      try{
+         await request.jwtVerify();
+      }catch(err){
+         console.error(err.message);
+         if(err.code == error.FST_JWT_AUTHORIZATION_TOKEN_INVALID){
+            sendErrorResponse(reply, 401, responseMessage.AUTHORIZATION_TOKEN_INVALID);
+         }else{
+            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         }
+      }
+   },
+
+   verifyEmailPasswordDecorator: async (request, reply) => {
+      const email = request.body.email;
+      const password = request.body.password;
+      try{
+         const user = await User.findOne({ email: email }).select(constants.selectUserFieldsForLogin);
+         if(user){
+            if(!await comparePassword(password, user.password))
+               sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
+         }else{
+            sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
+         }
+      }catch(err){
+         console.error(err.message);
+         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
    generateToken: async (request, reply) => {
       const userId = request.params.id;
       try{
