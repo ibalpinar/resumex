@@ -106,11 +106,11 @@ const sendSuccessResponse = (reply, response, options = {}) => {
 	}
 };
 
-const checkObjectIdRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+const checkObjectIdRegex = new RegExp("^[0-9a-fA-F]{24}$");
 
 module.exports = {
 	sendErrorResponse,
 	sendSuccessResponse,
-   checkObjectIdRegExp,
+   checkObjectIdRegex,
    responseMessage
 };

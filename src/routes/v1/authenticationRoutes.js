@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const constants = require('../../utils/constants');
 const error = require('../../utils/errors');
 const { comparePassword } = require('../../utils/passwordManager');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../../utils/responseHelpers");
 const authenticationController = require('../../handlers/authenticationController');
 const { authenticationServiceSchema } = require('../../routes/v1/schemas/authenticationServiceSchema');
 

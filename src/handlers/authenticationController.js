@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const ForgorPasswordRequest = require('../models/ForgorPasswordRequest');
 const constants = require('../utils/constants');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../utils/responseHelpers");
 const crypto = require("crypto");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;

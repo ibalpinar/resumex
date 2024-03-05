@@ -1,7 +1,7 @@
 const Resume = require('../models/Resume');
 const User = require('../models/User');
 const constants = require('../utils/constants');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
@@ -17,7 +17,7 @@ module.exports = {
       });
 
       try{
-            if(checkObjectIdRegExp.test(resume.userId)){
+            if(checkObjectIdRegex.test(resume.userId)){
                let user = await User.findById(resume.userId).select(constants.selectUserFieldsOnlyResume);
                if(user){
                   let newResume = await Resume.create(resume);
@@ -59,7 +59,7 @@ module.exports = {
    getResumeById: async (request, reply) => {
       const resumeId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(resumeId)){
+         if(checkObjectIdRegex.test(resumeId)){
             const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resume){
                sendSuccessResponse(
@@ -80,7 +80,7 @@ module.exports = {
    getCompleteResumeById: async (request, reply) => {
       const resumeId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(resumeId)){
+         if(checkObjectIdRegex.test(resumeId)){
             const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resume){
                let completeResume = await Resume.aggregate([
@@ -129,7 +129,7 @@ module.exports = {
       const resumeId = request.params.id;
       const resumeUpdates = request.body;
       try{
-         if(checkObjectIdRegExp.test(resumeId)){
+         if(checkObjectIdRegex.test(resumeId)){
             let resumeToUpdate = await Resume.findById(resumeId);
             if(resumeToUpdate){
                await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
@@ -153,7 +153,7 @@ module.exports = {
    deleteResumeById: async (request, reply) => {
       const resumeId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(resumeId)){
+         if(checkObjectIdRegex.test(resumeId)){
             const resumeToDelete = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resumeToDelete){
                let user = await User.findById(resumeToDelete.userId).select(constants.selectUserFieldsOnlyResume);
