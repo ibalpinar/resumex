@@ -1,10 +1,13 @@
 const responseMessage = {
    INTERNAL_SERVER_ERROR: "Internal Server Error",
+   AUTHORIZATION_TOKEN_INVALID: "Authorization token invalid",
    BAD_REQUEST: "Bad Request",
    NOT_FOUND: "Not Found",
    FORBIDDEN: "Forbidden",
    TOO_MANY_REQUEST: "Too many requests",
    CAST_OBJECTID_ERROR: "Cast to ObjectId failed for value",
+   EMAIL_OR_PASSWORD_IS_INCORRECT: "Email address or password is incorrect",
+   INVALID_EMAIL_ADDRESS: "Invalid email address",
    NO_USER_FOUND: "No user found",
    NO_USERS_FOUND: "No users found",
    USER_ALREADY_EXIST: "User already exist",
@@ -32,6 +35,8 @@ const responseMessage = {
    ALL_LANGUAGES_LISTED_SUCCESSFULLY: "All languages listed successfully",
    NO_LANGUAGES_FOUND: "No languages found",
    USER_TOKEN_GENERATED_SUCCESSFULLY: "User token generated successfully",
+   USER_LOGGED_IN_SUCCESSFULLY: "User logged in successfully",
+   FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT: "Forgotten password request successfully sent",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
@@ -103,11 +108,13 @@ const sendSuccessResponse = (reply, response, options = {}) => {
 	}
 };
 
-const checkObjectIdRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+const checkObjectIdRegex = new RegExp("^[0-9a-fA-F]{24}$");
+const checkEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
 
 module.exports = {
 	sendErrorResponse,
 	sendSuccessResponse,
-   checkObjectIdRegExp,
+   checkObjectIdRegex,
+   checkEmailRegex,
    responseMessage
 };

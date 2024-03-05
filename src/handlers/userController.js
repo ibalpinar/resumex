@@ -2,7 +2,7 @@ const User = require('../models/User');
 const error = require('../utils/errors');
 const constants = require('../utils/constants');
 const { removePasswordKey, bcryptPassword } = require('../utils/passwordManager');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
@@ -51,7 +51,7 @@ module.exports = {
    getUserById: async (request, reply) => {
       const userId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(userId)){
+         if(checkObjectIdRegex.test(userId)){
             const user = await User.findById(userId).select(constants.selectUserFields);
 
             if(user){
@@ -74,7 +74,7 @@ module.exports = {
       const userId = request.params.id;
       const userUpdates = request.body;
       try{
-         if(checkObjectIdRegExp.test(userId)){
+         if(checkObjectIdRegex.test(userId)){
             let userToUpdate = await User.findById(userId);
             if(userToUpdate){
                if(userUpdates.password){
@@ -110,7 +110,7 @@ module.exports = {
    deleteUserById: async (request, reply) => {
       const userId = request.params.id;
       try{
-         if(checkObjectIdRegExp.test(userId)){
+         if(checkObjectIdRegex.test(userId)){
             const userToDelete = await User.findById(userId).select(constants.selectUserFields);
             if(userToDelete){
                await User.findByIdAndDelete(userId);

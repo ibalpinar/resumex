@@ -3,7 +3,7 @@ const Interest = require('../models/Interest');
 const Skill = require('../models/Skill');
 const Language = require('../models/Language');
 const constants = require('../utils/constants');
-const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegExp, responseMessage } = require("../utils/responseHelpers");
+const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 

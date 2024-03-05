@@ -19,6 +19,8 @@ const Resume = require('./Resume');
  * ##########################################################################
  */
 
+// TODO: Telefon numarasi eklenecek
+
 const UserSchema = new Schema({
     name: {
       type: String,

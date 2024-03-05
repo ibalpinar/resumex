@@ -20,13 +20,13 @@ try {
    console.error(err);
 }
 
-app.register(jwt, {secret: 'secret'});
+app.register(jwt, {secret: process.env.JWT_SECRET});
 app.register(fastifySwagger, swaggerOptions);
 app.register(fastifySwaggerUi, swaggerUiOptions);
 app.register(userRoutes, { prefix: "api/v1/user" });
 app.register(resumeRoutes, { prefix: "api/v1/resume" });
 app.register(lookupRoutes, { prefix: "api/v1/lookup" });
-app.register(authenticationRoutes, { prefix: "api/v1/authentication" });
+app.register(authenticationRoutes, { prefix: "api/v1/auth" });
 app.get('/health', (req, res) => {res.send({ "statusCode":200, "status":"ok", message: 'Success' })});
 
 insertInitialData();
