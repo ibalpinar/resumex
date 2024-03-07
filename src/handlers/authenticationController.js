@@ -54,6 +54,7 @@ module.exports = {
             if(user){
                let expiredAt = new Date();
                expiredAt.setHours(expiredAt.getHours() + 24);
+
                const forgotPasswordRequestData = {
                   userId: new ObjectId(user.userId),
                   email: user.email,
@@ -61,6 +62,7 @@ module.exports = {
                   requestToken: crypto.randomBytes(32).toString("hex"),
                   expiredAt: expiredAt
                }
+
                const forgotPasswordRequest = await ForgorPasswordRequest.create(forgotPasswordRequestData);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
@@ -77,8 +79,8 @@ module.exports = {
       }
    },
 
-   resetPasswordWithToken: async (request, reply) => {},
-
-   resetPasswordWithCode: async (request, reply) => {}
+   resetPassword: async (request, reply) => {
+      const passwordResetBody = request.body;
+   }
 
 };
