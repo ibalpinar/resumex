@@ -1,6 +1,4 @@
-const { responseErrors, getSuccessObject, path } = require("../../common");
-const { responseMessage } = require("../../../utils/responseHelpers");
-const errors = responseErrors;
+const { path } = require("../../common");
 
 const resumeServiceSchema = {
    createResume: {

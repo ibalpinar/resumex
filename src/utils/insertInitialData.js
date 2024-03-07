@@ -5,7 +5,6 @@ const Skill = require("../models/Skill");
 const Interest = require("../models/Interest");
 const Continent = require("../models/Continent");
 const Country = require("../models/Country");
-const { bcryptPassword } = require('../utils/passwordManager');
 
 const insertInitialData = async()=>{
    const predefinedUserTypes = [

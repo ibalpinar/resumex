@@ -5,7 +5,6 @@ const Language = require('../models/Language');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkObjectIdRegex, responseMessage } = require("../utils/responseHelpers");
 const mongoose = require('mongoose');
-const { ObjectId } = mongoose.Types;
 
 module.exports = {
    getAllCountries: async (request, reply) => {

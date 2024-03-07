@@ -1,6 +1,5 @@
-const { responseErrors, getSuccessObject, path } = require("../../common");
+const { path } = require("../../common");
 const { responseMessage } = require("../../../utils/responseHelpers");
-const errors = responseErrors;
 
 const userServiceSchema = {
 	createUser: {

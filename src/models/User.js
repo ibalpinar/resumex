@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const { Schema, model } = mongoose;
-const UserType = require('./UserType');
-const Resume = require('./Resume');
 
 /**
  * TODO: This section must be simplified!

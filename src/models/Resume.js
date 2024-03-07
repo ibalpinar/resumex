@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 const { Schema, model } = mongoose;
-const User = require('../models/User');
-const Skill = require('../models/Skill');
-const Interest = require('../models/Interest');
-const Language = require('../models/Language');
 
 const ResumeSchema = new Schema({
    userId: {
