@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const ForgorPasswordRequest = require('../models/ForgorPasswordRequest');
+const ForgotPasswordRequest = require('../models/ForgotPasswordRequest');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkEmailRegex, responseMessage } = require("../utils/responseHelpers");
 const crypto = require("crypto");
@@ -61,7 +61,7 @@ module.exports = {
                   expiredAt: expiredAt
                }
 
-               const forgotPasswordRequest = await ForgorPasswordRequest.create(forgotPasswordRequestData);
+               const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
                );
@@ -79,6 +79,19 @@ module.exports = {
 
    resetPassword: async (request, reply) => {
       const passwordResetBody = request.body;
+
+      if(passwordResetBody.code){
+         if(passwordResetBody.token)
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
+
+            const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+
+      }else if(passwordResetBody.token){
+         console.log("############ token ok ############");
+      }else{
+         console.log("############ NOK ############");
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
+      }
    }
 
 };
