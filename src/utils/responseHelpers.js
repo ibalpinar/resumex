@@ -38,6 +38,7 @@ const responseMessage = {
    USER_LOGGED_IN_SUCCESSFULLY: "User logged in successfully",
    CANNOT_BE_USE_TOKEN_CODE_SAME_TIME: "Token and code cannot be used at the same time",
    FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT: "Forgotten password request successfully sent",
+   INVALID_RESET_PASSWORD_REQUEST: "Invalid reset password request",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
       error: { type: "string"},
