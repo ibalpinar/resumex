@@ -1,9 +1,7 @@
 const User = require('../models/User');
-const ForgorPasswordRequest = require('../models/ForgorPasswordRequest');
+const ForgotPasswordRequest = require('../models/ForgotPasswordRequest');
 const constants = require('../utils/constants');
-const error = require('../utils/errors');
 const { sendErrorResponse, sendSuccessResponse, checkEmailRegex, responseMessage } = require("../utils/responseHelpers");
-const { comparePassword } = require('../utils/passwordManager');
 const crypto = require("crypto");
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
@@ -54,6 +52,7 @@ module.exports = {
             if(user){
                let expiredAt = new Date();
                expiredAt.setHours(expiredAt.getHours() + 24);
+
                const forgotPasswordRequestData = {
                   userId: new ObjectId(user.userId),
                   email: user.email,
@@ -61,7 +60,8 @@ module.exports = {
                   requestToken: crypto.randomBytes(32).toString("hex"),
                   expiredAt: expiredAt
                }
-               const forgotPasswordRequest = await ForgorPasswordRequest.create(forgotPasswordRequestData);
+
+               const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
                sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
                );
@@ -77,8 +77,21 @@ module.exports = {
       }
    },
 
-   resetPasswordWithToken: async (request, reply) => {},
+   resetPassword: async (request, reply) => {
+      const passwordResetBody = request.body;
 
-   resetPasswordWithCode: async (request, reply) => {}
+      if(passwordResetBody.code){
+         if(passwordResetBody.token)
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
+
+            const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+
+      }else if(passwordResetBody.token){
+         console.log("############ token ok ############");
+      }else{
+         console.log("############ NOK ############");
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
+      }
+   }
 
 };

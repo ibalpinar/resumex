@@ -40,14 +40,8 @@ const authenticationRoutes = async (app, opts) => {
 
    app.route({
       method: "POST",
-      url: "/resetPasswordWithToken",
-      handler: authenticationController.resetPasswordWithToken
-   });
-
-   app.route({
-      method: "POST",
-      url: "/resetPasswordWithCode",
-      handler: authenticationController.resetPasswordWithCode
+      url: "/resetPassword",
+      handler: authenticationController.resetPassword
    });
 
 };
