@@ -85,6 +85,29 @@ module.exports = {
             return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
 
             const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+            if(user){
+               if(user.password == user.confirmPassword){
+                  const now = new Date();
+                  const forgotPasswordRequest = await ForgotPasswordRequest.findOne({
+                     userId: user._id,
+                     email: user.email,
+                     code: passwordResetBody.code,
+                     expiredAt: {
+                        $gte: now
+                     },
+                     updatedAt: now
+                  });
+
+                  return sendSuccessResponse(
+                     reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null }
+                  );
+
+               }else{
+                  return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+               }
+            }else{
+               return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+            }
 
       }else if(passwordResetBody.token){
          console.log("############ token ok ############");
