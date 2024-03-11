@@ -66,7 +66,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
@@ -81,33 +83,41 @@ module.exports = {
       const passwordResetBody = request.body;
 
       if(passwordResetBody.code){
-         if(passwordResetBody.token)
+         if(passwordResetBody.token){
             return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
+         }
 
-            const user = await User.findOne({ email: email }).select(constants.selectUserFields);
-            if(user){
-               if(user.password == user.confirmPassword){
-                  const now = new Date();
-                  const forgotPasswordRequest = await ForgotPasswordRequest.findOne({
-                     userId: user._id,
-                     email: user.email,
-                     code: passwordResetBody.code,
-                     expiredAt: {
-                        $gte: now
-                     },
-                     updatedAt: now
-                  });
+         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+         if(user){
+            if(user.password == user.confirmPassword){
+               const now = new Date();
+               const forgotPasswordRequest = await ForgotPasswordRequest.findOne({
+                  userId: user._id,
+                  email: user.email,
+                  code: passwordResetBody.code,
+                  expiredAt: {
+                     $gte: now
+                  },
+                  updatedAt: now
+               });
 
-                  return sendSuccessResponse(
-                     reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null }
-                  );
-
+               if(forgotPasswordRequest){
+                  console.log("======> password changed <======");
                }else{
-                  return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+                  return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST);
                }
+               return sendSuccessResponse(
+                  reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null }
+               );
+
             }else{
-               return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
             }
+         }else{
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+            );
+         }
 
       }else if(passwordResetBody.token){
          console.log("############ token ok ############");

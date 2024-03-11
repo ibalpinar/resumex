@@ -2,7 +2,8 @@ const responseMessage = {
    INTERNAL_SERVER_ERROR: "Internal Server Error",
    AUTHORIZATION_TOKEN_INVALID: "Authorization token invalid",
    BAD_REQUEST: "Bad Request",
-   NOT_FOUND: "Not Found",
+   CONTENT_NOT_FOUND: "Content not Found",
+   RESOURCE_NOT_FOUND: "Rsource not Found",
    FORBIDDEN: "Forbidden",
    TOO_MANY_REQUEST: "Too many requests",
    CAST_OBJECTID_ERROR: "Cast to ObjectId failed for value",
@@ -69,7 +70,7 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 			error = responseMessage.BAD_REQUEST;
 			break;
 		case 404:
-			error = responseMessage.NOT_FOUND;
+			error = responseMessage.RESOURCE_NOT_FOUND;
 			break;
 		case 403:
 			error = responseMessage.FORBIDDEN;

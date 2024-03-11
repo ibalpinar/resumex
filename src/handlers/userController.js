@@ -40,7 +40,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
@@ -59,7 +61,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.USER_LISTED_SUCCESSFULLY, data: user }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
@@ -91,7 +95,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
@@ -118,7 +124,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.USER_DELETED_SUCCESSFULLY, data: userToDelete }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
@@ -139,8 +147,10 @@ module.exports = {
                reply, { statusCode: 200, message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY, data: null }
             );
          }else{
-            sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
-         }
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] }
+            );
+      }
       }catch(err){
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
