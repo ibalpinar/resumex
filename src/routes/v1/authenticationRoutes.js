@@ -39,7 +39,7 @@ const authenticationRoutes = async (app, opts) => {
    });
 
    app.route({
-      method: "POST",
+      method: "PATCH",
       url: "/resetPassword",
       handler: authenticationController.resetPassword
    });
