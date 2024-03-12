@@ -30,4 +30,21 @@ const swaggerOptions = {
    },
 };
 
-module.exports = { selectUserFieldsForLogin, selectUserFields, selectUserFieldsOnlyResume, selectResumeFields, selectCountryFields, selectInterestFields, selectSkillFields, selectLanguageFields, swaggerUiOptions, swaggerOptions };
+const forgottenPasswordRequestType = {
+   CODE: "code",
+   TOKEN: "token"
+};
+
+module.exports = {
+   selectUserFieldsForLogin,
+   selectUserFields,
+   selectUserFieldsOnlyResume,
+   selectResumeFields,
+   selectCountryFields,
+   selectInterestFields,
+   selectSkillFields,
+   selectLanguageFields,
+   swaggerUiOptions,
+   swaggerOptions,
+   forgottenPasswordRequestType
+};
