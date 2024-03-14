@@ -94,13 +94,8 @@ module.exports = {
                expiredAt: { $gte: now.toString() },
                updatedAt: { $eq: null }
             };
-            const forgotPasswordRequestUpdates = {
-               requestType: constants.forgottenPasswordRequestType.CODE,
-               updatedAt: now
-            };
-            const userUpdates = {
-               updatedAt: now
-            };
+            let forgotPasswordRequestUpdates = { updatedAt: now };
+            let userUpdates = { updatedAt: now };
 
             userUpdates.password = await bcryptPassword(passwordResetBody.password);
             let forgotPasswordRequest;
@@ -110,9 +105,11 @@ module.exports = {
                   return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
 
                forgotPasswordRequestFilter.requestCode = parseInt(passwordResetBody.code);
+               forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.CODE;
                forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
             }else if(passwordResetBody.token){
                forgotPasswordRequestFilter.requestToken = passwordResetBody.token;
+               forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.TOKEN;
                forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
             }else{
                return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_TOKEN);
