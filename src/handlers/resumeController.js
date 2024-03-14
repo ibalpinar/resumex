@@ -28,7 +28,9 @@ module.exports = {
                   );
                }
                else{
-                  sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+                  sendSuccessResponse(
+                     reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+                  );
                }
             }else{
                sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
@@ -48,7 +50,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
@@ -66,7 +70,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: resume }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
@@ -114,7 +120,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: completeResume }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
@@ -138,7 +146,9 @@ module.exports = {
                   reply, { statusCode: 200, message: responseMessage.RESUME_UPDATED_SUCCESSFULLY, data: resumeToUpdate }
                );
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
@@ -171,10 +181,14 @@ module.exports = {
                   );
                }
                else{
-                  sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
-               }
+                  sendSuccessResponse(
+                     reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
+                  );
+                  }
             }else{
-               sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+               sendSuccessResponse(
+                  reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
+               );
             }
          }else{
             sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
@@ -194,7 +208,9 @@ module.exports = {
                reply, { statusCode: 200, message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY, data: null }
             );
          }else{
-            sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);

@@ -2,7 +2,8 @@ const responseMessage = {
    INTERNAL_SERVER_ERROR: "Internal Server Error",
    AUTHORIZATION_TOKEN_INVALID: "Authorization token invalid",
    BAD_REQUEST: "Bad Request",
-   NOT_FOUND: "Not Found",
+   CONTENT_NOT_FOUND: "Content not Found",
+   RESOURCE_NOT_FOUND: "Rsource not Found",
    FORBIDDEN: "Forbidden",
    TOO_MANY_REQUEST: "Too many requests",
    CAST_OBJECTID_ERROR: "Cast to ObjectId failed for value",
@@ -38,7 +39,8 @@ const responseMessage = {
    USER_LOGGED_IN_SUCCESSFULLY: "User logged in successfully",
    CANNOT_BE_USE_TOKEN_CODE_SAME_TIME: "Token and code cannot be used at the same time",
    FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT: "Forgotten password request successfully sent",
-   INVALID_RESET_PASSWORD_REQUEST: "Invalid reset password request",
+   INVALID_RESET_PASSWORD_REQUEST_CODE: "Invalid reset password request with code",
+   INVALID_RESET_PASSWORD_REQUEST_TOKEN: "Invalid reset password request with token",
    PASSWORD_CHANGED_SUCCESSFULLY: "Password has been changed successfully",
    DEFAULT_ERROR_RESPONSE_FOR_SCHEMA: {
       statusCode: { type: 'number'},
@@ -69,7 +71,7 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
 			error = responseMessage.BAD_REQUEST;
 			break;
 		case 404:
-			error = responseMessage.NOT_FOUND;
+			error = responseMessage.RESOURCE_NOT_FOUND;
 			break;
 		case 403:
 			error = responseMessage.FORBIDDEN;

@@ -16,7 +16,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_COUNTRIES_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_COUNTRIES_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
@@ -33,7 +35,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_INTERESTS_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_INTERESTS_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
@@ -50,7 +54,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_SKILLS_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
@@ -67,7 +73,9 @@ module.exports = {
             );
          }
          else{
-            sendErrorResponse(reply, 404, responseMessage.NO_LANGUAGES_FOUND);
+            sendSuccessResponse(
+               reply, { statusCode: 204, message: responseMessage.NO_LANGUAGES_FOUND, data: [] }
+            );
          }
       }catch(err){
          console.error(err.message);
