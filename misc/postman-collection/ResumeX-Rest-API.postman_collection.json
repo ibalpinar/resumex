@@ -4,7 +4,7 @@
 		"name": "ResumeX Rest API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4104",
-		"_collection_link": "https://resumex.postman.co/workspace/0b4fad7f-a091-4a47-8fbd-4b9cf6782e67/collection/4104-0b739d57-af6a-4a6b-9ecb-45956a173d31?action=share&source=collection_link&creator=4104"
+		"_collection_link": "https://resumex.postman.co/workspace/ResumeX-Team-Workspace~0b4fad7f-a091-4a47-8fbd-4b9cf6782e67/collection/4104-0b739d57-af6a-4a6b-9ecb-45956a173d31?action=share&source=collection_link&creator=4104"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/v1/auth/generateToken/65e3b7e2fc05c685f55593c2",
+							"raw": "localhost:3000/api/v1/authentication/generateToken/65e3b7e2fc05c685f55593c2",
 							"host": [
 								"localhost"
 							],
@@ -24,7 +24,7 @@
 							"path": [
 								"api",
 								"v1",
-								"auth",
+								"authentication",
 								"generateToken",
 								"65e3b7e2fc05c685f55593c2"
 							]
@@ -44,7 +44,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:3000/api/v1/auth/validateToken",
+							"raw": "localhost:3000/api/v1/authentication/validateToken",
 							"host": [
 								"localhost"
 							],
@@ -52,7 +52,7 @@
 							"path": [
 								"api",
 								"v1",
-								"auth",
+								"authentication",
 								"validateToken"
 							]
 						}
@@ -73,7 +73,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\", \n    \"password\": \"123456\"\n}",
+							"raw": "{\n    \"email\": \"phil@jackson.com\", \n    \"password\": \"1234567\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -136,7 +136,7 @@
 				{
 					"name": "Reset Password",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
@@ -147,7 +147,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\"\n}",
+							"raw": "{\n    \"email\": \"phil@jackson.com\",\n    \"token\": \"ec392e4da6db459aa8d4c12af3fb9908ddd3378009734a15cec33d39be8af006\",\n    \"password\": \"2222\",\n    \"confirmPassword\": \"2222\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
