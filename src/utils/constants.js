@@ -35,6 +35,12 @@ const forgottenPasswordRequestType = {
    TOKEN: "token"
 };
 
+const healthResponseObject = {
+   "statusCode": 200,
+   "status": "ok",
+   message: 'Success'
+};
+
 module.exports = {
    selectUserFieldsForLogin,
    selectUserFields,
@@ -46,5 +52,6 @@ module.exports = {
    selectLanguageFields,
    swaggerUiOptions,
    swaggerOptions,
-   forgottenPasswordRequestType
+   forgottenPasswordRequestType,
+   healthResponseObject
 };

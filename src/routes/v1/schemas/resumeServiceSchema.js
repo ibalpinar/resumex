@@ -29,12 +29,12 @@ const resumeServiceSchema = {
    deleteResumeById: {
       description: "This endpoint deletes a resume given its Id. Returns the deleted resume's information",
       summary: "Delete a resume",
-		tags: [path.RESUME],
+		tags: [path.RESUME]
    },
    deleteAllResumes: {
       description: "This endpoint deletes all resumes. It only returns a status message",
       summary: "Delete all resumes",
-		tags: [path.RESUME],
+		tags: [path.RESUME]
    }
 };
 

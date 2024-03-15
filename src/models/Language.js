@@ -25,5 +25,4 @@ const LanguageSchema = new Schema({
 });
 
 const Language = model('Language', LanguageSchema);
-
 module.exports = Language;
