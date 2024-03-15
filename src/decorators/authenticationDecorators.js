@@ -33,6 +33,6 @@ module.exports = {
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
-   },
+   }
 
 };

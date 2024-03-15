@@ -28,5 +28,4 @@ const InterestSchema = new Schema({
 });
 
 const Interest = model('Interest', InterestSchema);
-
 module.exports = Interest;

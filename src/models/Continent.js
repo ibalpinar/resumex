@@ -29,5 +29,4 @@ const ContinentSchema = new Schema({
 });
 
 const Continent = model('Continent', ContinentSchema);
-
 module.exports = Continent;

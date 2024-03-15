@@ -25,5 +25,4 @@ const ResumeThemeSchema = new Schema({
 });
 
 const ResumeTheme = model('ResumeTheme', ResumeThemeSchema);
-
 module.exports = ResumeTheme;
