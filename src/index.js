@@ -6,6 +6,7 @@ const { userRoutes } = require('./routes/v1/userRoutes');
 const { resumeRoutes } = require('./routes/v1/resumeRoutes');
 const { lookupRoutes } = require('./routes/v1/lookupRoutes');
 const { authenticationRoutes } = require('./routes/v1/authenticationRoutes');
+const { accountRoutes } = require('./routes/v1/accountRoutes');
 const { swaggerUiOptions, swaggerOptions, healthResponseObject } = require('./utils/constants');
 const { insertInitialData } = require('./utils/insertInitialData');
 const jwt = require('@fastify/jwt');
@@ -27,6 +28,7 @@ app.register(userRoutes, { prefix: "api/v1/user" });
 app.register(resumeRoutes, { prefix: "api/v1/resume" });
 app.register(lookupRoutes, { prefix: "api/v1/lookup" });
 app.register(authenticationRoutes, { prefix: "api/v1/authentication" });
+app.register(accountRoutes, { prefix: "api/v1/account" });
 app.get('/health', (req, res) => {res.send( healthResponseObject )});
 
 insertInitialData();

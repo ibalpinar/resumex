@@ -9,7 +9,8 @@ const path = {
 	USER: "User",
    RESUME: "Resume",
    LOOKUP: "Lookup",
-   AUTHENTICATION: "Authentication"
+   AUTHENTICATION: "Authentication",
+   ACCOUNT: "Account"
 };
 
 const getErrorProperties = (statusCode, successValue) => ({
