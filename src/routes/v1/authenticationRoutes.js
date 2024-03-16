@@ -1,13 +1,9 @@
 const authenticationController = require('../../handlers/authenticationController');
-const authenticationDecorator = require('../../decorators/authenticationDecorators');
+const authenticationDecorator = require('../../decorators/authenticationDecorator');
 
 const authenticationRoutes = async (app, opts) => {
    app.decorate("authenticate", async (request, reply) => {
       await authenticationDecorator.authenticate(request, reply);
-   });
-
-   app.decorate("verifyEmailPassword", async(request, reply) => {
-      await authenticationDecorator.verifyEmailPassword(request, reply);
    });
 
    app.route({
@@ -23,25 +19,6 @@ const authenticationRoutes = async (app, opts) => {
       handler: (request, reply) => {
          return request.user;
       }
-   });
-
-   app.route({
-      method: "POST",
-      url: "/login",
-      preHandler: [app.verifyEmailPassword],
-      handler: authenticationController.login
-   });
-
-   app.route({
-      method: "POST",
-      url: "/forgottenPassword",
-      handler: authenticationController.forgottenPassword
-   });
-
-   app.route({
-      method: "PATCH",
-      url: "/resetPassword",
-      handler: authenticationController.resetPassword
    });
 
 };
