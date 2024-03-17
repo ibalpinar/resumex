@@ -49,12 +49,12 @@ module.exports = {
             userTypeId: user.userTypeId
          };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
-         sendSuccessResponse(
+         return sendSuccessResponse(
             reply, { statusCode: 200, message: responseMessage.USER_LOGGED_IN_SUCCESSFULLY, data: { authToken: authToken } }
          );
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -76,20 +76,20 @@ module.exports = {
                }
 
                const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -138,7 +138,7 @@ module.exports = {
                return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
             }
          }else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
             );
          }

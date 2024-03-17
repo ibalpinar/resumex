@@ -15,12 +15,12 @@ module.exports = {
             _id:userId
          };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
-         sendSuccessResponse(
+         return sendSuccessResponse(
             reply, { statusCode: 200, message: responseMessage.USER_TOKEN_GENERATED_SUCCESSFULLY, data: { authToken: authToken } }
          );
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    }
 
