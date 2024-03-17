@@ -12,9 +12,9 @@ module.exports = {
       if(user.password == user.confirmPassword){
          try{
             user.password = await bcryptPassword(user.password);
+            user.userTypeId = new ObjectId(user.userTypeId);
             let newUser = await User.create(user);
             newUser = removePasswordKey(newUser);
-            user.userTypeId = new ObjectId(user.userTypeId);
             sendSuccessResponse(
                reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
             );
