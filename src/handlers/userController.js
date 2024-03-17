@@ -13,6 +13,7 @@ module.exports = {
          try{
             user.password = await bcryptPassword(user.password);
             user.userTypeId = new ObjectId(user.userTypeId);
+            user.countryId = new ObjectId(user.countryId);
             let newUser = await User.create(user);
             newUser = removePasswordKey(newUser);
             sendSuccessResponse(
