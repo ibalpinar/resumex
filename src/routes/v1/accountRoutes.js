@@ -9,6 +9,12 @@ const accountRoutes = async (app, opts) => {
 
    app.route({
       method: "POST",
+      url: "/register",
+      handler: accountController.register
+   });
+
+   app.route({
+      method: "POST",
       url: "/login",
       preHandler: [app.verifyEmailPassword],
       handler: accountController.login

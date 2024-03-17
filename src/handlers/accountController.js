@@ -1,6 +1,7 @@
 const User = require('../models/User');
+const error = require('../utils/errors');
 const ForgotPasswordRequest = require('../models/ForgotPasswordRequest');
-const { bcryptPassword } = require('../utils/passwordManager');
+const { removePasswordKey, bcryptPassword } = require('../utils/passwordManager');
 const constants = require('../utils/constants');
 const { sendErrorResponse, sendSuccessResponse, checkEmailRegex, responseMessage } = require("../utils/responseHelpers");
 const crypto = require("crypto");
@@ -8,6 +9,34 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
 module.exports = {
+   register: async (request, reply) => {
+      const registerUser = request.body;
+      if(checkEmailRegex.test(registerUser.email)){
+         if(registerUser.password == registerUser.confirmPassword){
+            try{
+               registerUser.password = await bcryptPassword(registerUser.password);
+               registerUser.userTypeId = new ObjectId(constants.userTypesIds.CANDIDATE);
+               let newRegisteredUser = await User.create(registerUser);
+               newRegisteredUser = removePasswordKey(newRegisteredUser);
+               return sendSuccessResponse(
+                  reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newRegisteredUser }
+               );
+            }catch(err){
+               console.error(err.message);
+               if(err.code == error.DUPLICATE_KEY_ERROR){
+                  return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+               }else{
+                  return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+               }
+            }
+         }else{
+            return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+         }
+      }else{
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+      }
+   },
+
    login: async (request, reply) => {
       const email = request.body.email;
       try{
