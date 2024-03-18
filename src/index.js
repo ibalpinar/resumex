@@ -19,6 +19,7 @@ try {
    mongoose.connect(mongoUrl, {});
 } catch (err) {
    console.error(err);
+   process.exit(-1);
 }
 
 app.register(jwt, {secret: process.env.JWT_SECRET});
