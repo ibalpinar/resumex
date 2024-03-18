@@ -10,18 +10,18 @@ module.exports = {
       try{
          const countries = await Country.find({}).select(constants.selectCountryFields);
          if(countries.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_COUNTRIES_LISTED_SUCCESSFULLY, data: countries }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_COUNTRIES_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -29,18 +29,18 @@ module.exports = {
       try{
          const interests = await Interest.find({}).select(constants.selectInterestFields);
          if(interests.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_INTERESTS_LISTED_SUCCESSFULLY, data: interests }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_INTERESTS_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -48,18 +48,18 @@ module.exports = {
       try{
          const skills = await Skill.find({}).select(constants.selectSkillFields);
          if(skills.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY, data: skills }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_SKILLS_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -67,18 +67,18 @@ module.exports = {
       try{
          const languages = await Language.find({}).select(constants.selectLanguageFields);
          if(languages.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY, data: languages }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_LANGUAGES_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 

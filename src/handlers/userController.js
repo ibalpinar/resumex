@@ -12,22 +12,23 @@ module.exports = {
       if(user.password == user.confirmPassword){
          try{
             user.password = await bcryptPassword(user.password);
+            user.userTypeId = new ObjectId(user.userTypeId);
+            user.countryId = new ObjectId(user.countryId);
             let newUser = await User.create(user);
             newUser = removePasswordKey(newUser);
-            user.userTypeId = new ObjectId(user.userTypeId);
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser }
             );
          }catch(err){
             console.error(err.message);
             if(err.code == error.DUPLICATE_KEY_ERROR){
-               sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+               return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
             }else{
-               sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+               return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
             }
          }
       }else{
-         sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+         return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
       }
    },
 
@@ -35,18 +36,18 @@ module.exports = {
       try{
          const users = await User.find({}).select(constants.selectUserFields);
          if(users.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY, data: users }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -57,20 +58,20 @@ module.exports = {
             const user = await User.findById(userId).select(constants.selectUserFields);
 
             if(user){
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_LISTED_SUCCESSFULLY, data: user }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -83,7 +84,7 @@ module.exports = {
             if(userToUpdate){
                if(userUpdates.password){
                   if(userUpdates.password != userUpdates.confirmPassword){
-                     sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+                     return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
                   }
                   userUpdates.password = await bcryptPassword(userUpdates.password);
                }else{
@@ -91,24 +92,24 @@ module.exports = {
                }
                await User.findByIdAndUpdate(userId, userUpdates);
                userToUpdate = removePasswordKey(userToUpdate);
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
          }
 
       }catch(err){
          console.error(err.message);
          if(err.code == error.DUPLICATE_KEY_ERROR){
-            sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+            return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
          }else{
-            sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+            return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
          }
       }
    },
@@ -120,21 +121,21 @@ module.exports = {
             const userToDelete = await User.findById(userId).select(constants.selectUserFields);
             if(userToDelete){
                await User.findByIdAndDelete(userId);
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.USER_DELETED_SUCCESSFULLY, data: userToDelete }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
          }
 
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -143,11 +144,11 @@ module.exports = {
          let numberOfUsers = await User.countDocuments({});
          if(numberOfUsers != 0){
             await User.deleteMany();
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY, data: null }
             );
          }else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] }
             );
       }

@@ -7,6 +7,12 @@ const selectInterestFields = { _id: 1, name: 1, iconName: 1 };
 const selectSkillFields = { _id: 1, name: 1 };
 const selectLanguageFields = { _id: 1, name: 1 };
 
+const userTypesIds = {
+   ADMIN: "65dd07373d7e0c75327ccf24",
+   CANDIDATE: "65dd07373d7e0c75327ccf25",
+   EDITOR: "65dd07373d7e0c75327ccf26"
+};
+
 const swaggerUiOptions = {
    routePrefix: "/apidocs",
    exposeRoute: true,
@@ -53,5 +59,6 @@ module.exports = {
    swaggerUiOptions,
    swaggerOptions,
    forgottenPasswordRequestType,
-   healthResponseObject
+   healthResponseObject,
+   userTypesIds
 };

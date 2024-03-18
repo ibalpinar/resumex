@@ -23,21 +23,21 @@ module.exports = {
                   let newResume = await Resume.create(resume);
                   user.resumeIds.push(newResume._id);
                   await User.findByIdAndUpdate(resume.userId, user);
-                  sendSuccessResponse(
+                  return sendSuccessResponse(
                      reply, { statusCode: 201, message: responseMessage.RESUME_CREATED_SUCCESSFULLY, data: newResume }
                   );
                }
                else{
-                  sendSuccessResponse(
+                  return sendSuccessResponse(
                      reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                   );
                }
             }else{
-               sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
+               return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
             }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -45,18 +45,18 @@ module.exports = {
       try{
          const resumes = await Resume.find({}).select(constants.selectResumeFields);
          if(resumes.length != 0){
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_RESUMES_LISTED_SUCCESSFULLY, data: resumes }
             );
          }
          else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -66,20 +66,20 @@ module.exports = {
          if(checkObjectIdRegex.test(resumeId)){
             const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
             if(resume){
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: resume }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -116,20 +116,20 @@ module.exports = {
                   }
                ]);
 
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: completeResume }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -142,21 +142,21 @@ module.exports = {
             if(resumeToUpdate){
                await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
                resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 200, message: responseMessage.RESUME_UPDATED_SUCCESSFULLY, data: resumeToUpdate }
                );
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
          }
 
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -176,26 +176,26 @@ module.exports = {
                   }
                   await User.findByIdAndUpdate(resumeToDelete.userId, user);
                   await Resume.findByIdAndDelete(resumeId);
-                  sendSuccessResponse(
+                  return sendSuccessResponse(
                      reply, { statusCode: 200, message: responseMessage.RESUME_DELETED_SUCCESSFULLY, data: resumeToDelete }
                   );
                }
                else{
-                  sendSuccessResponse(
+                  return sendSuccessResponse(
                      reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
                   );
                   }
             }else{
-               sendSuccessResponse(
+               return sendSuccessResponse(
                   reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} }
                );
             }
          }else{
-            sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
+            return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 
@@ -204,17 +204,17 @@ module.exports = {
          let numberOfResumes = await Resume.countDocuments({});
          if(numberOfResumes != 0){
             await Resume.deleteMany();
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 200, message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY, data: null }
             );
          }else{
-            sendSuccessResponse(
+            return sendSuccessResponse(
                reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] }
             );
          }
       }catch(err){
          console.error(err.message);
-         sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
 };
