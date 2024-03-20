@@ -57,33 +57,28 @@ module.exports = {
 
    forgottenPassword: async (request, reply) => {
       const email = request.body.email;
+      if(checkEmailRegex.test(email))
+      return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
       try{
-         if(checkEmailRegex.test(email)){
-            const user = await User.findOne({ email: email }).select(constants.selectUserFields);
-            if(user){
-               let expiredAt = new Date();
-               expiredAt.setHours(expiredAt.getHours() + 24);
+         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+         if(!user)
+            return sendSuccessResponse( reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} } );
 
-               const forgotPasswordRequestData = {
-                  userId: new ObjectId(user._id),
-                  email: user.email,
-                  requestCode: Math.floor(100000 + Math.random() * 900000),
-                  requestToken: crypto.randomBytes(32).toString("hex"),
-                  expiredAt: expiredAt
-               }
+         let expiredAt = new Date();
+         expiredAt.setHours(expiredAt.getHours() + 24);
 
-               const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
-               return sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
-               );
-            }else{
-               return sendSuccessResponse(
-                  reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
-               );
-            }
-         }else{
-            return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+         const forgotPasswordRequestData = {
+            userId: new ObjectId(user._id),
+            email: user.email,
+            requestCode: Math.floor(100000 + Math.random() * 900000),
+            requestToken: crypto.randomBytes(32).toString("hex"),
+            expiredAt: expiredAt
          }
+
+         const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
+         return sendSuccessResponse(
+            reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } }
+         );
       }catch(err){
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
