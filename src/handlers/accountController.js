@@ -88,54 +88,49 @@ module.exports = {
    resetPassword: async (request, reply) => {
       const passwordResetBody = request.body;
 
-      if(passwordResetBody.password == passwordResetBody.confirmPassword){
-         const user = await User.findOne({ email: passwordResetBody.email }).select(constants.selectUserFields);
-         if(user){
-            const now = new Date();
-
-            let forgotPasswordRequestFilter = {
-               userId: user._id,
-               email: user.email,
-               expiredAt: { $gte: now.toString() },
-               updatedAt: { $eq: null }
-            };
-            let forgotPasswordRequestUpdates = { updatedAt: now };
-            let userUpdates = { updatedAt: now };
-
-            userUpdates.password = await bcryptPassword(passwordResetBody.password);
-            let forgotPasswordRequest;
-
-            if(passwordResetBody.code && typeof passwordResetBody.code !== 'undefined'){
-               if(passwordResetBody.token)
-                  return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
-
-               forgotPasswordRequestFilter.requestCode = parseInt(passwordResetBody.code);
-               forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.CODE;
-               forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
-            }else if(passwordResetBody.token){
-               forgotPasswordRequestFilter.requestToken = passwordResetBody.token;
-               forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.TOKEN;
-               forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
-            }else{
-               return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_TOKEN);
-            }
-
-            if(forgotPasswordRequest){
-               await ForgotPasswordRequest.findByIdAndUpdate(forgotPasswordRequest._id, forgotPasswordRequestUpdates);
-               await User.findByIdAndUpdate(forgotPasswordRequest.userId, userUpdates);
-               return sendSuccessResponse(
-                  reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null }
-               );
-            }else{
-               return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
-            }
-         }else{
-            return sendSuccessResponse(
-               reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} }
-            );
-         }
-      }else{
+      if(passwordResetBody.password != passwordResetBody.confirmPassword)
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+
+      const user = await User.findOne({ email: passwordResetBody.email }).select(constants.selectUserFields);
+      if(!user)
+         return sendSuccessResponse( reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} } );
+
+      const now = new Date();
+      let forgotPasswordRequestFilter = {
+         userId: user._id,
+         email: user.email,
+         expiredAt: { $gte: now.toString() },
+         updatedAt: { $eq: null }
+      };
+
+      let forgotPasswordRequestUpdates = { updatedAt: now };
+      let userUpdates = { updatedAt: now };
+
+      userUpdates.password = await bcryptPassword(passwordResetBody.password);
+      let forgotPasswordRequest;
+
+      if(passwordResetBody.code && typeof passwordResetBody.code !== 'undefined'){
+         if(passwordResetBody.token)
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
+
+         forgotPasswordRequestFilter.requestCode = parseInt(passwordResetBody.code);
+         forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.CODE;
+         forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
+      }else if(passwordResetBody.token){
+         forgotPasswordRequestFilter.requestToken = passwordResetBody.token;
+         forgotPasswordRequestUpdates.requestType = constants.forgottenPasswordRequestType.TOKEN;
+         forgotPasswordRequest = await ForgotPasswordRequest.findOne(forgotPasswordRequestFilter);
+      }else{
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_TOKEN);
       }
+
+      if(!forgotPasswordRequest)
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_RESET_PASSWORD_REQUEST_CODE);
+
+      await ForgotPasswordRequest.findByIdAndUpdate(forgotPasswordRequest._id, forgotPasswordRequestUpdates);
+      await User.findByIdAndUpdate(forgotPasswordRequest.userId, userUpdates);
+      return sendSuccessResponse(
+         reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null }
+      );
    }
 };
