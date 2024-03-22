@@ -10,12 +10,11 @@ module.exports = {
       const password = request.body.password;
       try{
          const user = await User.findOne({ email: email }).select(constants.selectUserFieldsForLogin);
-         if(user){
-            if(!await comparePassword(password, user.password))
+         if(!user)
             return sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
-         }else{
+
+         if(!await comparePassword(password, user.password))
             return sendErrorResponse(reply, 401, responseMessage.EMAIL_OR_PASSWORD_IS_INCORRECT);
-         }
       }catch(err){
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
