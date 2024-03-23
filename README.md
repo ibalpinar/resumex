@@ -4,6 +4,9 @@ ResumeX is the new generation open-source resume platform that forces you to pre
 This will be a never-ending project and will constantly grow and develop with open-source contributors.
 
 ### Objectives until April 2024:
+ - Get the landing page of ResumeX live.
+
+### Objectives until May 2024:
  - Get the MVP of ResumeX live.
 
 ### Objectives until March 2025:
