@@ -11,7 +11,7 @@ const { swaggerUiOptions, swaggerOptions, healthResponseObject } = require('./ut
 const { insertInitialData } = require('./utils/insertInitialData');
 const jwt = require('@fastify/jwt');
 
-const app = fastify({ logger: true });
+const app = fastify({ logger: (process.env.DEVELOPMENT)?true:false });
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/resumex"
 const port = process.env.PORT || 3000;
 

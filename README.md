@@ -9,7 +9,7 @@ This will be a never-ending project and will constantly grow and develop with op
 ### Objectives until May 2024:
  - Get the MVP of ResumeX live.
 
-### Objectives until March 2025:
+### Objectives until May 2025:
 #### For open source repository:
  - 10 Watchers
  - 30 Forks
