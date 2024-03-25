@@ -1,30 +1,32 @@
-# ResumeX v0.0.1 (discovery phase)
+## ResumeX v0.0.1 (discovery phase)
 ResumeX is the new generation open-source resume platform that forces you to prepare a resume of only two pages to present yourself best.
 
 This project will be a never-ending project as long as donors fund it, and it will constantly grow and improve with open-source contributors.
 
-### Objectives until April 2024:
+## Objectives
+
+### Until April 2024:
  - Get the landing page of the ResumeX live. At this phase, only demand will be collected.
 
-### Objectives until May 2024:
+### Until May 2024:
  - Get the MVP of the ResumeX live. This will be the Alpha version of the project and will be spread by word of mouth in a closed system.
 
-### Objectives until June 2024:
+### Until June 2024:
 - Get the 3rd phase of the ResumeX live. This will be the Beta version of this project. Anyone who wants to open an account can use the entire system. Based on the feedback received, the system will continue to be improved.
 
-### Objectives until October 2024:
+### Until October 2024:
  - This is the 4th phase of the ResumeX, which will move from the beta version to the live version.
 
-### Objectives until October 2025:
-#### For open source repository:
- - 10 Watchers
- - 30 Forks
- - 150 Stars
-#### Project in production:
- - 5000 active users
- - 1000 active resumes
+### Until October 2025:
+ - For open source repository:
+   - 10 Watchers
+   - 30 Forks
+   - 150 Stars
+ - Project in live:
+   - 5000 active users
+   - 1000 active resumes
 
-### Installation
+## Installation
 
 First, I recommend that you install it with Homebrew. If you don't have Homebrew installed on your system, you can install Homebrew first.
 
