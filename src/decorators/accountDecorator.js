@@ -20,5 +20,4 @@ module.exports = {
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    }
-
 };

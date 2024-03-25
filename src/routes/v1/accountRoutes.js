@@ -31,7 +31,6 @@ const accountRoutes = async (app, opts) => {
       url: "/resetPassword",
       handler: accountController.resetPassword
    });
-
 };
 
 module.exports = {

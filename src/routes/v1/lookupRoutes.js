@@ -29,7 +29,6 @@ const lookupRoutes = async (app, opts) => {
       schema: lookupServiceSchema.fetchAllLanguages,
       handler: lookupController.getAllLanguages
    });
-
 };
 
 module.exports = {

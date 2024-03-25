@@ -20,7 +20,6 @@ const authenticationRoutes = async (app, opts) => {
          return request.user;
       }
    });
-
 };
 
 module.exports = {
