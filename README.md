@@ -4,12 +4,18 @@ ResumeX is the new generation open-source resume platform that forces you to pre
 This project will be a never-ending project as long as donors fund it, and it will constantly grow and improve with open-source contributors.
 
 ### Objectives until April 2024:
- - Get the landing page of ResumeX live.
+ - Get the landing page of the ResumeX live. At this phase, only demand will be collected.
 
 ### Objectives until May 2024:
- - Get the MVP of ResumeX live.
+ - Get the MVP of the ResumeX live. This will be the Alpha version of the project and will be spread by word of mouth in a closed system.
 
-### Objectives until May 2025:
+### Objectives until June 2024:
+- Get the 3rd phase of the ResumeX live. This will be the Beta version of this project. Anyone who wants to open an account can use the entire system. Based on the feedback received, the system will continue to be improved.
+
+### Objectives until October 2024:
+ - This is the 4th phase of the ResumeX, which will move from the beta version to the live version.
+
+### Objectives until October 2025:
 #### For open source repository:
  - 10 Watchers
  - 30 Forks
@@ -20,7 +26,7 @@ This project will be a never-ending project as long as donors fund it, and it wi
 
 ### Installation
 
-First, I would recommend that you install it with Homebrew. If you don't have Homebrew installed on your system, you can just install Homebrew first.
+First, I recommend that you install it with Homebrew. If you don't have Homebrew installed on your system, you can install Homebrew first.
 
 https://brew.sh/
 
