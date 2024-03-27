@@ -18,5 +18,8 @@
       "fastify": "^4.25.2",
       "mongoose": "^8.1.0",
       "validator": "^13.11.0"
+   },
+   "devDependencies": {
+      "eslint": "^8.57.0"
    }
 }
