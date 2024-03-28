@@ -12,7 +12,14 @@ module.exports = {
    },
    "rules": {
       "semi": "error",
-      'no-unused-vars': 'off'
+      'no-unused-vars': [
+         "error",
+         {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": false
+         }
+      ]
    },
    extends: ['eslint:recommended', 'plugin:prettier/recommended']
 };
