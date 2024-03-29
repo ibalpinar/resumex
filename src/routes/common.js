@@ -30,6 +30,7 @@ const getSuccessObject = (statusCode, successValue, description, props) => ({
 	description,
 	properties: { ...getCommonProperties(statusCode, successValue), ...props },
 });
+
 const responseErrors = {
 	400: {
 		description: "Bad Request",
@@ -55,13 +56,13 @@ const responseErrors = {
 		description: "Rate Limit. More than 100 requests per minute",
 		type: "object",
 		properties: getErrorProperties(429, false),
-	},
+	}
 };
 
 const jwtSecurity = [
 	{
 		JWTToken: [],
-	},
+	}
 ];
 
 module.exports = {

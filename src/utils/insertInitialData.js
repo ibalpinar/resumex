@@ -13,9 +13,9 @@ const insertInitialData = async()=>{
       { _id: "65dd07373d7e0c75327ccf26", name : "editor" }
    ];
    const userTypes = await UserType.find({});
-   if (userTypes === undefined || userTypes.length === 0) {
+
+   if (userTypes === undefined || userTypes.length === 0)
       UserType.create(predefinedUserTypes);
-   }
 
    const predefinedLanguages = [
       { _id: "65dd07373d7e0c75327ccf32", name : "English" },
@@ -30,9 +30,9 @@ const insertInitialData = async()=>{
       { _id: "65dd07373d7e0c75327ccf2f", name : "Spanish" }
    ];
    const languages = await Language.find({});
-   if (languages === undefined || languages.length === 0) {
+
+   if (languages === undefined || languages.length === 0)
       Language.create(predefinedLanguages);
-   }
 
    const predefinedSkills = [
       { _id: "65dd07373d7e0c75327ccf43", name : "Effective Hiring" },
@@ -65,9 +65,9 @@ const insertInitialData = async()=>{
       { _id: "65dd07373d7e0c75327ccf40", name : "Cloud Platforms (GCP, AWS, Azure)" }
    ];
    const skills = await Skill.find({});
-   if (skills === undefined || skills.length === 0) {
+
+   if (skills === undefined || skills.length === 0)
       Skill.create(predefinedSkills);
-   }
 
    const predefinedInterests = [
       { _id: "65dd07373d7e0c75327ccf7a", name : "Photography", iconName: "photography.png" },
@@ -79,9 +79,9 @@ const insertInitialData = async()=>{
       { _id: "65dd07373d7e0c75327ccf80", name : "Science & Technology", iconName: "science_technology.png" }
    ];
    const interests = await Interest.find({});
-   if (interests === undefined || interests.length === 0) {
+
+   if (interests === undefined || interests.length === 0)
       Interest.create(predefinedInterests);
-   }
 
    let predefinedUsers = [
       {
@@ -140,9 +140,9 @@ const insertInitialData = async()=>{
       { code: "SA", name: "South America" }
    ];
    const continents = await Continent.find({});
-   if (continents === undefined || continents.length === 0) {
+
+   if (continents === undefined || continents.length === 0)
       Continent.create(predefinedContinents);
-   }
 
    let predefinedCountries = [
       { _id: "65e0a6630426e221f00bc0d6", name: "Afghanistan, Islamic Republic of", codeA2: "AF", codeA3: "AFG", continentCode: "AS" },
@@ -397,9 +397,9 @@ const insertInitialData = async()=>{
       { _id: "65e0a6630426e221f00bc1c0", name: "Uganda, Republic of", codeA2: "UG", codeA3: "UGA", continentCode: "AF" }
    ];
    const countries = await Country.find({});
-   if (countries === undefined || countries.length === 0) {
+
+   if (countries === undefined || countries.length === 0)
       Country.create(predefinedCountries);
-   }
 
 };
 

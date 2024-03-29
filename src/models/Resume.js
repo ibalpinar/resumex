@@ -109,7 +109,6 @@ const ResumeSchema = new Schema({
       type : Boolean,
       default: false
    }
-
 });
 
 const Resume = model('Resume', ResumeSchema);
