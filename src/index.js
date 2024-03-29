@@ -31,10 +31,10 @@ app.register(lookupRoutes, { prefix: 'api/v1/lookup' });
 app.register(authenticationRoutes, { prefix: 'api/v1/authentication' });
 app.register(accountRoutes, { prefix: 'api/v1/account' });
 app.get('/health', (req, res) => {
-   res.send(healthResponseObject);
+      res.send(healthResponseObject);
 });
 
-insertInitialData();
+insertInitialData(); //TODO: Remove this line in production environment
 
 app.listen({ port: port }, (err, address) => {
    if (err) {
