@@ -1,7 +1,7 @@
 const lookupController = require('../../handlers/lookupController');
 const { lookupServiceSchema } = require('../../routes/v1/schemas/lookupServiceSchema');
 
-const lookupRoutes = async (app, opts) => {
+const lookupRoutes = async (app) => {
    app.route({
       method: 'GET',
       url: '/fetch/all/countries',

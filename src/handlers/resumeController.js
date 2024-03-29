@@ -82,7 +82,7 @@ module.exports = {
    getCompleteResumeById: async (request, reply) => {
       const resumeId = request.params.id;
       if (!checkObjectIdRegex.test(resumeId))
-         return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${_userId}`);
+         return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
          const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);

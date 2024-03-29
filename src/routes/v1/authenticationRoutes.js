@@ -1,7 +1,7 @@
 const authenticationController = require('../../handlers/authenticationController');
 const authenticationDecorator = require('../../decorators/authenticationDecorator');
 
-const authenticationRoutes = async (app, opts) => {
+const authenticationRoutes = async (app) => {
    app.decorate('authenticate', async (request, reply) => {
       await authenticationDecorator.authenticate(request, reply);
    });
@@ -16,7 +16,7 @@ const authenticationRoutes = async (app, opts) => {
       method: 'GET',
       url: '/validateToken',
       onRequest: [app.authenticate],
-      handler: (request, reply) => {
+      handler: (request) => {
          return request.user;
       },
    });

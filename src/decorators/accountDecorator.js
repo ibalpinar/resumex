@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const constants = require('../utils/constants');
-const error = require('../utils/errors');
 const { sendErrorResponse, responseMessage } = require('../utils/responseHelpers');
 const { comparePassword } = require('../utils/passwordManager');
 

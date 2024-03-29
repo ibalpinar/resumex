@@ -1,7 +1,7 @@
 const userController = require('../../handlers/userController');
 const { userServiceSchema } = require('../../routes/v1/schemas/userServiceSchema');
 
-const userRoutes = async (app, opts) => {
+const userRoutes = async (app) => {
    app.route({
       method: 'POST',
       url: '/create',

@@ -1,7 +1,7 @@
 const resumeController = require('../../handlers/resumeController');
 const { resumeServiceSchema } = require('../../routes/v1/schemas/resumeServiceSchema');
 
-const resumeRoutes = async (app, opts) => {
+const resumeRoutes = async (app) => {
    app.route({
       method: 'POST',
       url: '/create',

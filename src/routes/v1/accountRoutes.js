@@ -1,7 +1,7 @@
 const accountController = require('../../handlers/accountController');
 const accountDecorator = require('../../decorators/accountDecorator');
 
-const accountRoutes = async (app, opts) => {
+const accountRoutes = async (app) => {
    app.decorate('verifyEmailPassword', async (request, reply) => {
       await accountDecorator.verifyEmailPassword(request, reply);
    });

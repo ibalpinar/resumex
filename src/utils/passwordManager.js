@@ -1,15 +1,13 @@
 const bcrypt = require('bcrypt');
 
 const hashPassword = async function (password, saltRounds) {
-   let rhash;
    try {
       const salt = await bcrypt.genSalt(parseInt(saltRounds));
       const hash = await bcrypt.hash(password, salt);
-      rhash = hash;
+      return hash;
    } catch (err) {
       console.error(err.message);
-   } finally {
-      return rhash;
+      return -1;
    }
 };
 
@@ -21,15 +19,13 @@ const bcryptPassword = async function (password) {
 };
 
 const comparePassword = async function (password, hash) {
-   let isVerified = false;
    try {
-      isVerified = bcrypt.compare(password, hash).then((result) => {
+      return bcrypt.compare(password, hash).then((result) => {
          return result;
       });
    } catch (err) {
       console.error(err.message);
-   } finally {
-      return isVerified;
+      return -1;
    }
 };
 

@@ -3,12 +3,7 @@ const Interest = require('../models/Interest');
 const Skill = require('../models/Skill');
 const Language = require('../models/Language');
 const constants = require('../utils/constants');
-const {
-   sendErrorResponse,
-   sendSuccessResponse,
-   checkObjectIdRegex,
-   responseMessage,
-} = require('../utils/responseHelpers');
+const { sendErrorResponse, sendSuccessResponse, responseMessage } = require('../utils/responseHelpers');
 
 module.exports = {
    getAllCountries: async (request, reply) => {
