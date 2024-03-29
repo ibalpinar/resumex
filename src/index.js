@@ -30,6 +30,7 @@ app.register(resumeRoutes, { prefix: 'api/v1/resume' });
 app.register(lookupRoutes, { prefix: 'api/v1/lookup' });
 app.register(authenticationRoutes, { prefix: 'api/v1/authentication' });
 app.register(accountRoutes, { prefix: 'api/v1/account' });
+
 app.get('/health', (req, res) => {
       res.send(healthResponseObject);
 });
