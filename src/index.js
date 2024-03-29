@@ -32,7 +32,7 @@ app.register(authenticationRoutes, { prefix: 'api/v1/authentication' });
 app.register(accountRoutes, { prefix: 'api/v1/account' });
 
 app.get('/health', (req, res) => {
-      res.send(healthResponseObject);
+   res.send(healthResponseObject);
 });
 
 insertInitialData(); //TODO: Remove this line in production environment
