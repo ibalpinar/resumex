@@ -4,40 +4,40 @@ const { Schema, model } = mongoose;
 const CountrySchema = new Schema({
    name: {
       type: String,
-      required: [true, "Name is required field!"],
-      trim: true
+      required: [true, 'Name is required field!'],
+      trim: true,
    },
-   codeA2:{
+   codeA2: {
       type: String,
-      trim: true
+      trim: true,
    },
-   codeA3:{
+   codeA3: {
       type: String,
-      trim: true
+      trim: true,
    },
    flagFileName: {
       type: String,
-      trim: true
+      trim: true,
    },
-   continentCode:{
+   continentCode: {
       type: String,
-      trim: true
+      trim: true,
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
-   }
+      trim: true,
+   },
 });
 
 const Country = model('Country', CountrySchema);

@@ -4,32 +4,32 @@ const { Schema, model } = mongoose;
 const UserConfirmationSchema = new Schema({
    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
    },
    confirmationCode: {
       type: String,
-      trim: true
+      trim: true,
    },
    usedAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
-   }
+      trim: true,
+   },
 });
 
 const UserConfirmation = model('UserConfirmation', UserConfirmationSchema);

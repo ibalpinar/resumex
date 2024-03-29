@@ -4,27 +4,27 @@ const { Schema, model } = mongoose;
 const InterestSchema = new Schema({
    name: {
       type: String,
-      trim: true
+      trim: true,
    },
    iconName: {
       type: String,
-      trim: true
+      trim: true,
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
-   }
+      trim: true,
+   },
 });
 
 const Interest = model('Interest', InterestSchema);

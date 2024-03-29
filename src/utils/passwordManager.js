@@ -1,6 +1,6 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
-const hashPassword = async function(password, saltRounds) {
+const hashPassword = async function (password, saltRounds) {
    let rhash;
    try {
       const salt = await bcrypt.genSalt(parseInt(saltRounds));
@@ -13,20 +13,18 @@ const hashPassword = async function(password, saltRounds) {
    }
 };
 
-const bcryptPassword = async function(password) {
-   const bcrypted = await hashPassword(password, process.env.SALT_ROUNDS)
-      .then((rHash)=>{
-         return rHash;
+const bcryptPassword = async function (password) {
+   const bcrypted = await hashPassword(password, process.env.SALT_ROUNDS).then((rHash) => {
+      return rHash;
    });
    return bcrypted;
 };
 
-const comparePassword = async function(password, hash) {
+const comparePassword = async function (password, hash) {
    let isVerified = false;
    try {
-      isVerified = bcrypt.compare(password, hash)
-         .then(result=>{
-            return result;
+      isVerified = bcrypt.compare(password, hash).then((result) => {
+         return result;
       });
    } catch (err) {
       console.error(err.message);
@@ -35,7 +33,7 @@ const comparePassword = async function(password, hash) {
    }
 };
 
-const removePasswordKey = function(user){
+const removePasswordKey = function (user) {
    let tempUser = {
       _id: user._id,
       name: user.name,
@@ -48,7 +46,7 @@ const removePasswordKey = function(user){
       isEmailConfirmed: user.isEmailConfirmed,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
-      deletedAt: user.deletedAt
+      deletedAt: user.deletedAt,
    };
    return tempUser;
 };
@@ -56,5 +54,5 @@ const removePasswordKey = function(user){
 module.exports = {
    comparePassword,
    removePasswordKey,
-   bcryptPassword
+   bcryptPassword,
 };

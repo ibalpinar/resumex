@@ -3,34 +3,34 @@ const { lookupServiceSchema } = require('../../routes/v1/schemas/lookupServiceSc
 
 const lookupRoutes = async (app, opts) => {
    app.route({
-      method: "GET",
-      url: "/fetch/all/countries",
+      method: 'GET',
+      url: '/fetch/all/countries',
       schema: lookupServiceSchema.fetchAllCountries,
-      handler: lookupController.getAllCountries
+      handler: lookupController.getAllCountries,
    });
 
    app.route({
-      method: "GET",
-      url: "/fetch/all/interests",
+      method: 'GET',
+      url: '/fetch/all/interests',
       schema: lookupServiceSchema.fetchAllInterests,
-      handler: lookupController.getAllInterests
+      handler: lookupController.getAllInterests,
    });
 
    app.route({
-      method: "GET",
-      url: "/fetch/all/skills",
+      method: 'GET',
+      url: '/fetch/all/skills',
       schema: lookupServiceSchema.fetchAllSkills,
-      handler: lookupController.getAllSkills
+      handler: lookupController.getAllSkills,
    });
 
    app.route({
-      method: "GET",
-      url: "/fetch/all/languages",
+      method: 'GET',
+      url: '/fetch/all/languages',
       schema: lookupServiceSchema.fetchAllLanguages,
-      handler: lookupController.getAllLanguages
+      handler: lookupController.getAllLanguages,
    });
 };
 
 module.exports = {
-	lookupRoutes
+   lookupRoutes,
 };

@@ -4,28 +4,28 @@ const { Schema, model } = mongoose;
 const ContinentSchema = new Schema({
    name: {
       type: String,
-      required: [true, "Name is required field!"],
-      trim: true
+      required: [true, 'Name is required field!'],
+      trim: true,
    },
-   code:{
+   code: {
       type: String,
-      trim: true
+      trim: true,
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
-   }
+      trim: true,
+   },
 });
 
 const Continent = model('Continent', ContinentSchema);
