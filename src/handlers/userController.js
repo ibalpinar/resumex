@@ -119,7 +119,10 @@ module.exports = {
          if (!userToDelete)
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
 
-         await User.findByIdAndDelete(userId);
+         const now = new Date();
+         deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+         await User.findByIdAndUpdate(userId, deleteUserRequestUpdates);
+
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.USER_DELETED_SUCCESSFULLY,
