@@ -6,5 +6,5 @@ module.exports = {
    tabWidth: 3, // Use 2 spaces for indentation
    arrowParens: 'always', // Always include parentheses around arrow function parameters
    bracketSpacing: true, // Add spaces inside curly braces
-   useTabs: false
+   useTabs: false,
 };

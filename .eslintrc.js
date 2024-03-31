@@ -3,23 +3,23 @@ module.exports = {
    env: {
       node: true,
    },
-   "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module",
-      "ecmaFeatures": {
-          "jsx": true
-      }
+   parserOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      ecmaFeatures: {
+         jsx: true,
+      },
    },
-   "rules": {
-      "semi": "error",
+   rules: {
+      semi: 'error',
       'no-unused-vars': [
-         "error",
+         'error',
          {
-            "vars": "all",
-            "args": "after-used",
-            "ignoreRestSiblings": false
-         }
-      ]
+            vars: 'all',
+            args: 'after-used',
+            ignoreRestSiblings: false,
+         },
+      ],
    },
-   extends: ['eslint:recommended', 'plugin:prettier/recommended']
+   extends: ['eslint:recommended', 'plugin:prettier/recommended', 'prettier'],
 };

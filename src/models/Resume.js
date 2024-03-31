@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 const ResumeSchema = new Schema({
    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
    },
    header: {
       type: Object,
@@ -17,8 +17,8 @@ const ResumeSchema = new Schema({
          mobile: String,
          location: String,
          linkedin: String,
-         github: String
-      }
+         github: String,
+      },
    },
    workExperience: {
       type: Array,
@@ -33,18 +33,18 @@ const ResumeSchema = new Schema({
             accomplishments: {
                type: Array,
                items: {
-                  type: String
-               }
-            }
-         }
-      }
+                  type: String,
+               },
+            },
+         },
+      },
    },
    skills: {
       type: Array,
       items: {
          type: Schema.Types.ObjectId,
-         ref: 'Skill'
-      }
+         ref: 'Skill',
+      },
    },
    education: {
       type: Array,
@@ -56,9 +56,9 @@ const ResumeSchema = new Schema({
             location: String,
             start: String,
             end: String,
-            degree: String
-         }
-      }
+            degree: String,
+         },
+      },
    },
    languages: {
       type: Array,
@@ -67,11 +67,11 @@ const ResumeSchema = new Schema({
          properties: {
             languageId: {
                type: Schema.Types.ObjectId,
-               ref: 'Language'
+               ref: 'Language',
             },
-            level: String
-         }
-      }
+            level: String,
+         },
+      },
    },
    courses: {
       type: Array,
@@ -79,36 +79,36 @@ const ResumeSchema = new Schema({
          type: Object,
          properties: {
             name: String,
-            company: String
-         }
-      }
+            company: String,
+         },
+      },
    },
    interests: {
       type: Array,
       items: {
          type: Schema.Types.ObjectId,
-         ref: 'Interest'
-      }
+         ref: 'Interest',
+      },
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    isPublished: {
-      type : Boolean,
-      default: false
-   }
+      type: Boolean,
+      default: false,
+   },
 });
 
 const Resume = model('Resume', ResumeSchema);

@@ -20,74 +20,74 @@ const { Schema, model } = mongoose;
 // TODO: Telefon numarasi eklenecek
 
 const UserSchema = new Schema({
-    name: {
+   name: {
       type: String,
-      required: [true, "Name is required field!"],
-      maxlength: [30, "User name must not have more then 30 characters!"],
-      minlength: [2, "User name must have at least 2 characters!"],
-      trim: true
+      required: [true, 'Name is required field!'],
+      maxlength: [30, 'User name must not have more then 30 characters!'],
+      minlength: [2, 'User name must have at least 2 characters!'],
+      trim: true,
    },
-    lastName: {
+   lastName: {
       type: String,
-      required: [true, "User last name is required field!"],
-      maxlength: [70, "User last name must not have more then 70 characters!"],
-      minlength: [2, "User last name must have at least 2 characters!"],
-      trim: true
-    },
-    password: {
+      required: [true, 'User last name is required field!'],
+      maxlength: [70, 'User last name must not have more then 70 characters!'],
+      minlength: [2, 'User last name must have at least 2 characters!'],
+      trim: true,
+   },
+   password: {
       type: String,
-      required: [true, "Password is required field!"],
-      maxlength: [64, "Password must not have more then 64 characters!"],
-      minlength: [8, "Password must have at least 8 characters!"],
-      trim: true
-    },
-    email: {
+      required: [true, 'Password is required field!'],
+      maxlength: [64, 'Password must not have more then 64 characters!'],
+      minlength: [8, 'Password must have at least 8 characters!'],
+      trim: true,
+   },
+   email: {
       type: String,
-      required: [true, "E-mail is required field!"],
-      maxlength: [150, "E-mail must not have more then 150 characters!"],
-      minlength: [6, "E-mail must have at least 6 characters!"],
+      required: [true, 'E-mail is required field!'],
+      maxlength: [150, 'E-mail must not have more then 150 characters!'],
+      minlength: [6, 'E-mail must have at least 6 characters!'],
       validate: [validator.isEmail, 'Please enter a valid email.'],
       trim: true,
-      unique : true
+      unique: true,
    },
    userTypeId: {
       type: Schema.Types.ObjectId,
-      ref: 'UserType'
+      ref: 'UserType',
    },
    countryId: {
       type: Schema.Types.ObjectId,
-      ref: 'Country'
+      ref: 'Country',
    },
    resumeIds: {
       type: Array,
       items: {
          type: Schema.Types.ObjectId,
-         ref: 'Resume'
-      }
+         ref: 'Resume',
+      },
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    isSuspended: {
-      type : Boolean,
-      default: false
+      type: Boolean,
+      default: false,
    },
    isEmailConfirmed: {
-      type : Boolean,
-      default: false
-   }
+      type: Boolean,
+      default: false,
+   },
 });
 
 const User = model('User', UserSchema);

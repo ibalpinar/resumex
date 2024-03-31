@@ -8,6 +8,335 @@
 	},
 	"item": [
 		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create a User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Michael2\", \n    \"lastName\": \"Jordan2\", \n    \"email\": \"michael2@jordan.com\", \n    \"password\": \"123456\",\n    \"confirmPassword\": \"123456\",\n    \"userTypeId\": \"65dd07373d7e0c75327ccf24\",\n    \"countryId\": \"65e0a6630426e221f00bc1bc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/user/fetch",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"fetch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/get/65e3b7e2fc05c685f55593c2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"get",
+								"65e3b7e2fc05c685f55593c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ilker2\", \n    \"lastName\": \"Balpinardddddddddd2\", \n    \"email\": \"ilker2@balpinar.com\",\n    \"password\": \"bub1rsiFRredir1**\",\n    \"confirmPassword\": \"bub1rsiFRredir1**\",\n    \"userTypeId\": \"65dd07373d7e0c75327ccf24\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/update/65df9d764d31790bbfcec453",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update",
+								"65df9d764d31790bbfcec453"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Resume By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/delete/65d3f89f9fb89adbe112628f",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"delete",
+								"65d3f89f9fb89adbe112628f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/delete/all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"delete",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"michael2@jordan2.com\", \n    \"password\": \"2222\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/account/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"phil@jackson.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/account/forgottenPassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"forgottenPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"phil@jackson.com\",\n    \"token\": \"817ab62209857ccb8c91c265e1be7d78dc76efb6295c4f6e5ddcf4f398fff28b\",\n    \"password\": \"2222\",\n    \"confirmPassword\": \"2222\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/account/resetPassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register a User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Phil2\", \n    \"lastName\": \"Jackson2\", \n    \"email\": \"phils2@jacksons.com\", \n    \"password\": \"123456s\",\n    \"confirmPassword\": \"123456s\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/account/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Authentication",
 			"item": [
 				{
@@ -54,103 +383,6 @@
 								"v1",
 								"authentication",
 								"validateToken"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Lookup",
-			"item": [
-				{
-					"name": "Fetch All Countries",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/v1/lookup/fetch/all/countries",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"lookup",
-								"fetch",
-								"all",
-								"countries"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch All Interests",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/v1/lookup/fetch/all/interests",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"lookup",
-								"fetch",
-								"all",
-								"interests"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch All Skills",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/v1/lookup/fetch/all/skills",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"lookup",
-								"fetch",
-								"all",
-								"skills"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch All Languages",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:3000/api/v1/lookup/fetch/all/languages",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"lookup",
-								"fetch",
-								"all",
-								"languages"
 							]
 						}
 					},
@@ -377,45 +609,15 @@
 			]
 		},
 		{
-			"name": "User",
+			"name": "Lookup",
 			"item": [
 				{
-					"name": "Create a User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Phil\", \n    \"lastName\": \"Jackson\", \n    \"email\": \"phil@jackson.com\", \n    \"password\": \"123456\",\n    \"confirmPassword\": \"123456\",\n    \"userTypeId\": \"65dd07373d7e0c75327ccf24\",\n    \"countryId\": \"65e0a6630426e221f00bc1bc\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/v1/user/create",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch All Users",
+					"name": "Fetch All Countries",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/api/v1/user/fetch",
+							"raw": "localhost:3000/api/v1/lookup/fetch/all/countries",
 							"host": [
 								"localhost"
 							],
@@ -423,32 +625,22 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"fetch"
+								"lookup",
+								"fetch",
+								"all",
+								"countries"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get User by Id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Fetch All Interests",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:3000/api/v1/user/get/65dd07373d7e0c75327ccf89",
+							"raw": "localhost:3000/api/v1/lookup/fetch/all/interests",
 							"host": [
 								"localhost"
 							],
@@ -456,30 +648,22 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"get",
-								"65dd07373d7e0c75327ccf89"
+								"lookup",
+								"fetch",
+								"all",
+								"interests"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update User By Id",
+					"name": "Fetch All Skills",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Ilker2\", \n    \"lastName\": \"Balpinardddddddddd2\", \n    \"email\": \"ilker2@balpinar.com\",\n    \"password\": \"bub1rsiFRredir1**\",\n    \"confirmPassword\": \"bub1rsiFRredir1**\",\n    \"userTypeId\": \"65dd07373d7e0c75327ccf24\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:3000/api/v1/user/update/65df9d764d31790bbfcec453",
+							"raw": "localhost:3000/api/v1/lookup/fetch/all/skills",
 							"host": [
 								"localhost"
 							],
@@ -487,30 +671,22 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"update",
-								"65df9d764d31790bbfcec453"
+								"lookup",
+								"fetch",
+								"all",
+								"skills"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Resume By Id",
+					"name": "Fetch All Languages",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:3000/api/v1/user/delete/65d3f89f9fb89adbe112628f",
+							"raw": "localhost:3000/api/v1/lookup/fetch/all/languages",
 							"host": [
 								"localhost"
 							],
@@ -518,156 +694,10 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
-								"delete",
-								"65d3f89f9fb89adbe112628f"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete All Users",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/v1/user/delete/all",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"delete",
-								"all"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Account",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\", \n    \"password\": \"2222\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/v1/account/login",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"account",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Forgot Password",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/v1/account/forgottenPassword",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"account",
-								"forgottenPassword"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Reset Password",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNDM2NzI4OSIsImlhdCI6MTcwOTQxOTM1OX0.eyMqCMTRGjFCxpwu3ArWyZJjUwBZxkPOqbLy-Ha0RkQs",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\",\n    \"code\": 155107,\n    \"password\": \"2222\",\n    \"confirmPassword\": \"2222\"\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:3000/api/v1/account/resetPassword",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"v1",
-								"account",
-								"resetPassword"
+								"lookup",
+								"fetch",
+								"all",
+								"languages"
 							]
 						}
 					},

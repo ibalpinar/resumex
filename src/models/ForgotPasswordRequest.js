@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 const ForgotPasswordRequestSchema = new Schema({
    userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
    },
    email: {
       type: String,
@@ -13,36 +13,36 @@ const ForgotPasswordRequestSchema = new Schema({
    requestCode: {
       type: Number,
       min: 100000,
-      max: 999999
+      max: 999999,
    },
    requestToken: {
       type: String,
-      trim: true
+      trim: true,
    },
    requestType: {
       type: String,
-      trim: true
+      trim: true,
    },
    expiredAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    createdAt: {
-      type : Date,
+      type: Date,
       default: Date.now,
-      trim: true
+      trim: true,
    },
    updatedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
+      trim: true,
    },
    deletedAt: {
-      type : Date,
+      type: Date,
       default: null,
-      trim: true
-   }
+      trim: true,
+   },
 });
 
 const ForgotPasswordRequest = model('ForgotPasswordRequest', ForgotPasswordRequestSchema);
