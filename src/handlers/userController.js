@@ -111,7 +111,7 @@ module.exports = {
 
    deleteUserById: async (request, reply) => {
       const userId = request.params.id;
-      if (checkObjectIdRegex.test(userId))
+      if (!checkObjectIdRegex.test(userId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
