@@ -115,11 +115,7 @@ module.exports = {
                },
             },
          ]);
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.RESUME_LISTED_SUCCESSFULLY,
-            data: completeResume,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.RESUME_LISTED_SUCCESSFULLY, data: completeResume });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -138,11 +134,7 @@ module.exports = {
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} });
          await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
          resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.RESUME_UPDATED_SUCCESSFULLY,
-            data: resumeToUpdate,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.RESUME_UPDATED_SUCCESSFULLY, data: resumeToUpdate });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -168,11 +160,7 @@ module.exports = {
 
          await User.findByIdAndUpdate(resumeToDelete.userId, user);
          await Resume.findByIdAndDelete(resumeId);
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.RESUME_DELETED_SUCCESSFULLY,
-            data: resumeToDelete,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.RESUME_DELETED_SUCCESSFULLY, data: resumeToDelete });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -186,11 +174,7 @@ module.exports = {
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] });
 
          await Resume.deleteMany();
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY,
-            data: null,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY, data: null });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
