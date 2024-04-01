@@ -10,17 +10,9 @@ module.exports = {
       try {
          const countries = await Country.find({}).select(constants.selectCountryFields);
          if (countries.length == 0)
-            return sendSuccessResponse(reply, {
-               statusCode: 204,
-               message: responseMessage.NO_COUNTRIES_FOUND,
-               data: [],
-            });
+            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_COUNTRIES_FOUND, data: [] });
 
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.ALL_COUNTRIES_LISTED_SUCCESSFULLY,
-            data: countries,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_COUNTRIES_LISTED_SUCCESSFULLY, data: countries });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -31,17 +23,9 @@ module.exports = {
       try {
          const interests = await Interest.find({}).select(constants.selectInterestFields);
          if (interests.length == 0)
-            return sendSuccessResponse(reply, {
-               statusCode: 204,
-               message: responseMessage.NO_INTERESTS_FOUND,
-               data: [],
-            });
+            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_INTERESTS_FOUND, data: [] });
 
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.ALL_INTERESTS_LISTED_SUCCESSFULLY,
-            data: interests,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_INTERESTS_LISTED_SUCCESSFULLY, data: interests });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -54,11 +38,7 @@ module.exports = {
          if (skills.length == 0)
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_SKILLS_FOUND, data: [] });
 
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY,
-            data: skills,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY, data: skills });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -69,17 +49,9 @@ module.exports = {
       try {
          const languages = await Language.find({}).select(constants.selectLanguageFields);
          if (languages.length == 0)
-            return sendSuccessResponse(reply, {
-               statusCode: 204,
-               message: responseMessage.NO_LANGUAGES_FOUND,
-               data: [],
-            });
+            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_LANGUAGES_FOUND, data: [] });
 
-         return sendSuccessResponse(reply, {
-            statusCode: 200,
-            message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY,
-            data: languages,
-         });
+         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY, data: languages });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
