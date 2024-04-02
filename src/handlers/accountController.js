@@ -27,7 +27,11 @@ module.exports = {
          registerUser.userTypeId = new ObjectId(constants.userTypesIds.CANDIDATE);
          let newRegisteredUser = await User.create(registerUser);
          newRegisteredUser = removePasswordKey(newRegisteredUser);
-         return sendSuccessResponse(reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newRegisteredUser });
+         return sendSuccessResponse(reply, {
+            statusCode: 201,
+            message: responseMessage.USER_CREATED_SUCCESSFULLY,
+            data: newRegisteredUser,
+         });
       } catch (err) {
          console.error(err.message);
          if (err.code == error.DUPLICATE_KEY_ERROR)
@@ -49,7 +53,11 @@ module.exports = {
             userTypeId: user.userTypeId,
          };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.USER_LOGGED_IN_SUCCESSFULLY, data: { authToken: authToken } });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.USER_LOGGED_IN_SUCCESSFULLY,
+            data: { authToken: authToken },
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -76,7 +84,11 @@ module.exports = {
          };
 
          const forgotPasswordRequest = await ForgotPasswordRequest.create(forgotPasswordRequestData);
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT, data: { forgotPasswordRequest } });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.FORGOTTEN_PASSWORD_REQUEST_SUCCESSFULLY_SENT,
+            data: { forgotPasswordRequest },
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -127,6 +139,10 @@ module.exports = {
 
       await ForgotPasswordRequest.findByIdAndUpdate(forgotPasswordRequest._id, forgotPasswordRequestUpdates);
       await User.findByIdAndUpdate(forgotPasswordRequest.userId, userUpdates);
-      return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY, data: null });
+      return sendSuccessResponse(reply, {
+         statusCode: 200,
+         message: responseMessage.PASSWORD_CHANGED_SUCCESSFULLY,
+         data: null,
+      });
    },
 };

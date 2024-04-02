@@ -23,7 +23,11 @@ module.exports = {
          user.countryId = new ObjectId(user.countryId);
          let newUser = await User.create(user);
          newUser = removePasswordKey(newUser);
-         return sendSuccessResponse(reply, { statusCode: 201, message: responseMessage.USER_CREATED_SUCCESSFULLY, data: newUser });
+         return sendSuccessResponse(reply, {
+            statusCode: 201,
+            message: responseMessage.USER_CREATED_SUCCESSFULLY,
+            data: newUser,
+         });
       } catch (err) {
          console.error(err.message);
          if (err.code == error.DUPLICATE_KEY_ERROR)
@@ -37,7 +41,11 @@ module.exports = {
       try {
          const users = await User.find({}).select(constants.selectUserFields);
          if (users.length != 0)
-            return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY, data: users });
+            return sendSuccessResponse(reply, {
+               statusCode: 200,
+               message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
+               data: users,
+            });
 
          return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
       } catch (err) {
@@ -56,7 +64,11 @@ module.exports = {
          if (!user)
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
 
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.USER_LISTED_SUCCESSFULLY, data: user });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.USER_LISTED_SUCCESSFULLY,
+            data: user,
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -83,7 +95,11 @@ module.exports = {
          }
          await User.findByIdAndUpdate(userId, userUpdates);
          userToUpdate = removePasswordKey(userToUpdate);
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.USER_UPDATED_SUCCESSFULLY, data: userToUpdate });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.USER_UPDATED_SUCCESSFULLY,
+            data: userToUpdate,
+         });
       } catch (err) {
          console.error(err.message);
          if (err.code == error.DUPLICATE_KEY_ERROR)
@@ -104,10 +120,14 @@ module.exports = {
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
 
          const now = new Date();
-         deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
          await User.findByIdAndUpdate(userId, deleteUserRequestUpdates);
 
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.USER_DELETED_SUCCESSFULLY, data: userToDelete });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.USER_DELETED_SUCCESSFULLY,
+            data: userToDelete,
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -121,7 +141,11 @@ module.exports = {
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
 
          await User.deleteMany();
-         return sendSuccessResponse(reply, { statusCode: 200, message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY, data: null });
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
+            data: null,
+         });
       } catch (err) {
          console.error(err.message);
          sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
