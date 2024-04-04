@@ -115,9 +115,10 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         const userToDelete = await User.findOne({ _id: userId, deletedAt: { $exists: true, $ne: null } }).select(
+         const userToDelete = await User.findOne({ _id: userId, deletedAt: { $exists: true, $eq: null } }).select(
             constants.selectUserFields,
          );
+
          if (!userToDelete)
             return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
 
