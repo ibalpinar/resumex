@@ -66,7 +66,10 @@ module.exports = {
 
    forgottenPassword: async (request, reply) => {
       const email = request.body.email;
-      if (checkEmailRegex.test(email)) return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+      if (!checkEmailRegex.test(email)) {
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+      }
+
       try {
          const user = await User.findOne({ email: email }).select(constants.selectUserFields);
          if (!user)
