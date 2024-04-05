@@ -18,8 +18,9 @@ module.exports = {
 
       try {
          let user = await User.findById(userId).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          const authData = { _id: userId };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });
