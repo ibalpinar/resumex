@@ -66,7 +66,7 @@ const userServiceSchema = {
                success: { type: 'boolean' },
             },
          },
-         204: {
+         404: {
             description: responseMessage.NO_USERS_FOUND,
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
@@ -111,7 +111,7 @@ const userServiceSchema = {
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
          },
-         204: {
+         404: {
             description: responseMessage.NO_USER_FOUND,
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
@@ -168,7 +168,7 @@ const userServiceSchema = {
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
          },
-         204: {
+         404: {
             description: responseMessage.NO_USER_FOUND,
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
@@ -213,7 +213,7 @@ const userServiceSchema = {
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
          },
-         204: {
+         404: {
             description: responseMessage.NO_USER_FOUND,
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
@@ -240,7 +240,7 @@ const userServiceSchema = {
                success: { type: 'boolean' },
             },
          },
-         204: {
+         404: {
             description: responseMessage.NO_USER_FOUND,
             type: 'object',
             properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
