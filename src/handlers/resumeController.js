@@ -25,8 +25,9 @@ module.exports = {
 
       try {
          let user = await User.findById(resume.userId).select(constants.selectUserFieldsOnlyResume);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          let newResume = await Resume.create(resume);
          user.resumeIds.push(newResume._id);
@@ -45,8 +46,9 @@ module.exports = {
    getAllResumes: async (request, reply) => {
       try {
          const resumes = await Resume.find({}).select(constants.selectResumeFields);
-         if (resumes.length == 0)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] });
+         if (resumes.length == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+         }
 
          return sendSuccessResponse(reply, {
             statusCode: 200,
@@ -66,8 +68,10 @@ module.exports = {
 
       try {
          const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
-         if (!resume)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} });
+         if (!resume) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
+
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.RESUME_LISTED_SUCCESSFULLY,
@@ -86,8 +90,9 @@ module.exports = {
 
       try {
          const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
-         if (!resume)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} });
+         if (!resume) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
 
          let completeResume = await Resume.aggregate([
             {
@@ -134,8 +139,10 @@ module.exports = {
 
       try {
          let resumeToUpdate = await Resume.findById(resumeId);
-         if (!resumeToUpdate)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} });
+         if (!resumeToUpdate) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
+
          await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
          resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
          return sendSuccessResponse(reply, {
@@ -156,12 +163,14 @@ module.exports = {
 
       try {
          const resumeToDelete = await Resume.findById(resumeId).select(constants.selectResumeFields);
-         if (!resumeToDelete)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUME_FOUND, data: {} });
+         if (!resumeToDelete) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
 
          let user = await User.findById(resumeToDelete.userId).select(constants.selectUserFieldsOnlyResume);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          const indexOfResumeId = user.resumeIds.indexOf(resumeId);
          if (indexOfResumeId > -1) user.resumeIds.splice(indexOfResumeId, 1);
@@ -182,8 +191,9 @@ module.exports = {
    deleteAllResumes: async (request, reply) => {
       try {
          let numberOfResumes = await Resume.countDocuments({});
-         if (numberOfResumes == 0)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_RESUMES_FOUND, data: [] });
+         if (numberOfResumes == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+         }
 
          await Resume.deleteMany();
          return sendSuccessResponse(reply, {
