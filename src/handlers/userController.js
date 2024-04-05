@@ -47,7 +47,7 @@ module.exports = {
                data: users,
             });
 
-         return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
+         return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -61,8 +61,9 @@ module.exports = {
 
       try {
          const user = await User.findById(userId).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          return sendSuccessResponse(reply, {
             statusCode: 200,
@@ -83,16 +84,19 @@ module.exports = {
 
       try {
          let userToUpdate = await User.findById(userId);
-         if (!userToUpdate)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!userToUpdate) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          if (userUpdates.password) {
-            if (userUpdates.password != userUpdates.confirmPassword)
+            if (userUpdates.password != userUpdates.confirmPassword) {
                return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+            }
             userUpdates.password = await bcryptPassword(userUpdates.password);
          } else {
             userUpdates.password = userToUpdate.password;
          }
+
          await User.findByIdAndUpdate(userId, userUpdates);
          userToUpdate = removePasswordKey(userToUpdate);
          return sendSuccessResponse(reply, {
@@ -119,8 +123,9 @@ module.exports = {
             constants.selectUserFields,
          );
 
-         if (!userToDelete)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!userToDelete) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          const now = new Date();
          let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
@@ -140,8 +145,9 @@ module.exports = {
    deleteAllUsers: async (request, reply) => {
       try {
          let numberOfUsers = await User.countDocuments({});
-         if (numberOfUsers == 0)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
+         if (numberOfUsers == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         }
 
          await User.deleteMany();
          return sendSuccessResponse(reply, {
