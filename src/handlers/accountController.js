@@ -72,8 +72,9 @@ module.exports = {
 
       try {
          const user = await User.findOne({ email: email }).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          let expiredAt = new Date();
          expiredAt.setHours(expiredAt.getHours() + 24);
@@ -105,8 +106,9 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
 
       const user = await User.findOne({ email: passwordResetBody.email }).select(constants.selectUserFields);
-      if (!user)
-         return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+      if (!user) {
+         return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+      }
 
       const now = new Date();
       let forgotPasswordRequestFilter = {
