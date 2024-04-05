@@ -115,7 +115,7 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         const userToDelete = await User.findOne({ _id: userId, deletedAt: { $exists: true, $eq: null } }).select(
+         const userToDelete = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(
             constants.selectUserFields,
          );
 
