@@ -127,7 +127,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Resume By Id",
+					"name": "Delete User By Id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -141,7 +141,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/api/v1/user/delete/65d3f89f9fb89adbe112628f",
+							"raw": "localhost:3000/api/v1/user/delete/65dd07373d7e0c75327ccf89",
 							"host": [
 								"localhost"
 							],
@@ -151,7 +151,7 @@
 								"v1",
 								"user",
 								"delete",
-								"65d3f89f9fb89adbe112628f"
+								"65dd07373d7e0c75327ccf89"
 							]
 						}
 					},
@@ -231,7 +231,7 @@
 					"response": []
 				},
 				{
-					"name": "Forgot Password",
+					"name": "Forgotten Password",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -244,7 +244,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"phil@jackson.com\"\n}",
+							"raw": "{\n    \"email\": \"phils32@jacksons.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
