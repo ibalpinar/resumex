@@ -115,7 +115,9 @@ module.exports = {
       if (passwordResetBody.password != passwordResetBody.confirmPassword)
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
 
-      const user = await User.findOne({ email: passwordResetBody.email }).select(constants.selectUserFields);
+      const user = await User.findOne({ email: passwordResetBody.email, deletedAt: { $eq: null } }).select(
+         constants.selectUserFields,
+      );
       if (!user) {
          return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
       }
