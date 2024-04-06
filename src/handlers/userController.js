@@ -83,7 +83,8 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         let userToUpdate = await User.findById(userId);
+         let userToUpdate = await User.findOne({ _id: userId, deletedAt: { $eq: null } });
+
          if (!userToUpdate) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
          }
