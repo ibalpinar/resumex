@@ -48,7 +48,6 @@ const UserSchema = new Schema({
       minlength: [6, 'E-mail must have at least 6 characters!'],
       validate: [validator.isEmail, 'Please enter a valid email.'],
       trim: true,
-      unique: true,
    },
    userTypeId: {
       type: Schema.Types.ObjectId,
