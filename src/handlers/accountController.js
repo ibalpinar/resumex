@@ -16,13 +16,19 @@ const { ObjectId } = mongoose.Types;
 module.exports = {
    register: async (request, reply) => {
       const registerUser = request.body;
-      if (!checkEmailRegex.test(registerUser.email))
-         return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
-
-      if (registerUser.password != registerUser.confirmPassword)
-         return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
 
       try {
+         if (!checkEmailRegex.test(registerUser.email))
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+
+         if (registerUser.password != registerUser.confirmPassword)
+            return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+
+         const userExist = await User.findOne({ email: registerUser.email, deletedAt: { $eq: null } });
+         if (userExist) {
+            return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }
+
          registerUser.password = await bcryptPassword(registerUser.password);
          registerUser.userTypeId = new ObjectId(constants.userTypesIds.CANDIDATE);
          let newRegisteredUser = await User.create(registerUser);
