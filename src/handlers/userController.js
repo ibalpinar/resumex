@@ -151,12 +151,15 @@ module.exports = {
 
    deleteAllUsers: async (request, reply) => {
       try {
-         let numberOfUsers = await User.countDocuments({});
+         let numberOfUsers = await User.countDocuments({ deletedAt: { $eq: null } });
          if (numberOfUsers == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
          }
 
-         await User.deleteMany();
+         const now = new Date();
+         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+
+         await User.updateMany({ deletedAt: { $eq: null } }, deleteUserRequestUpdates);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
