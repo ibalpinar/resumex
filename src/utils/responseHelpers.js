@@ -3,7 +3,7 @@ const responseMessage = {
    AUTHORIZATION_TOKEN_INVALID: 'Authorization token invalid',
    BAD_REQUEST: 'Bad Request',
    CONTENT_NOT_FOUND: 'Content not Found',
-   RESOURCE_NOT_FOUND: 'Rsource not Found',
+   RESOURCE_NOT_FOUND: 'Resource not Found',
    FORBIDDEN: 'Forbidden',
    TOO_MANY_REQUEST: 'Too many requests',
    CAST_OBJECTID_ERROR: 'Cast to ObjectId failed for value',
