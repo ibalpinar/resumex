@@ -13,7 +13,7 @@ module.exports = {
    generateToken: async (request, reply) => {
       let userId = request.params.id;
       userId = new ObjectId(userId);
-      if (checkObjectIdRegex.test(userId))
+      if (!checkObjectIdRegex.test(userId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
