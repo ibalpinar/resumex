@@ -16,6 +16,11 @@ module.exports = {
       if (!checkObjectIdRegex.test(userId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
+      const userExist = await User.findOne({ _id: userId, deletedAt: { $eq: null } });
+      if (!userExist) {
+         return sendErrorResponse(reply, 400, responseMessage.NO_USER_FOUND);
+      }
+
       try {
          let user = await User.findById(userId).select(constants.selectUserFields);
          if (!user) {
