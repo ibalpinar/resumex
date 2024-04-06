@@ -14,10 +14,16 @@ const { ObjectId } = mongoose.Types;
 module.exports = {
    createUser: async (request, reply) => {
       const user = request.body;
-      if (user.password != user.confirmPassword)
+      if (user.password != user.confirmPassword) {
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+      }
 
       try {
+         const userExist = await User.findOne({ email: user.email, deletedAt: { $eq: null } });
+         if (userExist) {
+            return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }
+
          user.password = await bcryptPassword(user.password);
          user.userTypeId = new ObjectId(user.userTypeId);
          user.countryId = new ObjectId(user.countryId);
