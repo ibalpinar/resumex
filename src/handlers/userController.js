@@ -39,7 +39,7 @@ module.exports = {
 
    fetchAllUsers: async (request, reply) => {
       try {
-         const users = await User.find({}).select(constants.selectUserFields);
+         const users = await User.find({ deletedAt: { $eq: null } }).select(constants.selectUserFields);
          if (users.length != 0)
             return sendSuccessResponse(reply, {
                statusCode: 200,
