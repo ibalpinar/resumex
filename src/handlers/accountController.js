@@ -81,7 +81,7 @@ module.exports = {
       }
 
       try {
-         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+         const user = await User.findOne({ email: email, deletedAt: { $eq: null } }).select(constants.selectUserFields);
          if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
          }
