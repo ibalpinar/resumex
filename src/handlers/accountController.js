@@ -50,7 +50,11 @@ module.exports = {
    login: async (request, reply) => {
       const email = request.body.email;
       try {
-         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+         const user = await User.findOne({ email: email, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         if (!user) {
+            return sendErrorResponse(reply, 400, responseMessage.NO_USER_FOUND);
+         }
+
          const authData = {
             _id: user._id,
             name: user.name,
