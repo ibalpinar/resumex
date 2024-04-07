@@ -17,7 +17,7 @@ const { Schema, model } = mongoose;
  * ##########################################################################
  */
 
-// TODO: Telefon numarasi eklenecek
+// TODO: Phone number to be added
 
 const UserSchema = new Schema({
    name: {
