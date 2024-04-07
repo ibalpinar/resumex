@@ -20,7 +20,7 @@ module.exports = {
          return { languageId: new ObjectId(language.languageId), level: language.level };
       });
 
-      if (checkObjectIdRegex.test(resume.userId))
+      if (!checkObjectIdRegex.test(resume.userId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resume.userId}`);
 
       try {
