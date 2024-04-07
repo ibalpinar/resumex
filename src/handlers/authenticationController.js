@@ -18,7 +18,7 @@ module.exports = {
 
       const userExist = await User.findOne({ _id: userId, deletedAt: { $eq: null } });
       if (!userExist) {
-         return sendErrorResponse(reply, 400, responseMessage.NO_USER_FOUND);
+         return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
       }
 
       try {
