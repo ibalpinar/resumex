@@ -17,7 +17,7 @@ const { Schema, model } = mongoose;
  * ##########################################################################
  */
 
-// TODO: Telefon numarasi eklenecek
+// TODO: Phone number to be added
 
 const UserSchema = new Schema({
    name: {
@@ -48,7 +48,6 @@ const UserSchema = new Schema({
       minlength: [6, 'E-mail must have at least 6 characters!'],
       validate: [validator.isEmail, 'Please enter a valid email.'],
       trim: true,
-      unique: true,
    },
    userTypeId: {
       type: Schema.Types.ObjectId,
@@ -58,13 +57,12 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Country',
    },
-   resumeIds: {
-      type: Array,
-      items: {
+   resumes: [
+      {
          type: Schema.Types.ObjectId,
          ref: 'Resume',
       },
-   },
+   ],
    createdAt: {
       type: Date,
       default: Date.now,

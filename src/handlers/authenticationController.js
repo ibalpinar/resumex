@@ -13,13 +13,19 @@ module.exports = {
    generateToken: async (request, reply) => {
       let userId = request.params.id;
       userId = new ObjectId(userId);
-      if (checkObjectIdRegex.test(userId))
+      if (!checkObjectIdRegex.test(userId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+
+      const userExist = await User.findOne({ _id: userId, deletedAt: { $eq: null } });
+      if (!userExist) {
+         return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+      }
 
       try {
          let user = await User.findById(userId).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          const authData = { _id: userId };
          const authToken = request.server.jwt.sign(authData, { expiresIn: process.env.DEFAULT_TOKEN_EXPIRATION_TIME });

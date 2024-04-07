@@ -43,7 +43,7 @@ const responseErrors = {
       properties: getErrorProperties(500, false),
    },
    404: {
-      description: 'Resource not found',
+      description: 'Resource or content not found',
       type: 'object',
       properties: getErrorProperties(404, false),
    },

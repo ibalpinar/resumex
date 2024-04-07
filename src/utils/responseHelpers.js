@@ -1,9 +1,10 @@
 const responseMessage = {
    INTERNAL_SERVER_ERROR: 'Internal Server Error',
    AUTHORIZATION_TOKEN_INVALID: 'Authorization token invalid',
+   AUTHORIZATION_TOKEN_EXPIRED: 'Authorization token expired',
    BAD_REQUEST: 'Bad Request',
    CONTENT_NOT_FOUND: 'Content not Found',
-   RESOURCE_NOT_FOUND: 'Rsource not Found',
+   RESOURCE_OR_CONTENT_NOT_FOUND: 'Resource or content not found',
    FORBIDDEN: 'Forbidden',
    TOO_MANY_REQUEST: 'Too many requests',
    CAST_OBJECTID_ERROR: 'Cast to ObjectId failed for value',
@@ -55,7 +56,7 @@ const responseMessage = {
       email: { type: 'string', format: 'email' },
       userTypeId: { type: 'string' },
       countryId: { type: 'string' },
-      resumeIds: { type: 'array' },
+      resumes: { type: 'array' },
       isSuspended: { type: 'boolean' },
       isEmailConfirmed: { type: 'boolean' },
       createdAt: { type: 'string' },
@@ -71,7 +72,7 @@ const sendErrorResponse = (reply, statusCode, message, options = {}) => {
          error = responseMessage.BAD_REQUEST;
          break;
       case 404:
-         error = responseMessage.RESOURCE_NOT_FOUND;
+         error = responseMessage.RESOURCE_OR_CONTENT_NOT_FOUND;
          break;
       case 403:
          error = responseMessage.FORBIDDEN;

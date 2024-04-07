@@ -16,13 +16,19 @@ const { ObjectId } = mongoose.Types;
 module.exports = {
    register: async (request, reply) => {
       const registerUser = request.body;
-      if (!checkEmailRegex.test(registerUser.email))
-         return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
-
-      if (registerUser.password != registerUser.confirmPassword)
-         return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
 
       try {
+         if (!checkEmailRegex.test(registerUser.email))
+            return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+
+         if (registerUser.password != registerUser.confirmPassword)
+            return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+
+         const userExist = await User.findOne({ email: registerUser.email, deletedAt: { $eq: null } });
+         if (userExist) {
+            return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }
+
          registerUser.password = await bcryptPassword(registerUser.password);
          registerUser.userTypeId = new ObjectId(constants.userTypesIds.CANDIDATE);
          let newRegisteredUser = await User.create(registerUser);
@@ -44,7 +50,11 @@ module.exports = {
    login: async (request, reply) => {
       const email = request.body.email;
       try {
-         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
+         const user = await User.findOne({ email: email, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
+
          const authData = {
             _id: user._id,
             name: user.name,
@@ -66,11 +76,15 @@ module.exports = {
 
    forgottenPassword: async (request, reply) => {
       const email = request.body.email;
-      if (checkEmailRegex.test(email)) return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+      if (!checkEmailRegex.test(email)) {
+         return sendErrorResponse(reply, 400, responseMessage.INVALID_EMAIL_ADDRESS);
+      }
+
       try {
-         const user = await User.findOne({ email: email }).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         const user = await User.findOne({ email: email, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          let expiredAt = new Date();
          expiredAt.setHours(expiredAt.getHours() + 24);
@@ -101,9 +115,12 @@ module.exports = {
       if (passwordResetBody.password != passwordResetBody.confirmPassword)
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
 
-      const user = await User.findOne({ email: passwordResetBody.email }).select(constants.selectUserFields);
-      if (!user)
-         return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+      const user = await User.findOne({ email: passwordResetBody.email, deletedAt: { $eq: null } }).select(
+         constants.selectUserFields,
+      );
+      if (!user) {
+         return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+      }
 
       const now = new Date();
       let forgotPasswordRequestFilter = {

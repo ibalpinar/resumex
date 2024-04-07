@@ -14,10 +14,16 @@ const { ObjectId } = mongoose.Types;
 module.exports = {
    createUser: async (request, reply) => {
       const user = request.body;
-      if (user.password != user.confirmPassword)
+      if (user.password != user.confirmPassword) {
          return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+      }
 
       try {
+         const userExist = await User.findOne({ email: user.email, deletedAt: { $eq: null } });
+         if (userExist) {
+            return sendErrorResponse(reply, 400, responseMessage.USER_ALREADY_EXIST);
+         }
+
          user.password = await bcryptPassword(user.password);
          user.userTypeId = new ObjectId(user.userTypeId);
          user.countryId = new ObjectId(user.countryId);
@@ -39,7 +45,7 @@ module.exports = {
 
    fetchAllUsers: async (request, reply) => {
       try {
-         const users = await User.find({}).select(constants.selectUserFields);
+         const users = await User.find({ deletedAt: { $eq: null } }).select(constants.selectUserFields);
          if (users.length != 0)
             return sendSuccessResponse(reply, {
                statusCode: 200,
@@ -47,7 +53,7 @@ module.exports = {
                data: users,
             });
 
-         return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
+         return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -60,9 +66,10 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         const user = await User.findById(userId).select(constants.selectUserFields);
-         if (!user)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          return sendSuccessResponse(reply, {
             statusCode: 200,
@@ -82,17 +89,21 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         let userToUpdate = await User.findById(userId);
-         if (!userToUpdate)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         let userToUpdate = await User.findOne({ _id: userId, deletedAt: { $eq: null } });
+
+         if (!userToUpdate) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          if (userUpdates.password) {
-            if (userUpdates.password != userUpdates.confirmPassword)
+            if (userUpdates.password != userUpdates.confirmPassword) {
                return sendErrorResponse(reply, 400, responseMessage.PASS_CONFIRM_PASS_DONT_MATCH);
+            }
             userUpdates.password = await bcryptPassword(userUpdates.password);
          } else {
             userUpdates.password = userToUpdate.password;
          }
+
          await User.findByIdAndUpdate(userId, userUpdates);
          userToUpdate = removePasswordKey(userToUpdate);
          return sendSuccessResponse(reply, {
@@ -115,12 +126,16 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         const userToDelete = await User.findById(userId).select(constants.selectUserFields);
-         if (!userToDelete)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USER_FOUND, data: {} });
+         const userToDelete = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(
+            constants.selectUserFields,
+         );
+
+         if (!userToDelete) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
 
          const now = new Date();
-         deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
          await User.findByIdAndUpdate(userId, deleteUserRequestUpdates);
 
          return sendSuccessResponse(reply, {
@@ -136,11 +151,15 @@ module.exports = {
 
    deleteAllUsers: async (request, reply) => {
       try {
-         let numberOfUsers = await User.countDocuments({});
-         if (numberOfUsers == 0)
-            return sendSuccessResponse(reply, { statusCode: 204, message: responseMessage.NO_USERS_FOUND, data: [] });
+         let numberOfUsers = await User.countDocuments({ deletedAt: { $eq: null } });
+         if (numberOfUsers == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         }
 
-         await User.deleteMany();
+         const now = new Date();
+         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+
+         await User.updateMany({ deletedAt: { $eq: null } }, deleteUserRequestUpdates);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
