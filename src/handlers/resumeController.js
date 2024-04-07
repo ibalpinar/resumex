@@ -162,21 +162,26 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         const resumeToDelete = await Resume.findById(resumeId).select(constants.selectResumeFields);
-         if (!resumeToDelete) {
-            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
-         }
+         const resumeToDelete = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } }).select(
+            constants.selectResumeFields,
+         );
 
-         let user = await User.findById(resumeToDelete.userId).select(constants.selectUserFieldsOnlyResume);
-         if (!user) {
-            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         const user = await User.findOne({ _id: resumeToDelete.userId, deletedAt: { $eq: null } }).select(
+            constants.selectUserFieldsOnlyResume,
+         );
+
+         if (!resumeToDelete || !user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
          const indexOfResumeId = user.resumeIds.indexOf(resumeId);
          if (indexOfResumeId > -1) user.resumeIds.splice(indexOfResumeId, 1);
 
+         const now = new Date();
+         let deleteResumeRequestUpdates = { updatedAt: now, deletedAt: now };
+
          await User.findByIdAndUpdate(resumeToDelete.userId, user);
-         await Resume.findByIdAndDelete(resumeId);
+         await Resume.findByIdAndUpdate(resumeId, deleteResumeRequestUpdates);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.RESUME_DELETED_SUCCESSFULLY,
