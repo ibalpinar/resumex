@@ -57,13 +57,12 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Country',
    },
-   resumes: {
-      type: Array,
-      items: {
+   resumes: [
+      {
          type: Schema.Types.ObjectId,
          ref: 'Resume',
       },
-   },
+   ],
    createdAt: {
       type: Date,
       default: Date.now,
