@@ -7,7 +7,7 @@ const selectUserFieldsForLogin = {
    userTypeId: 1,
    isSuspended: 1,
    isEmailConfirmed: 1,
-   resumeIds: 1,
+   resumes: 1,
    createdAt: 1,
    updatedAt: 1,
    deletedAt: 1,
@@ -20,12 +20,12 @@ const selectUserFields = {
    userTypeId: 1,
    isSuspended: 1,
    isEmailConfirmed: 1,
-   resumeIds: 1,
+   resumes: 1,
    createdAt: 1,
    updatedAt: 1,
    deletedAt: 1,
 };
-const selectUserFieldsOnlyResume = { resumeIds: 1 };
+const selectUserFieldsOnlyResume = { resumes: 1 };
 const selectResumeFields = {
    _id: 1,
    userId: 1,

@@ -37,7 +37,7 @@ const removePasswordKey = function (user) {
       email: user.email,
       userTypeId: user.userTypeId,
       countryId: user.countryId,
-      resumeIds: user.resumeIds,
+      resumes: user.resumes,
       isSuspended: user.isSuspended,
       isEmailConfirmed: user.isEmailConfirmed,
       createdAt: user.createdAt,

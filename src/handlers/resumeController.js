@@ -30,7 +30,7 @@ module.exports = {
          }
 
          let newResume = await Resume.create(resume);
-         user.resumeIds.push(newResume._id);
+         user.resumes.push(newResume._id);
          await User.findByIdAndUpdate(resume.userId, user);
          return sendSuccessResponse(reply, {
             statusCode: 201,
@@ -174,8 +174,8 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
-         const indexOfResumeId = user.resumeIds.indexOf(resumeId);
-         if (indexOfResumeId > -1) user.resumeIds.splice(indexOfResumeId, 1);
+         const indexOfResumeId = user.resumes.indexOf(resumeId);
+         if (indexOfResumeId > -1) user.resumes.splice(indexOfResumeId, 1);
 
          const now = new Date();
          let deleteResumeRequestUpdates = { updatedAt: now, deletedAt: now };

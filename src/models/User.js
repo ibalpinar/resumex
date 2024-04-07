@@ -57,7 +57,7 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Country',
    },
-   resumeIds: {
+   resumes: {
       type: Array,
       items: {
          type: Schema.Types.ObjectId,

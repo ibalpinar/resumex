@@ -56,7 +56,7 @@ const responseMessage = {
       email: { type: 'string', format: 'email' },
       userTypeId: { type: 'string' },
       countryId: { type: 'string' },
-      resumeIds: { type: 'array' },
+      resumes: { type: 'array' },
       isSuspended: { type: 'boolean' },
       isEmailConfirmed: { type: 'boolean' },
       createdAt: { type: 'string' },
