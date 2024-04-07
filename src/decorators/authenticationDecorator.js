@@ -1,10 +1,17 @@
 const error = require('../utils/errors');
 const { sendErrorResponse, responseMessage } = require('../utils/responseHelpers');
+const User = require('../models/User');
+const constants = require('../utils/constants');
 
 module.exports = {
    authenticate: async (request, reply) => {
       try {
-         await request.jwtVerify();
+         let decoded = await request.jwtVerify();
+         let userId = decoded._id;
+         const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
       } catch (err) {
          console.error(err.message);
          if (err.code == error.FST_JWT_AUTHORIZATION_TOKEN_INVALID) {
