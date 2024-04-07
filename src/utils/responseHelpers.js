@@ -1,6 +1,7 @@
 const responseMessage = {
    INTERNAL_SERVER_ERROR: 'Internal Server Error',
    AUTHORIZATION_TOKEN_INVALID: 'Authorization token invalid',
+   AUTHORIZATION_TOKEN_EXPIRED: 'Authorization token expired',
    BAD_REQUEST: 'Bad Request',
    CONTENT_NOT_FOUND: 'Content not Found',
    RESOURCE_OR_CONTENT_NOT_FOUND: 'Resource or content not found',
