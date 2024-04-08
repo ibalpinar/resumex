@@ -66,7 +66,28 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
 
       try {
-         const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+         const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).populate({
+            path: 'resumes',
+            model: 'Resume',
+            deletedAt: { $eq: null },
+            populate: [
+               {
+                  path: 'skills',
+                  model: 'Skill',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'interests',
+                  model: 'Interest',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'languages.languageId',
+                  model: 'Language',
+                  deletedAt: { $eq: null },
+               },
+            ],
+         });
          if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
          }
