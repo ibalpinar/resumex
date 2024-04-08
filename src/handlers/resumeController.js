@@ -158,7 +158,7 @@ module.exports = {
 
    deleteResumeById: async (request, reply) => {
       const resumeId = request.params.id;
-      if (checkObjectIdRegex.test(resumeId))
+      if (!checkObjectIdRegex.test(resumeId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
