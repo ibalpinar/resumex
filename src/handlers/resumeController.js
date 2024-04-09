@@ -166,11 +166,15 @@ module.exports = {
             constants.selectResumeFields,
          );
 
+         if (!resumeToDelete) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
+
          const user = await User.findOne({ _id: resumeToDelete.userId, deletedAt: { $eq: null } }).select(
             constants.selectUserFieldsOnlyResume,
          );
 
-         if (!resumeToDelete || !user) {
+         if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
