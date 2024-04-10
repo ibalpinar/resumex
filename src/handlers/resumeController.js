@@ -45,7 +45,7 @@ module.exports = {
 
    getAllResumes: async (request, reply) => {
       try {
-         const resumes = await Resume.find({}).select(constants.selectResumeFields);
+         const resumes = await Resume.find({ deletedAt: { $eq: null } }).select(constants.selectResumeFields);
          if (resumes.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
