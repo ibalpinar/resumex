@@ -148,10 +148,13 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         let resumeToUpdate = await Resume.findById(resumeId);
+         let resumeToUpdate = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } });
+
          if (!resumeToUpdate) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
+
+         resumeUpdates.updatedAt = new Date();
 
          await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
          resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
