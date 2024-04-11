@@ -125,6 +125,8 @@ module.exports = {
             userUpdates.password = userToUpdate.password;
          }
 
+         userUpdates.updatedAt = new Date();
+
          await User.findByIdAndUpdate(userId, userUpdates);
          userToUpdate = removePasswordKey(userToUpdate);
          return sendSuccessResponse(reply, {
