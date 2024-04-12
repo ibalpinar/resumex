@@ -8,7 +8,7 @@ const { sendErrorResponse, sendSuccessResponse, responseMessage } = require('../
 module.exports = {
    getAllCountries: async (request, reply) => {
       try {
-         const countries = await Country.find({}).select(constants.selectCountryFields);
+         const countries = await Country.find({ deletedAt: { $eq: null } }).select(constants.selectCountryFields);
          if (countries.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_COUNTRIES_FOUND);
          }
@@ -26,7 +26,7 @@ module.exports = {
 
    getAllInterests: async (request, reply) => {
       try {
-         const interests = await Interest.find({}).select(constants.selectInterestFields);
+         const interests = await Interest.find({ deletedAt: { $eq: null } }).select(constants.selectInterestFields);
          if (interests.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_INTERESTS_FOUND);
          }
@@ -44,7 +44,7 @@ module.exports = {
 
    getAllSkills: async (request, reply) => {
       try {
-         const skills = await Skill.find({}).select(constants.selectSkillFields);
+         const skills = await Skill.find({ deletedAt: { $eq: null } }).select(constants.selectSkillFields);
          if (skills.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
          }
@@ -62,7 +62,7 @@ module.exports = {
 
    getAllLanguages: async (request, reply) => {
       try {
-         const languages = await Language.find({}).select(constants.selectLanguageFields);
+         const languages = await Language.find({ deletedAt: { $eq: null } }).select(constants.selectLanguageFields);
          if (languages.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_LANGUAGES_FOUND);
          }
