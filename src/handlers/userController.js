@@ -180,9 +180,9 @@ module.exports = {
          }
 
          const now = new Date();
-         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+         let deleteAllUsersRequest = { updatedAt: now, deletedAt: now };
 
-         await User.updateMany({ deletedAt: { $eq: null } }, deleteUserRequestUpdates);
+         await User.updateMany({ deletedAt: { $eq: null } }, deleteAllUsersRequest);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,
