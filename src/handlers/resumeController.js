@@ -99,7 +99,7 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
+         const resume = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } }).select(constants.selectResumeFields);
          if (!resume) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
