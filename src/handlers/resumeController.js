@@ -212,12 +212,15 @@ module.exports = {
 
    deleteAllResumes: async (request, reply) => {
       try {
-         let numberOfResumes = await Resume.countDocuments({});
+         let numberOfResumes = await Resume.countDocuments({ deletedAt: { $eq: null } });
          if (numberOfResumes == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
 
-         await Resume.deleteMany();
+         const now = new Date();
+         let deleteAllResumesRequest = { updatedAt: now, deletedAt: now };
+
+         await Resume.updateMany({ deletedAt: { $eq: null } }, deleteAllResumesRequest);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY,
