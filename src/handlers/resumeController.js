@@ -99,41 +99,34 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         const resume = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } }).select(constants.selectResumeFields);
+         const resume = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } })
+            .populate([
+               {
+                  path: 'skills',
+                  model: 'Skill',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'interests',
+                  model: 'Interest',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'languages.languageId',
+                  model: 'Language',
+                  deletedAt: { $eq: null },
+               },
+            ])
+            .select(constants.selectResumeFields);
+
          if (!resume) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
-         let completeResume = await Resume.aggregate([
-            {
-               $lookup: {
-                  from: 'interests',
-                  localField: 'interests',
-                  foreignField: '_id',
-                  as: 'interestInformation',
-               },
-            },
-            {
-               $lookup: {
-                  from: 'skills',
-                  localField: 'skills',
-                  foreignField: '_id',
-                  as: 'skillInformation',
-               },
-            },
-            {
-               $lookup: {
-                  from: 'languages',
-                  localField: 'languages.languageId',
-                  foreignField: '_id',
-                  as: 'languageInformation',
-               },
-            },
-         ]);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.RESUME_LISTED_SUCCESSFULLY,
-            data: completeResume,
+            data: resume,
          });
       } catch (err) {
          console.error(err.message);
