@@ -24,6 +24,13 @@ const userRoutes = async (app) => {
    });
 
    app.route({
+      method: 'GET',
+      url: '/w/resume/get/:id',
+      schema: userServiceSchema.getUserByIdWithResume,
+      handler: userController.getUserByIdWithResume,
+   });
+
+   app.route({
       method: 'PUT',
       url: '/update/:id',
       schema: userServiceSchema.updateUserById,
