@@ -61,6 +61,24 @@ module.exports = {
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
       }
    },
+   getResumeCount: async (request, reply) => {
+      try {
+         const numberOfResumes = await Resume.countDocuments({ deletedAt: { $eq: null } });
+         if (numberOfResumes == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+         }
+
+         const data = { count: numberOfResumes };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.THE_NUMBER_OF_RESUMES_LISTED_SUCCESSFULLY,
+            data: data,
+         });
+      } catch (err) {
+         console.error(err.message);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
 
    getResumeById: async (request, reply) => {
       const resumeId = request.params.id;

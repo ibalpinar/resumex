@@ -25,6 +25,13 @@ const resumeRoutes = async (app) => {
 
    app.route({
       method: 'GET',
+      url: '/get/count',
+      schema: resumeServiceSchema.getResumeCount,
+      handler: resumeController.getResumeCount,
+   });
+
+   app.route({
+      method: 'GET',
       url: '/get/complete/:id',
       schema: resumeServiceSchema.getResumeByUserId,
       handler: resumeController.getCompleteResumeById,

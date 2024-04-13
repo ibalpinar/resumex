@@ -23,6 +23,7 @@ const responseMessage = {
    ALL_USERS_DELETED_SUCCESSFULLY: 'All users deleted successfully',
    RESUME_CREATED_SUCCESSFULLY: 'Resume created successfully',
    ALL_RESUMES_LISTED_SUCCESSFULLY: 'All resumes listed successfully',
+   THE_NUMBER_OF_RESUMES_LISTED_SUCCESSFULLY: 'The number of resumes listed successfully',
    ALL_RESUMES_DELETED_SUCCESSFULLY: 'All resumes deleted successfully',
    RESUME_LISTED_SUCCESSFULLY: 'Resume listed successfully',
    RESUME_DELETED_SUCCESSFULLY: 'Resume deleted successfully',
