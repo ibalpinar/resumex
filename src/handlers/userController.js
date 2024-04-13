@@ -65,7 +65,7 @@ module.exports = {
    getUserCount: async (request, reply) => {
       try {
          const numberOfUsers = await User.countDocuments({ deletedAt: { $eq: null } });
-         if (numberOfUsers.length == 0) {
+         if (numberOfUsers == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
          }
 
