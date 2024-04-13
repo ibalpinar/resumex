@@ -13,10 +13,11 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_COUNTRIES_FOUND);
          }
 
+         const data = { count: countries.length, countries: countries };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_COUNTRIES_LISTED_SUCCESSFULLY,
-            data: countries,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -31,10 +32,11 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_INTERESTS_FOUND);
          }
 
+         const data = { count: interests.length, interests: interests };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_INTERESTS_LISTED_SUCCESSFULLY,
-            data: interests,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -49,10 +51,11 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
          }
 
+         const data = { count: skills.length, skills: skills };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY,
-            data: skills,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -67,10 +70,11 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_LANGUAGES_FOUND);
          }
 
+         const data = { count: languages.length, languages: languages };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY,
-            data: languages,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
