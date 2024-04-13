@@ -96,6 +96,42 @@
 					"response": []
 				},
 				{
+					"name": "Get User by Id With Resume",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/user/w/resume/get/65dd07373d7e0c75327ccf8b",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"w",
+								"resume",
+								"get",
+								"65dd07373d7e0c75327ccf8b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update User By Id",
 					"request": {
 						"method": "PUT",
