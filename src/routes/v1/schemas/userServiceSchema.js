@@ -57,10 +57,13 @@ const userServiceSchema = {
                statusCode: { type: 'string' },
                message: { type: 'string' },
                data: {
-                  type: 'array',
-                  items: {
-                     type: 'object',
-                     properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA,
+                  count: { type: 'number' },
+                  users: {
+                     type: 'array',
+                     items: {
+                        type: 'object',
+                        properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA,
+                     },
                   },
                },
                success: { type: 'boolean' },

@@ -46,12 +46,14 @@ module.exports = {
    fetchAllUsers: async (request, reply) => {
       try {
          const users = await User.find({ deletedAt: { $eq: null } }).select(constants.selectUserFields);
-         if (users.length != 0)
+         if (users.length != 0) {
+            const data = { count: users.length, users: users };
             return sendSuccessResponse(reply, {
                statusCode: 200,
                message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
-               data: users,
+               data: data,
             });
+         }
 
          return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
       } catch (err) {
