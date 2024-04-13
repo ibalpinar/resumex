@@ -46,16 +46,16 @@ module.exports = {
    fetchAllUsers: async (request, reply) => {
       try {
          const users = await User.find({ deletedAt: { $eq: null } }).select(constants.selectUserFields);
-         if (users.length != 0) {
-            const data = { count: users.length, users: users };
-            return sendSuccessResponse(reply, {
-               statusCode: 200,
-               message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
-               data: data,
-            });
+         if (users.length == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
          }
 
-         return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         const data = { count: users.length, users: users };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
+            data: data,
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
