@@ -11,6 +11,8 @@ You can request for the task you want to do.
 
 ## Objectives
 
+###### (*) Objectives may vary depending on the contribution conditions
+
 ### Until April 2024:
  - Get the landing page of the ResumeX live. At this phase, only demand will be collected.
 
