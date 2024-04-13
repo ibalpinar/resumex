@@ -126,6 +126,11 @@ const userServiceSchema = {
          },
       },
    },
+   getUserCount: {
+      description: 'This endpoint fetches the number of users',
+      summary: 'Gets the number of users',
+      tags: [path.USER],
+   },
    getUserByIdWithResume: {
       description: 'This endpoint fetches a user given its Id. It returns a single user object',
       summary: 'Get a user',

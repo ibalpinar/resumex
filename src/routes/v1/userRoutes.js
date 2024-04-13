@@ -25,6 +25,13 @@ const userRoutes = async (app) => {
 
    app.route({
       method: 'GET',
+      url: '/get/count',
+      schema: userServiceSchema.getUserCount,
+      handler: userController.getUserCount,
+   });
+
+   app.route({
+      method: 'GET',
       url: '/w/resume/get/:id',
       schema: userServiceSchema.getUserByIdWithResume,
       handler: userController.getUserByIdWithResume,

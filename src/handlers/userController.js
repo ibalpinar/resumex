@@ -62,6 +62,25 @@ module.exports = {
       }
    },
 
+   getUserCount: async (request, reply) => {
+      try {
+         const numberOfUsers = await User.countDocuments({ deletedAt: { $eq: null } });
+         if (numberOfUsers.length == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         }
+
+         const data = { count: numberOfUsers };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.THE_NUMBER_OF_USERS_LISTED_SUCCESSFULLY,
+            data: data,
+         });
+      } catch (err) {
+         console.error(err.message);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
    getUserById: async (request, reply) => {
       const userId = request.params.id;
       if (!checkObjectIdRegex.test(userId))

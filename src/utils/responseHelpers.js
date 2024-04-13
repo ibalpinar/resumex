@@ -16,6 +16,7 @@ const responseMessage = {
    PASS_CONFIRM_PASS_DONT_MATCH: 'Password and Confirm Password do not match',
    USER_CREATED_SUCCESSFULLY: 'User created successfully',
    ALL_USERS_LISTED_SUCCESSFULLY: 'All users listed successfully',
+   THE_NUMBER_OF_USERS_LISTED_SUCCESSFULLY: 'The number of users listed successfully',
    USER_LISTED_SUCCESSFULLY: 'User listed successfully',
    USER_UPDATED_SUCCESSFULLY: 'User updated successfully',
    USER_DELETED_SUCCESSFULLY: 'User deleted successfully',
