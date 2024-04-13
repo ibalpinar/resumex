@@ -50,10 +50,11 @@ module.exports = {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
 
+         const data = { count: resumes.length, resumes: resumes };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_RESUMES_LISTED_SUCCESSFULLY,
-            data: resumes,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
