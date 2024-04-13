@@ -43,7 +43,7 @@ module.exports = {
       }
    },
 
-   getAllResumes: async (request, reply) => {
+   fetchAllResumes: async (request, reply) => {
       try {
          const resumes = await Resume.find({ deletedAt: { $eq: null } }).select(constants.selectResumeFields);
          if (resumes.length == 0) {

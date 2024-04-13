@@ -13,7 +13,7 @@ const resumeRoutes = async (app) => {
       method: 'GET',
       url: '/fetch',
       schema: resumeServiceSchema.fetchAllResumes,
-      handler: resumeController.getAllResumes,
+      handler: resumeController.fetchAllResumes,
    });
 
    app.route({
