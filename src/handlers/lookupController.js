@@ -8,15 +8,16 @@ const { sendErrorResponse, sendSuccessResponse, responseMessage } = require('../
 module.exports = {
    getAllCountries: async (request, reply) => {
       try {
-         const countries = await Country.find({}).select(constants.selectCountryFields);
+         const countries = await Country.find({ deletedAt: { $eq: null } }).select(constants.selectCountryFields);
          if (countries.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_COUNTRIES_FOUND);
          }
 
+         const data = { count: countries.length, countries: countries };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_COUNTRIES_LISTED_SUCCESSFULLY,
-            data: countries,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -26,15 +27,16 @@ module.exports = {
 
    getAllInterests: async (request, reply) => {
       try {
-         const interests = await Interest.find({}).select(constants.selectInterestFields);
+         const interests = await Interest.find({ deletedAt: { $eq: null } }).select(constants.selectInterestFields);
          if (interests.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_INTERESTS_FOUND);
          }
 
+         const data = { count: interests.length, interests: interests };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_INTERESTS_LISTED_SUCCESSFULLY,
-            data: interests,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -44,15 +46,16 @@ module.exports = {
 
    getAllSkills: async (request, reply) => {
       try {
-         const skills = await Skill.find({}).select(constants.selectSkillFields);
+         const skills = await Skill.find({ deletedAt: { $eq: null } }).select(constants.selectSkillFields);
          if (skills.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_SKILLS_FOUND);
          }
 
+         const data = { count: skills.length, skills: skills };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_SKILLS_LISTED_SUCCESSFULLY,
-            data: skills,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -62,15 +65,16 @@ module.exports = {
 
    getAllLanguages: async (request, reply) => {
       try {
-         const languages = await Language.find({}).select(constants.selectLanguageFields);
+         const languages = await Language.find({ deletedAt: { $eq: null } }).select(constants.selectLanguageFields);
          if (languages.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_LANGUAGES_FOUND);
          }
 
+         const data = { count: languages.length, languages: languages };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_LANGUAGES_LISTED_SUCCESSFULLY,
-            data: languages,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);

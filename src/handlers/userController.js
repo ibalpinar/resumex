@@ -46,14 +46,35 @@ module.exports = {
    fetchAllUsers: async (request, reply) => {
       try {
          const users = await User.find({ deletedAt: { $eq: null } }).select(constants.selectUserFields);
-         if (users.length != 0)
-            return sendSuccessResponse(reply, {
-               statusCode: 200,
-               message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
-               data: users,
-            });
+         if (users.length == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         }
 
-         return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         const data = { count: users.length, users: users };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.ALL_USERS_LISTED_SUCCESSFULLY,
+            data: data,
+         });
+      } catch (err) {
+         console.error(err.message);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
+   getUserCount: async (request, reply) => {
+      try {
+         const numberOfUsers = await User.countDocuments({ deletedAt: { $eq: null } });
+         if (numberOfUsers == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USERS_FOUND);
+         }
+
+         const data = { count: numberOfUsers };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.THE_NUMBER_OF_USERS_LISTED_SUCCESSFULLY,
+            data: data,
+         });
       } catch (err) {
          console.error(err.message);
          return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
@@ -67,6 +88,53 @@ module.exports = {
 
       try {
          const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } }).select(constants.selectUserFields);
+
+         if (!user) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
+         }
+
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.USER_LISTED_SUCCESSFULLY,
+            data: user,
+         });
+      } catch (err) {
+         console.error(err.message);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+
+   getUserByIdWithResume: async (request, reply) => {
+      const userId = request.params.id;
+      if (!checkObjectIdRegex.test(userId))
+         return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${userId}`);
+
+      try {
+         const user = await User.findOne({ _id: userId, deletedAt: { $eq: null } })
+            .populate({
+               path: 'resumes',
+               model: 'Resume',
+               deletedAt: { $eq: null },
+               populate: [
+                  {
+                     path: 'skills',
+                     model: 'Skill',
+                     deletedAt: { $eq: null },
+                  },
+                  {
+                     path: 'interests',
+                     model: 'Interest',
+                     deletedAt: { $eq: null },
+                  },
+                  {
+                     path: 'languages.languageId',
+                     model: 'Language',
+                     deletedAt: { $eq: null },
+                  },
+               ],
+            })
+            .select(constants.selectUserFields);
+
          if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_USER_FOUND);
          }
@@ -103,6 +171,8 @@ module.exports = {
          } else {
             userUpdates.password = userToUpdate.password;
          }
+
+         userUpdates.updatedAt = new Date();
 
          await User.findByIdAndUpdate(userId, userUpdates);
          userToUpdate = removePasswordKey(userToUpdate);
@@ -157,9 +227,9 @@ module.exports = {
          }
 
          const now = new Date();
-         let deleteUserRequestUpdates = { updatedAt: now, deletedAt: now };
+         let deleteAllUsersRequest = { updatedAt: now, deletedAt: now };
 
-         await User.updateMany({ deletedAt: { $eq: null } }, deleteUserRequestUpdates);
+         await User.updateMany({ deletedAt: { $eq: null } }, deleteAllUsersRequest);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_USERS_DELETED_SUCCESSFULLY,

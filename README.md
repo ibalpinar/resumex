@@ -3,7 +3,15 @@ ResumeX is the new generation open-source resume platform that forces you to pre
 
 This project will be a never-ending project as long as donors fund it, and it will constantly grow and improve with open-source contributors.
 
+You can see the current status of the project on Github ResumeX Project page below:
+
+https://github.com/users/ibalpinar/projects/2/
+
+You can request for the task you want to do.
+
 ## Objectives
+
+###### (*) Objectives may vary depending on the contribution conditions
 
 ### Until April 2024:
  - Get the landing page of the ResumeX live. At this phase, only demand will be collected.

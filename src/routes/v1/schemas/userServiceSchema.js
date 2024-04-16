@@ -57,10 +57,13 @@ const userServiceSchema = {
                statusCode: { type: 'string' },
                message: { type: 'string' },
                data: {
-                  type: 'array',
-                  items: {
-                     type: 'object',
-                     properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA,
+                  count: { type: 'number' },
+                  users: {
+                     type: 'array',
+                     items: {
+                        type: 'object',
+                        properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA,
+                     },
                   },
                },
                success: { type: 'boolean' },
@@ -79,6 +82,56 @@ const userServiceSchema = {
       },
    },
    getUserById: {
+      description: 'This endpoint fetches a user given its Id. It returns a single user object',
+      summary: 'Get a user',
+      tags: [path.USER],
+      querystring: {
+         type: 'object',
+         properties: {
+            id: {
+               type: 'string',
+               format: 'uuid',
+               description: 'User Id',
+            },
+         },
+      },
+      response: {
+         200: {
+            description: responseMessage.USER_LISTED_SUCCESSFULLY,
+            type: 'object',
+            properties: {
+               statusCode: { type: 'string' },
+               message: { type: 'string' },
+               data: {
+                  type: 'object',
+                  properties: responseMessage.DEFAULT_RESPONSE_USER_SCHEMA,
+               },
+               success: { type: 'boolean' },
+            },
+         },
+         400: {
+            description: responseMessage.BAD_REQUEST,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
+         },
+         404: {
+            description: responseMessage.NO_USER_FOUND,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
+         },
+         500: {
+            description: responseMessage.INTERNAL_SERVER_ERROR,
+            type: 'object',
+            properties: responseMessage.DEFAULT_ERROR_RESPONSE_FOR_SCHEMA,
+         },
+      },
+   },
+   getUserCount: {
+      description: 'This endpoint fetches the number of users',
+      summary: 'Gets the number of users',
+      tags: [path.USER],
+   },
+   getUserByIdWithResume: {
       description: 'This endpoint fetches a user given its Id. It returns a single user object',
       summary: 'Get a user',
       tags: [path.USER],

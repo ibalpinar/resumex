@@ -43,17 +43,36 @@ module.exports = {
       }
    },
 
-   getAllResumes: async (request, reply) => {
+   fetchAllResumes: async (request, reply) => {
       try {
-         const resumes = await Resume.find({}).select(constants.selectResumeFields);
+         const resumes = await Resume.find({ deletedAt: { $eq: null } }).select(constants.selectResumeFields);
          if (resumes.length == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
 
+         const data = { count: resumes.length, resumes: resumes };
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_RESUMES_LISTED_SUCCESSFULLY,
-            data: resumes,
+            data: data,
+         });
+      } catch (err) {
+         console.error(err.message);
+         return sendErrorResponse(reply, 500, responseMessage.INTERNAL_SERVER_ERROR);
+      }
+   },
+   getResumeCount: async (request, reply) => {
+      try {
+         const numberOfResumes = await Resume.countDocuments({ deletedAt: { $eq: null } });
+         if (numberOfResumes == 0) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
+         }
+
+         const data = { count: numberOfResumes };
+         return sendSuccessResponse(reply, {
+            statusCode: 200,
+            message: responseMessage.THE_NUMBER_OF_RESUMES_LISTED_SUCCESSFULLY,
+            data: data,
          });
       } catch (err) {
          console.error(err.message);
@@ -67,8 +86,18 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
+         const resume = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } }).select(
+            constants.selectResumeFields,
+         );
          if (!resume) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
+
+         const user = await User.findOne({ _id: resume.userId, deletedAt: { $eq: null } }).select(
+            constants.selectUserFieldsOnlyResume,
+         );
+
+         if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
@@ -89,41 +118,34 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         const resume = await Resume.findById(resumeId).select(constants.selectResumeFields);
+         const resume = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } })
+            .populate([
+               {
+                  path: 'skills',
+                  model: 'Skill',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'interests',
+                  model: 'Interest',
+                  deletedAt: { $eq: null },
+               },
+               {
+                  path: 'languages.languageId',
+                  model: 'Language',
+                  deletedAt: { $eq: null },
+               },
+            ])
+            .select(constants.selectResumeFields);
+
          if (!resume) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
-         let completeResume = await Resume.aggregate([
-            {
-               $lookup: {
-                  from: 'interests',
-                  localField: 'interests',
-                  foreignField: '_id',
-                  as: 'interestInformation',
-               },
-            },
-            {
-               $lookup: {
-                  from: 'skills',
-                  localField: 'skills',
-                  foreignField: '_id',
-                  as: 'skillInformation',
-               },
-            },
-            {
-               $lookup: {
-                  from: 'languages',
-                  localField: 'languages.languageId',
-                  foreignField: '_id',
-                  as: 'languageInformation',
-               },
-            },
-         ]);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.RESUME_LISTED_SUCCESSFULLY,
-            data: completeResume,
+            data: resume,
          });
       } catch (err) {
          console.error(err.message);
@@ -138,10 +160,13 @@ module.exports = {
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
-         let resumeToUpdate = await Resume.findById(resumeId);
+         let resumeToUpdate = await Resume.findOne({ _id: resumeId, deletedAt: { $eq: null } });
+
          if (!resumeToUpdate) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
+
+         resumeUpdates.updatedAt = new Date();
 
          await Resume.findByIdAndUpdate(resumeId, resumeUpdates);
          resumeToUpdate = await Resume.findById(resumeId).select(constants.selectResumeFields);
@@ -158,7 +183,7 @@ module.exports = {
 
    deleteResumeById: async (request, reply) => {
       const resumeId = request.params.id;
-      if (checkObjectIdRegex.test(resumeId))
+      if (!checkObjectIdRegex.test(resumeId))
          return sendErrorResponse(reply, 400, responseMessage.CAST_OBJECTID_ERROR + ` ${resumeId}`);
 
       try {
@@ -166,11 +191,15 @@ module.exports = {
             constants.selectResumeFields,
          );
 
+         if (!resumeToDelete) {
+            return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
+         }
+
          const user = await User.findOne({ _id: resumeToDelete.userId, deletedAt: { $eq: null } }).select(
             constants.selectUserFieldsOnlyResume,
          );
 
-         if (!resumeToDelete || !user) {
+         if (!user) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUME_FOUND);
          }
 
@@ -195,12 +224,15 @@ module.exports = {
 
    deleteAllResumes: async (request, reply) => {
       try {
-         let numberOfResumes = await Resume.countDocuments({});
+         let numberOfResumes = await Resume.countDocuments({ deletedAt: { $eq: null } });
          if (numberOfResumes == 0) {
             return sendErrorResponse(reply, 404, responseMessage.NO_RESUMES_FOUND);
          }
 
-         await Resume.deleteMany();
+         const now = new Date();
+         let deleteAllResumesRequest = { updatedAt: now, deletedAt: now };
+
+         await Resume.updateMany({ deletedAt: { $eq: null } }, deleteAllResumesRequest);
          return sendSuccessResponse(reply, {
             statusCode: 200,
             message: responseMessage.ALL_RESUMES_DELETED_SUCCESSFULLY,
