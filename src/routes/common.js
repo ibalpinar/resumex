@@ -1,4 +1,4 @@
-const getCommonProperties = (statusCode, successValue) => ({
+const getCommonProperties = () => ({
    statusCode: { type: 'integer' },
    message: { type: 'string' },
    success: { type: 'boolean' },
