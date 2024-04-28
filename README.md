@@ -13,19 +13,21 @@ You can request for the task you want to do.
 
 ###### (*) Objectives may vary depending on the contribution conditions
 
-### Until April 2024:
- - Get the landing page of the ResumeX live. At this phase, only demand will be collected.
-
-### Until May 2024:
- - Get the MVP of the ResumeX live. This will be the Alpha version of the project and will be spread by word of mouth in a closed system.
+###### Important Notice for April 29, 2024: I thought I could find contributors for the project ResumeX by objectives I set, but currently I am the only one working as a developer in all areas (idea, ux, ui, back-end, front-end, devops & infrastructure). Therefore I need to update the target dates:
 
 ### Until June 2024:
+ - Get the landing page of the ResumeX live. At this phase, only demand will be collected.
+
+### Until July 2024:
+ - Get the MVP of the ResumeX live. This will be the Alpha version of the project and will be spread by word of mouth in a closed system.
+
+### Until August 2024:
 - Get the 3rd phase of the ResumeX live. This will be the Beta version of this project. Anyone who wants to open an account can use the entire system. Based on the feedback received, the system will continue to be improved.
 
-### Until October 2024:
+### Until December 2024:
  - This is the 4th phase of the ResumeX, which will move from the beta version to the live version.
 
-### Until October 2025:
+### Until November 2025:
  - For open source repository:
    - 10 Watchers
    - 30 Forks
